@@ -4,7 +4,6 @@ import hachi.simpleboard.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -34,7 +33,6 @@ public class User extends BaseTimeEntity {
     private int birthYear;
 
     private String gender;
-
 
     @Builder
     public User(String name, String email, String loginId, String loginPassword, String profileImage, int birthYear, String gender) {
