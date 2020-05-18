@@ -15,44 +15,88 @@
 </head>
 <body>
 <div class="container">
-    <div>
-        <table class="table table-striped">
-            <thead>
-            <th>회원번호</th>
-            <th>회원아이디</th>
-            <th>회원이름</th>
-            <th>회원이메일</th>
-            </thead>
-            <tbody id="list-tbody">
+    <div class="board-area">
+        <div class="menu-area">
+            <div class="category-area"></div>
+            <div class="view-type-area"></div>
+        </div>
+        <div class="list-area">
+            <table class="table table-striped">
+                <thead>
+                <th>회원번호</th>
+                <th>회원아이디</th>
+                <th>회원이름</th>
+                <th>회원이메일</th>
+                <th>회원생년</th>
+                <th>회원성별</th>
+                </thead>
+                <tbody id="list-tbody">
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="search-area"><input id="search_keyword" name="search_keyword" type="text" value=""/> <input
+                id="search_button" onclick="UserService.search();" type="button" value="검색"/></div>
+        <div class="pagination-area">
+            [맨처음] [이전] [1] [2] [3] [4] [5] [다음] [맨마지막]
+        </div>
     </div>
 </div>
 <script>
     UserService = {
         getUserList: function () {
-            $.ajax("/api/users")
+            $.ajax({
+                url: "/api/users",
+                context: window.UserService
+            })
                 .done(function (res) {
                     let userList = res.content;
-                    UserService.renderList(userList);
+                    if (userList == undefined || userList == null) {
+                        $('#list-tbody').html('<tr><td colspan="6">회원이 아무도 등록되어있지 않습니다.</td></tr>');
+                        return;
+                    }
+
+                    this.renderList(userList);
+                })
+            ;
+        },
+        search: function () {
+            let searchKeyword = $('#search_keyword').val();
+
+            $.ajax({
+                url: "/api/users",
+                context: window.UserService,
+                data: {
+                    search_keyword: searchKeyword
+                }
+            })
+                .done(function (res) {
+                    let userList = res.content;
+                    if (userList == undefined || userList == null) {
+                        $('#list-tbody').html('<tr><td colspan="6">검색 결과가 없습니다</td></tr>');
+                        return;
+                    }
+                    this.renderList(userList);
                 })
             ;
         },
         renderList: function (userList) {
             let rowHtml = '';
+
+
             for (let i = 0; i < userList.length; i++) {
                 rowHtml += '<tr>';
                 rowHtml += '\t<td>' + userList[i].id + '</td>';
                 rowHtml += '\t<td>' + userList[i].loginId + '</td>';
                 rowHtml += '\t<td>' + userList[i].name + '</td>';
                 rowHtml += '\t<td>' + userList[i].email + '</td>';
+                rowHtml += '\t<td>' + userList[i].birthYear + '</td>';
+                rowHtml += '\t<td>' + userList[i].gender + '</td>';
                 rowHtml += '</tr>';
             }
             $('#list-tbody').html(rowHtml);
         }
     };
-
     $(document).ready(function () {
         UserService.getUserList();
     });
