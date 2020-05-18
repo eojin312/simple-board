@@ -38,7 +38,7 @@ class UserRepositoryTest {
      */
     @BeforeAll
     void beforeAll() {
-        userRepository.initDB(); // 153개의 user를 일괄 insert시킴
+//        userRepository.initDB(); // 153개의 user를 일괄 insert시킴
     }
 
     @Test
@@ -81,7 +81,14 @@ class UserRepositoryTest {
         }
 
         String paginatinoString = paginationSB.toString();
-        String expected = "[1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31] ";
+        String expected = "[1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] ";
         Assertions.assertEquals(expected, paginatinoString);
+    }
+
+    @Test
+    public void 마지막페이지인지아닌지() {
+        Pageable pageable = PageRequest.of(16, 10);
+        Page<User> userListPage = userRepository.findAll(pageable);
+        Assertions.assertTrue(userListPage.isLast());
     }
 }
