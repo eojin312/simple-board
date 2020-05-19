@@ -23,7 +23,7 @@ public class UserApiController extends BaseApiController {
 
     private final UserService userService;
 
-    @PostMapping("/users")
+    @PostMapping("/users/create")
     public User create(@RequestBody UserCreateDto userDto) {
         return userService.save(userDto);
     }

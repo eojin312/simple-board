@@ -10,4 +10,9 @@ public class UserController {
     public String list() {
         return "user/list";
     }
+
+    @GetMapping("users/create")
+    public String create() {
+        return "user/create";
+    }
 }
