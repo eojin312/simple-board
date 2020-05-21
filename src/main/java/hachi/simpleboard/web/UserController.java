@@ -11,7 +11,7 @@ public class UserController {
         return "user/list";
     }
 
-    @GetMapping("users/create")
+    @GetMapping("/users/create")
     public String create() {
         return "user/create";
     }

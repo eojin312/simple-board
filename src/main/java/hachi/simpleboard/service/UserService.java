@@ -20,8 +20,8 @@ public class UserService {
 //    private final ModelMapper modelMapper;
 
     @Transactional
-    public User save(UserCreateDto userDto) {
-        return userRepository.save(userDto.toEntity());
+    public Long save(UserCreateDto userDto) {
+        return userRepository.save(userDto.toEntity()).getId();
     }
 
     public Page<User> findAll(Pageable pageable) {

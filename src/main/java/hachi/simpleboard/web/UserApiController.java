@@ -24,7 +24,8 @@ public class UserApiController extends BaseApiController {
     private final UserService userService;
 
     @PostMapping("/users/create")
-    public User create(@RequestBody UserCreateDto userDto) {
+    public Long create(@RequestBody UserCreateDto userDto) {
+
         return userService.save(userDto);
     }
 

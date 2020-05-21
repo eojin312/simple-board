@@ -4,12 +4,6 @@ import hachi.simpleboard.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Getter
 @NoArgsConstructor
@@ -22,6 +16,7 @@ public class UserCreateDto {
     private String profileImage;
     private int birthYear;
     private String gender;
+
 
     @Builder
     public UserCreateDto(String name, String email, String loginId, String loginPassword, String profileImage, int birthYear, String gender) {
