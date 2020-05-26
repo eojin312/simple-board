@@ -85,7 +85,11 @@ UserService = {
             rowHtml += '<tr>';
             rowHtml += '\t<td>' + userList[i].id + '</td>';
             rowHtml += '\t<td>' + userList[i].loginId + '</td>';
-            rowHtml += '\t<td>' + userList[i].name + '</td>';
+            rowHtml += '\t<td>' + '<a href="/users/detail/"+'
+            {
+                userList.id
+            }
+            '+>' + userList[i].name + '</a>' + '</td>';
             rowHtml += '\t<td>' + userList[i].email + '</td>';
             rowHtml += '\t<td>' + userList[i].birthYear + '년</td>';
             rowHtml += '\t<td>' + genderString + '</td>';
@@ -104,12 +108,14 @@ UserService = {
             success: function (data) {
                 $('#search-result-area').empty();
                 let checkKeyWord = $('#search_keyword').val();
+                let searchRowHtml = '';
                 if (checkKeyWord.length > 0 && data.dataSearch.content.length > 0) {
                     for (i = 0; i < data.dataSearch.content.length; i++) {
-                        $('#search-result-area').append(
-                            ''
-                        )
+                        $('#search-tbody').append(
+                            "<li class='schoolList' value='" + data.dataSearch.content[i].name + "' data-input='" + data.dataSearch.content[i].schoolName + ">" +
+                            "<a href='javascript:void(0);'>" + data.dataSearch.content[i].schoolName + "</a>" + "</li>");
                     }
+                    ;
                 }
             }
         });
