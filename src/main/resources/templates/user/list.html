@@ -8,6 +8,7 @@
     <script src="/js/jquery-3.5.1.min.js"></script>
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" rel="stylesheet">
+    <script src="../../static/js/userService.js"></script>
 </head>
 <body>
 <div class="container">
@@ -29,19 +30,6 @@
                 <tbody id="list-tbody"></tbody>
             </table>
         </div>
-        <div class="search-result-area">
-            <table class="table table-search">
-                <thead>
-                <th>회원번호</th>
-                <th>회원아이디</th>
-                <th>회원이름</th>
-                <th>회원이메일</th>
-                <th>회원생년</th>
-                <th>회원성별</th>
-                </thead>
-                <tbody id="search-tbody"></tbody>
-            </table>
-        </div>
         <div class="create-area">
             <a class="btn btn-secondary" href="/users/create" role="button">회원가입</a>
         </div>
@@ -51,6 +39,11 @@
         <div class="pagination-area"></div>
     </div>
 </div>
-<script src="/js/list.js"></script>
+<script src="/js/userService.js"></script>
+<script>
+    $(document).ready(function () {
+        UserService.getUserList();
+    });
+</script>
 </body>
 </html>

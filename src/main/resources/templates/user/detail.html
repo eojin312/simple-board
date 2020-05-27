@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <title>회원 상세</title>
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" rel="stylesheet">
+    <script src="../../static/js/userService.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="list-area">
+        <table class="table table-striped">
+            <tr>
+                <th>회원번호</th>
+                <td id="id" th:text="${id}"></td>
+            </tr>
+            <tr>
+                <th>이름</th>
+                <td id="name"></td>
+            </tr>
+            <tr>
+                <th>아이디</th>
+                <td id="loginId"></td>
+            </tr>
+            <tr>
+                <th>이메일</th>
+                <td id="email"></td>
+            </tr>
+            <tr>
+                <th>생년</th>
+                <td id="birthYear"></td>
+            </tr>
+            <tr>
+                <th>성별</th>
+                <td id="gender"></td>
+            </tr>
+        </table>
+    </div>
+    <input onclick="location.href='/users';" type="button" value="목록"/>
+    <input onclick="goUpdate();" type="button" value="수정"/>
+</div>
+<input id="" type="hidden">
+<script src="/js/userService.js"></script>
+
+<script>
+    var id = $('#id').html();
+    $(document).ready(function () {
+        UserService.getDetail(id);
+    });
+
+    function goUpdate() {
+        location.href = '/users/update/' + id;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <title>회원 상세</title>
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="list-area">
+        <table class="table table-striped">
+            <tr>
+                <th>회원번호</th>
+                <td id="id" th:text="${id}"></td>
+            </tr>
+            <tr>
+                <th>이름</th>
+                <td><input id="name" type="text"></td>
+            </tr>
+            <tr>
+                <th>아이디</th>
+                <td><input id="loginId" type="text"></td>
+            </tr>
+            <tr>
+                <th>비밀번호</th>
+                <td><input id="loginPassword" type="password"></td>
+            </tr>
+            <tr>
+                <th>이메일</th>
+                <td><input id="email" type="text"></td>
+            </tr>
+            <tr>
+                <th>생년</th>
+                <td><input id="birthYear" type="text"></td>
+            </tr>
+            <tr>
+                <th>성별</th>
+                <td><select id="gender">
+                    <option value="F">여자</option>
+                    <option value="M">남자</option>
+                </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <input onclick="location.href='/users';" type="button" value="목록"/>
+    <input onclick="UserService.update();" type="button" value="수정완료"/>
+</div>
+<input id="" type="hidden">
+<script src="/js/userService.js"></script>
+
+<script>
+    var id = $('#id').html();
+    $(document).ready(function () {
+        UserService.getUpdateInfo(id);
+    });
+</script>
+</body>
+</html>

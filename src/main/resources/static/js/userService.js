@@ -85,11 +85,7 @@ UserService = {
             rowHtml += '<tr>';
             rowHtml += '\t<td>' + userList[i].id + '</td>';
             rowHtml += '\t<td>' + userList[i].loginId + '</td>';
-            rowHtml += '\t<td>' + '<a href="/users/detail/"+'
-            {
-                userList.id
-            }
-            '+>' + userList[i].name + '</a>' + '</td>';
+            rowHtml += '\t<td>' + '<a href="/users/detail/' + userList[i].id + '">' + userList[i].name + '</a>' + '</td>';
             rowHtml += '\t<td>' + userList[i].email + '</td>';
             rowHtml += '\t<td>' + userList[i].birthYear + '년</td>';
             rowHtml += '\t<td>' + genderString + '</td>';
@@ -119,8 +115,114 @@ UserService = {
                 }
             }
         });
+    },
+    getDetail: function (id) {
+        $.ajax({
+            type: 'GET',
+            url: '/api/users/' + id,
+            dataType: 'json',
+            contentType: 'application/json'
+        }).done(function (res) {
+            $('#name').html(res.name);
+            $('#loginId').html(res.loginId);
+            $('#email').html(res.email);
+            $('#birthYear').html(res.birthYear);
+            $('#gender').html(res.gender);
+        })
+        ;
+    },
+    getUpdateInfo: function (id) {
+        $.ajax({
+            type: 'GET',
+            url: '/api/users/' + id,
+            dataType: 'json',
+            contentType: 'application/json'
+        }).done(function (res) {
+            $('#name').val(res.name);
+            $('#loginId').val(res.loginId);
+            $('#loginPassword').val(res.loginPassword);
+            $('#email').val(res.email);
+            $('#birthYear').val(res.birthYear);
+            $('#gender').val(res.gender);
+        })
+        ;
+    },
+    constantValue: {
+        MIN_LOGIN_ID: 3,
+        MIN_LOGIN_PASSWORD: 6
+    },
+    userDto: {
+
+        name: '',
+        email: '',
+        loginId: '',
+        loginPassword: '',
+        gender: '',
+        profileImage: '',
+        toDto: function () {
+            this.name = $.trim($('#name').val());
+            this.email = $.trim($('#email').val());
+            this.loginId = $.trim($('#loginId').val());
+            this.loginPassword = $.trim($('#loginPassword').val());
+            this.birthYear = $.trim($('#birthYear').val());
+            this.gender = $.trim($('#gender').val());
+            this.profileImage = $.trim($('#profileImage').val());
+        }
+    },
+    update: function () {
+        this.userDto.toDto();
+
+        if (this.validate() == false) {
+            return;
+        }
+        $.ajax({
+            type: 'PUT',
+            url: '/api/users/',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(this.userDto)
+        }).done(function (res) {
+            location.href = '/users/detail/' + res.id;
+        })
+    },
+    validate: function () {
+        if (this.userDto.name == '') {
+            alert('이름을 입력해주세요');
+            $('#name').focus();
+            return false;
+        }
+
+        if (this.isEmptyAndAlert('email', '이메일') == false) {
+            return false;
+        }
+        if (this.userDto.loginId == '') {
+            alert('아이디를 입력해주세요');
+            $('#loginId').focus();
+            return false;
+        }
+        if (this.userDto.loginId.length < this.constantValue.MIN_LOGIN_ID) {
+            alert(`아이디는 최소 ${this.constantValue.MIN_LOGIN_ID}자 이상 입력해주세요`);
+            $('#loginId').focus();
+            return false;
+        }
+        if (this.userDto.loginPassword == '') {
+            alert('비밀번호를 입력해주세요');
+            $('#loginPassword').focus();
+            return false;
+        }
+        this.isEmptyAndAlert('email', '이메일');
+        if (this.userDto.loginPassword.length < this.constantValue.MIN_LOGIN_PASSWORD) {
+            alert(`비밀번호는 최소 ${this.constantValue.MIN_LOGIN_PASSWORD}자 이상 입력해주세요`);
+            $('#loginPassword').focus();
+            return false;
+        }
+    },
+    isEmptyAndAlert(target, label) {
+        if (this.userDto[target] == '') {
+            alert(`${label}을 입력해주세요`);
+            $(`#${target}`).focus();
+            return false;
+        }
     }
 };
-$(document).ready(function () {
-    UserService.getUserList();
-});
+
