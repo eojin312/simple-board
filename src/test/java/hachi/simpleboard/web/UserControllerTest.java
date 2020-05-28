@@ -1,5 +1,7 @@
 package hachi.simpleboard.web;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import hachi.simpleboard.web.dto.UserCreateDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,6 +31,9 @@ class UserControllerTest {
 
     @Autowired
     private WebApplicationContext ctx;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @BeforeEach
     public void setup() {
@@ -46,6 +52,27 @@ class UserControllerTest {
                 .andExpect(jsonPath("loginId").value("testID10001"))
                 .andExpect(jsonPath("birthYear").value(10201))
                 .andExpect(jsonPath("gender").value("M"))
+                .andDo(print());
+    }
+
+    @Test
+    public void 회원등록() throws Exception {
+        String content = objectMapper.writeValueAsString(
+                UserCreateDto.builder()
+                        .name("이어진")
+                        .email("eojin312@naver.com")
+                        .loginId("eojin312")
+                        .loginPassword("1234")
+                        .birthYear(2002)
+                        .gender("M")
+                        .profileImage("1234")
+                        .build()
+        );
+        mockMvc.perform(
+                post("/api/users")
+                        .content(content)
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk())
                 .andDo(print());
     }
 }
