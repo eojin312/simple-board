@@ -57,6 +57,7 @@ class UserControllerTest {
 
     @Test
     public void 회원등록() throws Exception {
+
         String content = objectMapper.writeValueAsString(
                 UserCreateDto.builder()
                         .name("이어진")
@@ -73,6 +74,28 @@ class UserControllerTest {
                         .content(content)
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    public void 회원등록유효성체크_짧은_ID_테스트() throws Exception {
+        String content = objectMapper.writeValueAsString(
+                UserCreateDto.builder()
+                        .name("이희진")
+                        .email("h2jin312@naver.com")
+                        .loginId("h2jin312")
+                        .loginPassword("1234")
+                        .birthYear(2013)
+                        .gender("F")
+                        .profileImage("1234")
+                        .build()
+        );
+
+        mockMvc.perform(
+                post("/api/users")
+                        .content(content)
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isBadRequest())
                 .andDo(print());
     }
 }
