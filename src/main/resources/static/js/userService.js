@@ -223,6 +223,18 @@ UserService = {
             $(`#${target}`).focus();
             return false;
         }
+    },
+    delete: function (id) {
+        var id = $('#id').val();
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/users/' + id,
+            dataType: 'json',
+            contentType: 'application/json'
+        }).done(function () {
+            alert('회원이 삭제되었습니다.');
+            window.location.href = '/users'
+        })
     }
 };
 

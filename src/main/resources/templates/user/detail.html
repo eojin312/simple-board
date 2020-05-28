@@ -7,7 +7,6 @@
     <script src="/js/jquery-3.5.1.min.js"></script>
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" rel="stylesheet">
-    <script src="../../static/js/userService.js"></script>
 </head>
 <body>
 <div class="container">
@@ -41,6 +40,7 @@
     </div>
     <input onclick="location.href='/users';" type="button" value="목록"/>
     <input onclick="goUpdate();" type="button" value="수정"/>
+    <input onclick="UserService.delete()" type="button" value="삭제"/>
 </div>
 <input id="" type="hidden">
 <script src="/js/userService.js"></script>
@@ -49,6 +49,7 @@
     var id = $('#id').html();
     $(document).ready(function () {
         UserService.getDetail(id);
+        UserService.delete(id);
     });
 
     function goUpdate() {

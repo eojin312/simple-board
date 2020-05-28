@@ -24,7 +24,6 @@ public class UserController {
         return "user/detail";
     }
 
-
     @GetMapping("/users/update/{id}")
     public String update(@PathVariable Long id, Model model) {
         model.addAttribute("id", id);

@@ -36,7 +36,15 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    @Transactional
     public User update(UserUpdateDto userUpdateDto) {
         return userRepository.save(userUpdateDto.toEntity());
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("회원이 없습니다."));
+        userRepository.delete(user);
     }
 }
