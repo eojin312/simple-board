@@ -45,7 +45,7 @@ public class UserApiController extends BaseApiController {
         return userService.update(userUpdateDto);
     }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping("/users/{id}")
     public Long delete(@PathVariable Long id) {
         userService.delete(id);
         return id;

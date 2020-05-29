@@ -224,8 +224,7 @@ UserService = {
             return false;
         }
     },
-    delete: function (id) {
-        var id = $('#id').val();
+    delete: function () {
         $.ajax({
             type: 'DELETE',
             url: '/api/users/' + id,
