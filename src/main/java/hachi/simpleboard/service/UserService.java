@@ -11,13 +11,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
+
+    private List<User> users;
 
 //    private final ModelMapper modelMapper;
 
@@ -46,5 +50,10 @@ public class UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("회원이 없습니다."));
         userRepository.delete(user);
+    }
+
+    public List<User> findByName(String name) {
+        List<User> result = users.stream().filter(x -> x.getName().equalsIgnoreCase(name)).collect(Collectors.toList());
+        return result;
     }
 }
