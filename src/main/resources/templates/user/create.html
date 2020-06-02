@@ -33,10 +33,14 @@
             </div>
 
             <div class="img-area">
-                <label for="profileImage">이미지</label>
-                <input id="profileImage" name="file" type="file"/>
+                <label for="attach-file">이미지</label>
+                <form action="/api/upload" enctype="multipart/form-data" id="upload-form" method="post"
+                      name="upload-form">
+                    <input id="attach-file" name="attach-file" type="file"/>
+                </form>
+                <input id="file-path" type="hidden" value=""/>
                 <div class="select-img">
-                    <img src=""/>
+                    <img id="preview-image" src=""/>
                 </div>
             </div>
         </form>
