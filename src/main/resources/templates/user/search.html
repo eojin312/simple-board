@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>검색 결과</title>
+</head>
+<body>
+<div th:replace="fragments/bodyHeader :: bodyHeader"/>
+<div class="container">
+    <div class="search-result-area">
+        <table>
+            <thead></thead>
+        </table>
+    </div>
+</div>
+</body>
+
+<script>
+    $(document).ready(function () {
+        $('#search-button').submit(function (event) {
+            event.preventDefault();
+            fire_ajax_sumit();
+        });
+    });
+
+    function fire_ajax_sumit() {
+        var search = {}
+        search['name'] = $('#name').val();
+
+        $('#search-button').prop("disable", true);
+
+        $.ajax({
+            type: 'POST',
+            url: "/api/users/search",
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify(search)
+        }).done(function (data) {
+
+        })
+    }
+</script>
+</html>

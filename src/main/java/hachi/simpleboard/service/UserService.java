@@ -2,18 +2,18 @@ package hachi.simpleboard.service;
 
 import hachi.simpleboard.domain.user.User;
 import hachi.simpleboard.domain.user.UserRepository;
-import hachi.simpleboard.web.dto.UserCreateDto;
-import hachi.simpleboard.web.dto.UserUpdateDto;
+import hachi.simpleboard.web.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +26,7 @@ public class UserService {
 //    private final ModelMapper modelMapper;
 
     @Transactional
-    public Long save(UserCreateDto userDto) {
+    public Long save(UserDto.Create userDto) {
         return userRepository.save(userDto.toEntity()).getId();
     }
 
@@ -41,7 +41,7 @@ public class UserService {
     }
 
     @Transactional
-    public User update(UserUpdateDto userUpdateDto) {
+    public User update(UserDto.Update userUpdateDto) {
         return userRepository.save(userUpdateDto.toEntity());
     }
 
@@ -52,8 +52,15 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public List<User> findByName(String name) {
-        List<User> result = users.stream().filter(x -> x.getName().equalsIgnoreCase(name)).collect(Collectors.toList());
-        return result;
+    public Page<User> findAllBySearchCondition(Pageable pageable, String searchType, String searchKeyword) {
+        if (searchType.equals("loginId")) {
+            return userRepository.findByLoginIdContaining(searchKeyword, pageable);
+        } else if (searchType.equals("name")) {
+            return userRepository.findByNameContaining(searchKeyword, pageable);
+        } else if (searchType.equals("email")) {
+            return userRepository.findByEmailContaining(searchKeyword, pageable);
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "알 수 없는 검색 타입입니다.");
+        }
     }
 }

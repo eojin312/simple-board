@@ -58,13 +58,15 @@ UserService = {
         $('.pagination-area').html(paginationString);
     },
     search: function () {
-        let searchKeyword = $('#search_keyword').val();
+        let searchType = $('#search-type').val();
+        let searchKeyword = $('#search-keyword').val();
 
         $.ajax({
             url: "/api/users",
             context: window.UserService,
             data: {
-                search_keyword: searchKeyword
+                searchType: searchType,
+                searchKeyword: searchKeyword
             }
         })
             .done(function (res) {
@@ -92,29 +94,6 @@ UserService = {
             rowHtml += '</tr>';
         }
         $('#list-tbody').html(rowHtml);
-    },
-    search: function (target) {
-        let word = target.value;
-        let encodeWord = encodeURI(word);
-
-        $.ajax({
-            type: 'GET',
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (data) {
-                $('#search-result-area').empty();
-                let checkKeyWord = $('#search_keyword').val();
-                let searchRowHtml = '';
-                if (checkKeyWord.length > 0 && data.dataSearch.content.length > 0) {
-                    for (i = 0; i < data.dataSearch.content.length; i++) {
-                        $('#search-tbody').append(
-                            "<li class='schoolList' value='" + data.dataSearch.content[i].name + "' data-input='" + data.dataSearch.content[i].schoolName + ">" +
-                            "<a href='javascript:void(0);'>" + data.dataSearch.content[i].schoolName + "</a>" + "</li>");
-                    }
-                    ;
-                }
-            }
-        });
     },
     getDetail: function (id) {
         $.ajax({

@@ -3,9 +3,7 @@ package hachi.simpleboard.web;
 import hachi.simpleboard.domain.user.User;
 import hachi.simpleboard.domain.user.UserRepository;
 import hachi.simpleboard.service.UserService;
-import hachi.simpleboard.web.dto.UserCreateDto;
-import hachi.simpleboard.web.dto.UserSearchDto;
-import hachi.simpleboard.web.dto.UserUpdateDto;
+import hachi.simpleboard.web.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -13,12 +11,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.util.List;
+
 
 @Slf4j
 @RestController
@@ -31,16 +28,21 @@ public class UserApiController extends BaseApiController {
 
     private final UserRepository userRepository;
 
-    @RequestMapping(value = "/users/create", method = RequestMethod.POST)
-    public Long create(@RequestBody UserCreateDto userDto) {
-
+    @PostMapping("/users")
+    public Long create(@RequestBody @Valid UserDto.Create userDto) {
         return userService.save(userDto);
     }
 
     @GetMapping("/users")
-    public Page<User> getList(@PageableDefault Pageable pageable) {
-        Page<User> userList = userService.findAll(pageable);
-        return userList;
+    public Page<User> getList(
+            @PageableDefault Pageable pageable,
+            @RequestParam(value = "searchType", required = false) String searchType,
+            @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
+        if (searchType != null && searchKeyword != null) {
+            return userService.findAllBySearchCondition(pageable, searchType, searchKeyword);
+        } else {
+            return userService.findAll(pageable);
+        }
     }
 
     @GetMapping("/users/{id}")
@@ -49,7 +51,7 @@ public class UserApiController extends BaseApiController {
     }
 
     @PutMapping("/users")
-    public User update(@RequestBody UserUpdateDto userUpdateDto) {
+    public User update(@RequestBody UserDto.Update userUpdateDto) {
         return userService.update(userUpdateDto);
     }
 
@@ -57,14 +59,5 @@ public class UserApiController extends BaseApiController {
     public Long delete(@PathVariable Long id) {
         userService.delete(id);
         return id;
-    }
-
-    @PostMapping("/users/search")
-    public ResponseEntity<?> getSearchResult(@Valid @RequestBody UserSearchDto userSearchDto, Error errors) {
-        AjaxResponseBody result = new AjaxResponseBody();
-
-        List<User> userList = userService.findByName(userSearchDto.getName());
-        result.setResult(userList);
-        return ResponseEntity.ok(result);
     }
 }

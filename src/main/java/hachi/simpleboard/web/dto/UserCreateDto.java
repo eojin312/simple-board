@@ -5,13 +5,20 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Size;
+
 @Getter
 @NoArgsConstructor
 public class UserCreateDto {
 
     private String name;
     private String email;
+
+
+    @Size(min = 3, max = 8)
     private String loginId;
+
+    @Size(min = 3, max = 10)
     private String loginPassword;
     private String profileImage;
     private int birthYear;

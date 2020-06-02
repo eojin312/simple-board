@@ -29,10 +29,4 @@ public class UserController {
         model.addAttribute("id", id);
         return "user/update";
     }
-
-    @GetMapping("/users/search")
-    public String search() {
-        return "user/search";
-    }
-
 }

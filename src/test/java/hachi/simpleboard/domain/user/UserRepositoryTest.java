@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 
 /**
@@ -71,7 +72,7 @@ class UserRepositoryTest {
 
     @Test
     public void paginationTest() {
-        Pageable pageable = PageRequest.of(0, 5);
+        Pageable pageable = PageRequest.of(0, 10);
         Page<User> userListPage = userRepository.findAll(pageable);
         StringBuilder paginationSB = new StringBuilder();
         for (int i = 1; i <= userListPage.getTotalPages(); i++) {
@@ -90,5 +91,13 @@ class UserRepositoryTest {
         Pageable pageable = PageRequest.of(16, 10);
         Page<User> userListPage = userRepository.findAll(pageable);
         Assertions.assertTrue(userListPage.isLast());
+    }
+
+    @Test
+    public void 검색기능테스트loginId() {
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<User> userListPage = userRepository.findByLoginIdContaining("testID101", pageable);
+        List<User> userList = userListPage.getContent();
+        Assertions.assertTrue(userList.size() > 0);
     }
 }
