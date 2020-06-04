@@ -14,7 +14,7 @@ public class UserDto {
         private String name;
         private String email;
 
-        @Size(min = 3, max = 8)
+        @Size(min = 3, max = 8, message = "아이디는 최소 3자 이상 최대 8자 이하로 입력해주세요")
         private String loginId;
 
         @Size(min = 3, max = 10)

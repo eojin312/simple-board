@@ -23,6 +23,8 @@ import java.util.UUID;
 @RestController
 public class UploadController {
 
+    public static final String UPLOAD_BASE_DIR = "/Users/user/data/";
+
     public static Optional<String> getExtensionByStringHandling(String filename) {
         return Optional.ofNullable(filename)
                 .filter(f -> f.contains("."))
@@ -35,15 +37,15 @@ public class UploadController {
         String originalName = multipartFile.getOriginalFilename();
         String extension = this.getExtensionByStringHandling(originalName).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "확장자가 없는 파일은 업로드할 수 없습니다."));
         String destinationFileName = UUID.nameUUIDFromBytes(multipartFile.getBytes()).toString() + "." + extension;
-        String destinationFilePathAndName = "/Users/user/data/" + destinationFileName;
+        String destinationFilePathAndName = UPLOAD_BASE_DIR + destinationFileName;
         File destinationFile = new File(destinationFilePathAndName);
         multipartFile.transferTo(destinationFile);
-        return destinationFilePathAndName;
+        return destinationFileName;
     }
 
     @GetMapping("/api/download")
-    public ResponseEntity<Resource> download(@RequestParam("file-path") String filePath) throws IOException {
-        Path path = Paths.get(filePath);
+    public ResponseEntity<Resource> download(@RequestParam("file-name") String fileName) throws IOException {
+        Path path = Paths.get(UPLOAD_BASE_DIR + fileName);
 
         //file로 부터 contentType 을 얻어온다.
         String contentType = Files.probeContentType(path);

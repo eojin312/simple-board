@@ -2,6 +2,7 @@ package hachi.simpleboard.service;
 
 import hachi.simpleboard.domain.user.User;
 import hachi.simpleboard.domain.user.UserRepository;
+import hachi.simpleboard.exception.DuplicateLoginIdException;
 import hachi.simpleboard.web.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,6 +28,10 @@ public class UserService {
 
     @Transactional
     public Long save(UserDto.Create userDto) {
+        User user = userRepository.findByLoginId(userDto.getLoginId());
+        if (user != null) {
+            throw new DuplicateLoginIdException("중복된 회원이 존재합니다.");
+        }
         return userRepository.save(userDto.toEntity()).getId();
     }
 

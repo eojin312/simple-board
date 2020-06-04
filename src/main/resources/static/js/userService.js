@@ -2,10 +2,6 @@ UserService = {
     config: {
         PAGES_PER_BLOCK: 5
     },
-    bindEvent: function () {
-        var _this = this;
-        $('#create_button').on('click', this.save);
-    },
     constantValue: {
         MIN_LOGIN_ID: 3,
         MIN_LOGIN_PASSWORD: 6
@@ -18,13 +14,21 @@ UserService = {
         gender: '',
         profileImage: '',
         toDto: function () {
+            if ($('#id') != undefined) {
+                this.id = $.trim($('#id').text());
+            }
             this.name = $.trim($('#name').val());
             this.email = $.trim($('#email').val());
-            this.loginId = $.trim($('#loginId').val());
-            this.loginPassword = $.trim($('#loginPassword').val());
+            this.loginId = $.trim($('#login-id').val());
+            this.loginPassword = $.trim($('#login-password').val());
+            this.birthYear = $.trim($('#birth-year').val());
             this.gender = $.trim($('#gender').val());
-            this.profileImage = $.trim($('#profileImage').val());
+            this.profileImage = $.trim($('#file-name').val());
         },
+    },
+    bindEvent: function () {
+        var _this = this;
+        $('#create_button').on('click', this.save);
     },
     save: function () {
         this.userDto.toDto();
@@ -32,7 +36,45 @@ UserService = {
         if (this.validate() == false) {
             return;
         }
-        this.callUserCreateApi();
+        $.ajax({
+            type: 'POST',
+            url: '/api/users',
+            contentType: 'application/json',
+            datatype: 'json',
+            data: JSON.stringify(this.userDto)
+        }).done(function (id) {
+            alert('정상적으로 회원이 등록되었습니다');
+            window.location.href = '/users/detail/' + id; // TODO : 회원상세페이지로 이동으로 변겨애ㅑ ㅇㅇs
+        }).fail(function (errorResponse) {
+            if (errorResponse.message == undefined) {
+                alert(errorResponse.responseJSON.errors[0].defaultMessage);
+            } else {
+                alert(errorResponse.message);
+            }
+        });
+    },
+    update: function () {
+        this.userDto.toDto();
+
+        if (this.validate() == false) {
+            return;
+        }
+        $.ajax({
+            type: 'PUT',
+            url: '/api/users/',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(this.userDto)
+        }).done(function (user) {
+            alert("정상적으로 변경이 완료되었습니다.")
+            location.href = '/users/detail/' + user.id;
+        }).fail(function (errorResponse) {
+            if (errorResponse.message == undefined) {
+                alert(errorResponse.responseJSON.errors[0].defaultMessage);
+            } else {
+                alert(errorResponse.message);
+            }
+        })
     },
     validate: function () {
         if (this.userDto.name == '') {
@@ -40,29 +82,28 @@ UserService = {
             $('#name').focus();
             return false;
         }
-
         if (this.isEmptyAndAlert('email', '이메일') == false) {
             return false;
         }
         if (this.userDto.loginId == '') {
             alert('아이디를 입력해주세요');
-            $('#loginId').focus();
+            $('#login-id').focus();
             return false;
         }
         if (this.userDto.loginId.length < this.constantValue.MIN_LOGIN_ID) {
             alert(`아이디는 최소 ${this.constantValue.MIN_LOGIN_ID}자 이상 입력해주세요`);
-            $('#loginId').focus();
+            $('#login-id').focus();
             return false;
         }
         if (this.userDto.loginPassword == '') {
             alert('비밀번호를 입력해주세요');
-            $('#loginPassword').focus();
+            $('#login-password').focus();
             return false;
         }
         this.isEmptyAndAlert('email', '이메일');
         if (this.userDto.loginPassword.length < this.constantValue.MIN_LOGIN_PASSWORD) {
             alert(`비밀번호는 최소 ${this.constantValue.MIN_LOGIN_PASSWORD}자 이상 입력해주세요`);
-            $('#loginPassword').focus();
+            $('#login-password').focus();
             return false;
         }
     },
@@ -73,22 +114,6 @@ UserService = {
             return false;
         }
     },
-    callUserCreateApi: function () {
-        $.ajax({
-            type: 'POST',
-            url: '/api/users',
-            contentType: 'application/json',
-            datatype: 'json',
-            data: JSON.stringify(this.userDto)
-        }).done(function (response) {
-            alert('정상적으로 회원이 등록되었습니다');
-            window.location.href = '/users'; // TODO : 회원상세페이지로 이동으로 변겨애ㅑ ㅇㅇs
-        }).fail(function (errorResponse) {
-            // {code: 500, msg : '중복된 회원입니다'}
-            alert(errorResponse.message);
-        });
-    },
-
     getUserList: function (_page) {
         if (_page == undefined || _page == null) {
             _page = 0;
@@ -187,12 +212,13 @@ UserService = {
             url: '/api/users/' + id,
             dataType: 'json',
             contentType: 'application/json'
-        }).done(function (res) {
-            $('#name').html(res.name);
-            $('#loginId').html(res.loginId);
-            $('#email').html(res.email);
-            $('#birthYear').html(res.birthYear);
-            $('#gender').html(res.gender);
+        }).done(function (user) {
+            $('#name').html(user.name);
+            $('#login-id').html(user.loginId);
+            $('#email').html(user.email);
+            $('#birth-year').html(user.birthYear);
+            $('#gender').html(user.gender);
+            $('#profile-image').attr("src", '/api/download?file-name=' + user.profileImage)
         })
         ;
     },
@@ -202,92 +228,16 @@ UserService = {
             url: '/api/users/' + id,
             dataType: 'json',
             contentType: 'application/json'
-        }).done(function (res) {
-            $('#name').val(res.name);
-            $('#loginId').val(res.loginId);
-            $('#loginPassword').val(res.loginPassword);
-            $('#email').val(res.email);
-            $('#birthYear').val(res.birthYear);
-            $('#gender').val(res.gender);
+        }).done(function (user) {
+            $('#name').val(user.name);
+            $('#login-id').val(user.loginId);
+            $('#login-password').val(user.loginPassword);
+            $('#email').val(user.email);
+            $('#birth-year').val(user.birthYear);
+            $('#gender').val(user.gender);
+            $('#profile-image').attr("src", '/api/download?file-name=' + user.profileImage)
         })
         ;
-    },
-    constantValue: {
-        MIN_LOGIN_ID: 3,
-        MIN_LOGIN_PASSWORD: 6
-    },
-    userDto: {
-
-        name: '',
-        email: '',
-        loginId: '',
-        loginPassword: '',
-        gender: '',
-        profileImage: '',
-        toDto: function () {
-            this.name = $.trim($('#name').val());
-            this.email = $.trim($('#email').val());
-            this.loginId = $.trim($('#loginId').val());
-            this.loginPassword = $.trim($('#loginPassword').val());
-            this.birthYear = $.trim($('#birthYear').val());
-            this.gender = $.trim($('#gender').val());
-            this.profileImage = $.trim($('#profileImage').val());
-        }
-    },
-    update: function () {
-        this.userDto.toDto();
-
-        if (this.validate() == false) {
-            return;
-        }
-        $.ajax({
-            type: 'PUT',
-            url: '/api/users/',
-            dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify(this.userDto)
-        }).done(function (res) {
-            location.href = '/users/detail/' + res.id;
-        })
-    },
-    validate: function () {
-        if (this.userDto.name == '') {
-            alert('이름을 입력해주세요');
-            $('#name').focus();
-            return false;
-        }
-
-        if (this.isEmptyAndAlert('email', '이메일') == false) {
-            return false;
-        }
-        if (this.userDto.loginId == '') {
-            alert('아이디를 입력해주세요');
-            $('#loginId').focus();
-            return false;
-        }
-        if (this.userDto.loginId.length < this.constantValue.MIN_LOGIN_ID) {
-            alert(`아이디는 최소 ${this.constantValue.MIN_LOGIN_ID}자 이상 입력해주세요`);
-            $('#loginId').focus();
-            return false;
-        }
-        if (this.userDto.loginPassword == '') {
-            alert('비밀번호를 입력해주세요');
-            $('#loginPassword').focus();
-            return false;
-        }
-        this.isEmptyAndAlert('email', '이메일');
-        if (this.userDto.loginPassword.length < this.constantValue.MIN_LOGIN_PASSWORD) {
-            alert(`비밀번호는 최소 ${this.constantValue.MIN_LOGIN_PASSWORD}자 이상 입력해주세요`);
-            $('#loginPassword').focus();
-            return false;
-        }
-    },
-    isEmptyAndAlert(target, label) {
-        if (this.userDto[target] == '') {
-            alert(`${label}을 입력해주세요`);
-            $(`#${target}`).focus();
-            return false;
-        }
     },
     delete: function () {
         $.ajax({
@@ -311,8 +261,9 @@ UserService = {
             processData: false,
             contentType: false,
             cache: false,
-            success: function (data) {
-                $('#preview-image').attr('src', '/api/download?file-path=' + data);
+            success: function (fileName) {
+                $('#profile-image').attr('src', '/api/download?file-name=' + fileName);
+                $('#file-name').val(fileName);
             }
         })
     }

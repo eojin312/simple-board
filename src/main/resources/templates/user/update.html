@@ -18,11 +18,11 @@
             </tr>
             <tr>
                 <th>아이디</th>
-                <td><input id="loginId" type="text"></td>
+                <td><input id="login-id" type="text"></td>
             </tr>
             <tr>
                 <th>비밀번호</th>
-                <td><input id="loginPassword" type="password"></td>
+                <td><input id="login-password" type="password"></td>
             </tr>
             <tr>
                 <th>이메일</th>
@@ -30,14 +30,28 @@
             </tr>
             <tr>
                 <th>생년</th>
-                <td><input id="birthYear" type="text"></td>
+                <td><input id="birth-year" type="text"></td>
             </tr>
             <tr>
                 <th>성별</th>
-                <td><select id="gender">
-                    <option value="F">여자</option>
+                <td><select class="selectpicker" id="gender">
                     <option value="M">남자</option>
+                    <option value="F">여자</option>
                 </select>
+                </td>
+            </tr>
+            <tr>
+                <th>프로필사진</th>
+                <td>
+                    <form action="/api/upload" enctype="multipart/form-data" id="upload-form" method="post"
+                          name="upload-form">
+                        <input name="attach-file" type="file">
+                        <input onclick="UserService.upload();" type="button" value="upload">
+                    </form>
+                    <input id="file-name" type="hidden" value=""/>
+                    <div class="select-img">
+                        <img id="profile-image"/>
+                    </div>
                 </td>
             </tr>
         </table>
