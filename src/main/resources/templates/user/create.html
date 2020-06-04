@@ -7,29 +7,34 @@
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
 <div class="container">
     <div class="create">
+
         <form action="/api/users/create" method="post">
-            <div>
+            <div class="form-group">
                 <label>이름</label>
-                <input class="form-group" id="name" placeholder="이름을 입력해주세요" type="text">
+                <input class="form-control" id="name" placeholder="이름을 입력해주세요" type="text">
             </div>
-            <div>
+            <div class="form-group">
                 <label>이메일</label>
-                <input class="form-group" id="email" placeholder="이메일을 입력해주세요" type="text">
+                <input class="form-control" id="email" placeholder="이메일을 입력해주세요" type="text">
             </div>
-            <div>
+            <div class="form-group">
                 <label>아이디</label>
-                <input class="form-group" id="loginId" placeholder="id 를 입력해주세요" type="text">
+                <input class="form-control" id="loginId" placeholder="id 를 입력해주세요" type="text">
             </div>
-            <div>
+            <div class="form-group">
                 <label>비밀번호</label>
-                <input class="form-group" id="loginPassword" placeholder="비밀번호를 입력해주세요" type="password">
+                <input class="form-control" id="loginPassword" placeholder="비밀번호를 입력해주세요" type="password">
             </div>
-            <div>
-                <label>비밀번호</label>
+            <div class="form-group">
+                <label>성별</label>
                 <select class="selectpicker">
                     <option value="M">남자</option>
                     <option value="F">여자</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label>생년</label>
+                <input class="form-control" id="birthYear" placeholder="생년을를 입력해주세요" type="text">
             </div>
 
             <div class="img-area">
@@ -37,111 +42,22 @@
                 <form action="/api/upload" enctype="multipart/form-data" id="upload-form" method="post"
                       name="upload-form">
                     <input id="attach-file" name="attach-file" type="file"/>
+                    <button class="btn btn-success" onclick="UserService.upload();" type="button">upload</button>
                 </form>
                 <input id="file-path" type="hidden" value=""/>
                 <div class="select-img">
-                    <img id="preview-image" src=""/>
+                    <img id="preview-image"/>
                 </div>
             </div>
         </form>
         <a class="btn btn-secondary" href="/user/list" role="button">취소</a>
-        <button class="btn btn-primary" id="create_button" onclick="SignUpUser.save();" type="button">등록</button>
+        <button class="btn btn-primary" id="create_button" onclick="UserService.save();" type="button">등록</button>
     </div>
 </div>
-
+<script src="/js/userService.js"></script>
 <script>
-
-    var SignUpUser = {
-        bindEvent: function () {
-            var _this = this;
-            $('#create_button').on('click', this.save);
-        },
-        constantValue: {
-            MIN_LOGIN_ID: 3,
-            MIN_LOGIN_PASSWORD: 6
-        },
-        userDto: {
-            name: '',
-            email: '',
-            loginId: '',
-            loginPassword: '',
-            gender: '',
-            profileImage: '',
-            toDto: function () {
-                this.name = $.trim($('#name').val());
-                this.email = $.trim($('#email').val());
-                this.loginId = $.trim($('#loginId').val());
-                this.loginPassword = $.trim($('#loginPassword').val());
-                this.gender = $.trim($('#gender').val());
-                this.profileImage = $.trim($('#profileImage').val());
-            },
-        },
-        save: function () {
-            this.userDto.toDto();
-
-            if (this.validate() == false) {
-                return;
-            }
-            this.callUserCreateApi();
-        },
-        validate: function () {
-            if (this.userDto.name == '') {
-                alert('이름을 입력해주세요');
-                $('#name').focus();
-                return false;
-            }
-
-            if (this.isEmptyAndAlert('email', '이메일') == false) {
-                return false;
-            }
-            if (this.userDto.loginId == '') {
-                alert('아이디를 입력해주세요');
-                $('#loginId').focus();
-                return false;
-            }
-            if (this.userDto.loginId.length < this.constantValue.MIN_LOGIN_ID) {
-                alert(`아이디는 최소 ${this.constantValue.MIN_LOGIN_ID}자 이상 입력해주세요`);
-                $('#loginId').focus();
-                return false;
-            }
-            if (this.userDto.loginPassword == '') {
-                alert('비밀번호를 입력해주세요');
-                $('#loginPassword').focus();
-                return false;
-            }
-            this.isEmptyAndAlert('email', '이메일');
-            if (this.userDto.loginPassword.length < this.constantValue.MIN_LOGIN_PASSWORD) {
-                alert(`비밀번호는 최소 ${this.constantValue.MIN_LOGIN_PASSWORD}자 이상 입력해주세요`);
-                $('#loginPassword').focus();
-                return false;
-            }
-        },
-        isEmptyAndAlert(target, label) {
-            if (this.userDto[target] == '') {
-                alert(`${label}을 입력해주세요`);
-                $(`#${target}`).focus();
-                return false;
-            }
-        },
-        callUserCreateApi: function () {
-            $.ajax({
-                type: 'POST',
-                url: '/api/users',
-                contentType: 'application/json',
-                datatype: 'json',
-                data: JSON.stringify(this.userDto)
-            }).done(function (response) {
-                alert('정상적으로 회원이 등록되었습니다');
-                window.location.href = '/users'; // TODO : 회원상세페이지로 이동으로 변겨애ㅑ ㅇㅇs
-            }).fail(function (errorResponse) {
-                // {code: 500, msg : '중복된 회원입니다'}
-                alert(errorResponse.message);
-            });
-        }
-    };
-
     $(document).ready(function () {
-        SignUpUser.bindEvent();
+        UserService.bindEvent();
     });
 </script>
 </body>

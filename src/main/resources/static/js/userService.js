@@ -1,8 +1,94 @@
 UserService = {
     config: {
         PAGES_PER_BLOCK: 5
-    }
-    ,
+    },
+    bindEvent: function () {
+        var _this = this;
+        $('#create_button').on('click', this.save);
+    },
+    constantValue: {
+        MIN_LOGIN_ID: 3,
+        MIN_LOGIN_PASSWORD: 6
+    },
+    userDto: {
+        name: '',
+        email: '',
+        loginId: '',
+        loginPassword: '',
+        gender: '',
+        profileImage: '',
+        toDto: function () {
+            this.name = $.trim($('#name').val());
+            this.email = $.trim($('#email').val());
+            this.loginId = $.trim($('#loginId').val());
+            this.loginPassword = $.trim($('#loginPassword').val());
+            this.gender = $.trim($('#gender').val());
+            this.profileImage = $.trim($('#profileImage').val());
+        },
+    },
+    save: function () {
+        this.userDto.toDto();
+
+        if (this.validate() == false) {
+            return;
+        }
+        this.callUserCreateApi();
+    },
+    validate: function () {
+        if (this.userDto.name == '') {
+            alert('이름을 입력해주세요');
+            $('#name').focus();
+            return false;
+        }
+
+        if (this.isEmptyAndAlert('email', '이메일') == false) {
+            return false;
+        }
+        if (this.userDto.loginId == '') {
+            alert('아이디를 입력해주세요');
+            $('#loginId').focus();
+            return false;
+        }
+        if (this.userDto.loginId.length < this.constantValue.MIN_LOGIN_ID) {
+            alert(`아이디는 최소 ${this.constantValue.MIN_LOGIN_ID}자 이상 입력해주세요`);
+            $('#loginId').focus();
+            return false;
+        }
+        if (this.userDto.loginPassword == '') {
+            alert('비밀번호를 입력해주세요');
+            $('#loginPassword').focus();
+            return false;
+        }
+        this.isEmptyAndAlert('email', '이메일');
+        if (this.userDto.loginPassword.length < this.constantValue.MIN_LOGIN_PASSWORD) {
+            alert(`비밀번호는 최소 ${this.constantValue.MIN_LOGIN_PASSWORD}자 이상 입력해주세요`);
+            $('#loginPassword').focus();
+            return false;
+        }
+    },
+    isEmptyAndAlert(target, label) {
+        if (this.userDto[target] == '') {
+            alert(`${label}을 입력해주세요`);
+            $(`#${target}`).focus();
+            return false;
+        }
+    },
+    callUserCreateApi: function () {
+        $.ajax({
+            type: 'POST',
+            url: '/api/users',
+            contentType: 'application/json',
+            datatype: 'json',
+            data: JSON.stringify(this.userDto)
+        }).done(function (response) {
+            alert('정상적으로 회원이 등록되었습니다');
+            window.location.href = '/users'; // TODO : 회원상세페이지로 이동으로 변겨애ㅑ ㅇㅇs
+        }).fail(function (errorResponse) {
+            // {code: 500, msg : '중복된 회원입니다'}
+            alert(errorResponse.message);
+        });
+    },
+
     getUserList: function (_page) {
         if (_page == undefined || _page == null) {
             _page = 0;
@@ -212,6 +298,22 @@ UserService = {
         }).done(function () {
             alert('회원이 삭제되었습니다.');
             window.location.href = '/users'
+        })
+    },
+    upload: function upload(event) {
+        let form = $('#upload-form')[0];
+        let data = new FormData(form);
+        $.ajax({
+            type: 'POST',
+            enctype: 'multipart/form-data',
+            data: data,
+            url: '/api/upload',
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (data) {
+                $('#preview-image').attr('src', '/api/download?file-path=' + data);
+            }
         })
     }
 };
