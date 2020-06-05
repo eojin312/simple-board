@@ -1,6 +1,6 @@
 package hachi.simpleboard.web.dto;
 
-import hachi.simpleboard.domain.posts.Post;
+import hachi.simpleboard.domain.posts.Posts;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +14,7 @@ public class PostDto {
         private String author;
         private LocalDateTime modifiedDate;
 
-        public ResponseListDto(Post entity) {
+        public ResponseListDto(Posts entity) {
             this.id = entity.getId();
             this.title = entity.getTitle();
             this.content = entity.getContents();

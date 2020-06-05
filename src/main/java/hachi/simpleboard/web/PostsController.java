@@ -6,13 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class PostController {
+public class PostsController {
 
     @Autowired
     private PostService postService;
 
-    @GetMapping("/post/list")
+    @GetMapping("/")
     public String list() {
-        return "post/list";
+        return "posts/list";
     }
 }

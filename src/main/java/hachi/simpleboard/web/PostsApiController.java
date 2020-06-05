@@ -1,6 +1,6 @@
 package hachi.simpleboard.web;
 
-import hachi.simpleboard.domain.posts.Post;
+import hachi.simpleboard.domain.posts.Posts;
 import hachi.simpleboard.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +11,13 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class PostApiController extends BaseApiController {
+public class PostsApiController extends BaseApiController {
 
     @Autowired
     private PostService postService;
 
-    @GetMapping("/post")
-    public List<Post> list() {
+    @GetMapping("/posts")
+    public List<Posts> list() {
         return postService.findAll();
     }
 }
