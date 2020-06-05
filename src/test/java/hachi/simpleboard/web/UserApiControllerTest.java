@@ -1,7 +1,7 @@
 package hachi.simpleboard.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hachi.simpleboard.web.dto.UserCreateDto;
+import hachi.simpleboard.web.dto.UserDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -59,7 +59,7 @@ class UserApiControllerTest {
     public void 회원등록() throws Exception {
 
         String content = objectMapper.writeValueAsString(
-                UserCreateDto.builder()
+                UserDto.Create.builder()
                         .name("이어진")
                         .email("eojin312@naver.com")
                         .loginId("eojin312")
@@ -80,7 +80,7 @@ class UserApiControllerTest {
     @Test
     public void 회원등록유효성체크_짧은_ID_테스트() throws Exception {
         String content = objectMapper.writeValueAsString(
-                UserCreateDto.builder()
+                UserDto.Create.builder()
                         .name("이희진")
                         .email("h2jin312@naver.com")
                         .loginId("h2")

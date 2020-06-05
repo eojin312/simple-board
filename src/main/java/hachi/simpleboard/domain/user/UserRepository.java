@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * 153개의 user를 일괄 insert시킴
      */
     default void initDB() {
-        IntStream.rangeClosed(10001, 10154).forEach(i -> {
+        IntStream.rangeClosed(1, 154).forEach(i -> {
             User user = User.builder()
                     .name("test" + i)
                     .email("test@naver.com" + i)

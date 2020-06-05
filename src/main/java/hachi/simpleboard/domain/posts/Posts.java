@@ -22,13 +22,15 @@ public class Posts extends BaseTimeEntity {
     private String contents;
     private String category;
     private String author;
+    private String img;
 
     @Builder
 
-    public Posts(String title, String contents, String category, String author) {
+    public Posts(String title, String contents, String category, String author, String img) {
         this.title = title;
         this.contents = contents;
         this.category = category;
         this.author = author;
+        this.img = img;
     }
 }

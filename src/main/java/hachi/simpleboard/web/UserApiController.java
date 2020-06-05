@@ -1,7 +1,6 @@
 package hachi.simpleboard.web;
 
 import hachi.simpleboard.domain.user.User;
-import hachi.simpleboard.domain.user.UserRepository;
 import hachi.simpleboard.service.UserService;
 import hachi.simpleboard.web.dto.UserDto;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +24,6 @@ public class UserApiController extends BaseApiController {
     private final ModelMapper modelMapper;
 
     private final UserService userService;
-
-    private final UserRepository userRepository;
 
     @PostMapping("/users")
     public Long create(@RequestBody @Valid UserDto.Create userDto) {

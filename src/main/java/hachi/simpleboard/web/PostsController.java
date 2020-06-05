@@ -15,4 +15,9 @@ public class PostsController {
     public String list() {
         return "posts/list";
     }
+
+    @GetMapping("/posts/create")
+    public String create() {
+        return "posts/create";
+    }
 }

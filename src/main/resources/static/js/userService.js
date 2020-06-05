@@ -250,7 +250,7 @@ UserService = {
             window.location.href = '/users'
         })
     },
-    upload: function upload(event) {
+    upload: function (event) {
         let form = $('#upload-form')[0];
         let data = new FormData(form);
         $.ajax({

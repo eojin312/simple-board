@@ -18,8 +18,11 @@
             <tbody></tbody>
         </table>
     </div>
+
+    <button onclick="location.href='/posts/create'" type="button">글쓰러가기</button>
 </div>
 
+<script src="/js/postService.js"></script>
 <script>
     $(document).ready(function () {
         PostService.renderList()
