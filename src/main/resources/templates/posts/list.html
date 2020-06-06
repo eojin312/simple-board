@@ -15,17 +15,20 @@
             <th>카테고리</th>
             <th>시간</th>
             </thead>
-            <tbody></tbody>
+            <tbody id="list-tbody"></tbody>
         </table>
     </div>
-
-    <button onclick="location.href='/posts/create'" type="button">글쓰러가기</button>
+    <div class="pagination-area2"></div>
+    <div class="list-footer-area">
+        <button onclick="location.href='/posts/create'" type="button">글쓰러가기</button>
+    </div>
 </div>
+
 
 <script src="/js/postService.js"></script>
 <script>
     $(document).ready(function () {
-        PostService.renderList()
+        PostService.getList();
     })
 </script>
 </body>

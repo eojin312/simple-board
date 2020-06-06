@@ -124,21 +124,32 @@ UserService = {
             data: {
                 page: _page
             }
-        })
-            .done(function (res) {
-                let userList = res.content;
-                if (userList == undefined || userList == null) {
-                    $('#list-tbody').html('<tr><td colspan="6">회원이 아무도 등록되어있지 않습니다.</td></tr>');
-                    return;
-                }
-                this.renderPagination(res.totalPages, res.pageable.pageNumber, res.size, res.totalElements);
-                this.renderList(userList);
-            })
-        ;
+        }).done(function (page) {
+            let userList = page.content;
+            if (userList == undefined || userList == null) {
+                $('#list-tbody').html('<tr><td colspan="6">회원이 아무도 등록되어있지 않습니다.</td></tr>');
+                return;
+            }
+            this.renderList(userList);
+            this.renderPagination(page.totalPages, page.pageable.pageNumber, page.size, page.totalElements, '.pagination-area');
+        }).fail(function (res) {
+            alert("서버에 문제가 발생했습니다.");
+            console.log(res);
+        });
     },
 
-    renderPagination: function (totalPage, _crrentPage, size, totalElements) {
-        let crrentPage = _crrentPage + 1;
+    /**
+     * private renderPagination
+     * @param totalPage 전체 페이지 수
+     * @param _crrentPage 현재 페이지 번호
+     * @param size 한 페이지 당 게시글의 수
+     * @param totalElements 총 게시글의 수
+     * @param _areaClassId 페이지네이션이 그려질 영역의 class id, default 는 .pagination-area
+     */
+    renderPagination: function (totalPage, _crrentPage, size, totalElements, _areaClassId) {
+
+        let areaClassId = (_areaClassId == undefined || _areaClassId == null) ? '.pagination-area' : _areaClassId;
+        let crrentPage = (_crrentPage < 1) ? 1 : _crrentPage;
         let currentBlock = Math.ceil(crrentPage / this.config.PAGES_PER_BLOCK);
         let startPageOfBlock = Math.ceil((currentBlock - 1) * this.config.PAGES_PER_BLOCK) + 1;
         let totalBlock = Math.ceil(totalElements / size / this.config.PAGES_PER_BLOCK);
@@ -166,7 +177,7 @@ UserService = {
             paginationString += '<span onclick="UserService.getUserList(' + j + ')" style="cursor:pointer; ' + styleBold + '">' + ' [' + j + ']</span>';
         }
         if (isLastBlock == false) paginationString += '<span onclick="UserService.getUserList(' + firstPageOfNextBlock + ')" style="cursor:pointer;" >[다음]</span>';
-        $('.pagination-area').html(paginationString);
+        $(areaClassId).html(paginationString);
     },
     search: function () {
         let searchType = $('#search-type').val();
