@@ -154,11 +154,27 @@ PostService = {
             }
         })
     },
+    detail: function (id) {
+        $.ajax({
+            type: 'GET',
+            url: '/api/posts/' + id,
+            dataType: 'json',
+            contentType: 'application/json'
+        }).done(function (post) {
+            $('#title').html(post.title);
+            $('#category').html(post.category);
+            $('#contents').html(post.contents);
+            $('#file-name').html(post.img);
+
+        })
+
+    },
     postDto: {
         title: '',
         contents: '',
         author: '',
         category: '',
+        createdDate: '',
         img: '',
         toDto: function () {
             if ($('#id') != undefined) {
@@ -168,6 +184,7 @@ PostService = {
             this.contents = $.trim($('#contents').val());
             this.author = $.trim($('#author').val());
             this.category = $.trim($('#category').val());
+            this.createdDate = $.trim($('#createdDate').val());
             this.img = $.trim($('#file-name').val());
         }
     }
