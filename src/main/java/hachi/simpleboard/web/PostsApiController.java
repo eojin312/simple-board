@@ -31,4 +31,9 @@ public class PostsApiController extends BaseApiController {
     public Posts detail(@PathVariable Long id) {
         return postService.findByid(id);
     }
+
+    @PutMapping("/posts/{id}")
+    public Posts update(@RequestBody PostDto.Update postUpdateDto) {
+        return postService.save(id);
+    }
 }

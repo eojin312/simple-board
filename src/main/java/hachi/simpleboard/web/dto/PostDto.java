@@ -60,4 +60,32 @@ public class PostDto {
                     .build();
         }
     }
+
+    public class Update {
+        private Long id;
+        private String title;
+        private String category;
+        private String contents;
+        private String img;
+
+
+        @Builder
+        public Update(Long id, String title, String category, String contents, String img) {
+            this.id = id;
+            this.title = title;
+            this.category = category;
+            this.contents = contents;
+            this.img = img;
+        }
+
+        public Posts toEntity() {
+            return Posts.builder()
+                    .id(id)
+                    .title(title)
+                    .category(category)
+                    .contents(contents)
+                    .img(img)
+                    .build();
+        }
+    }
 }

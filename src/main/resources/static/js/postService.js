@@ -169,6 +169,35 @@ PostService = {
         })
 
     },
+    update: function () {
+        this.postDto.toDto();
+        if (this.validate() == false) {
+            return;
+        }
+        $.ajax({
+            type: 'PUT',
+            url: '/api/posts/',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(this.postDto)
+        }).done(function (post) {
+            alert('정상적으로 변경이 완료되었습니다')
+            window.location.href = '/post/detail' + post.id;
+        })
+    },
+    getUpdateInfo: function () {
+        $.ajax({
+            type: 'GET',
+            url: '/api/posts/' + id,
+            dataType: 'json',
+            contentType: 'application/json'
+        }).done(function (post) {
+            $('#title').val(post.title);
+            $('#category').val(post.category);
+            $('#contents').val(post.contents);
+            $('#file-name').attr("src", '/api/download?file-name=' + post.img)
+        });
+    },
     postDto: {
         title: '',
         contents: '',
