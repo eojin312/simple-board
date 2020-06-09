@@ -115,7 +115,7 @@ PostService = {
             data: JSON.stringify(this.postDto)
         }).done(function (id) {
             alert('정상적으로 글이 등록되었습니다');
-            window.location.href = '/posts/detail/' + id;
+            window.location.href = '/post/detail/' + id;
         })
     },
     bindEvent: function () {
@@ -164,7 +164,7 @@ PostService = {
             $('#title').html(post.title);
             $('#category').html(post.category);
             $('#contents').html(post.contents);
-            $('#file-name').html(post.img);
+            $('#file-name').attr('src', '/api/download?file-name=' + post.img);
 
         })
 

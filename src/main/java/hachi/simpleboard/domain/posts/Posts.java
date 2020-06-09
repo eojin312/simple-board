@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Entity
@@ -23,14 +24,16 @@ public class Posts extends BaseTimeEntity {
     private String category;
     private String author;
     private String img;
+    private LocalDateTime createdDate;
 
     @Builder
 
-    public Posts(String title, String contents, String category, String author, String img) {
+    public Posts(String title, String contents, String category, String author, String img, LocalDateTime createdDate) {
         this.title = title;
         this.contents = contents;
         this.category = category;
         this.author = author;
         this.img = img;
+        this.createdDate = createdDate;
     }
 }

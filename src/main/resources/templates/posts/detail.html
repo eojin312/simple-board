@@ -6,23 +6,23 @@
 <body>
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
 <div class="container">
-    <div class="title-or-category-area">
-        <table class="table">
-            <thead class="thead-dark" id="list-thead">
-            <tr>
-                <th id="title"></th>
-                <th id="category"></th>
-            </tr>
-            </thead>
-            <tbody id="list-tbody">
-            <tr>
-                <td id="contents"></td>
-            </tr>
-            </tbody>
-        </table>
+    <div>
+        <p id="id" th:text="${id}"></p>
+        <h3 id="title"></h3>
+        <h4 id="category"></h4>
     </div>
+    <p id="contents"></p>
 </div>
-
+<img id="file-name"/>
+</div>
+<button class="btn btn-primary" onclick="window.location.href='/';" type="button">목록으로</button>
+<button class="btn btn-primary" onclick="window.location.href='/post/update';" type="button">수정</button>
 <script src="/js/postService.js"></script>
+<script>
+    var id = $('#id').html();
+    $(document).ready(function () {
+        PostService.detail(id);
+    })
+</script>
 </body>
 </html>
