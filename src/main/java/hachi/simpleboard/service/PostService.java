@@ -33,4 +33,14 @@ public class PostService {
     public Posts findByid(Long id) {
         return postRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지않은 게시물입니다."));
     }
+
+    public Posts update(PostDto.Update postUpdateDto) {
+        return postRepository.save(postUpdateDto.toEntity());
+    }
+
+    public void delete(Long id) {
+        Posts posts = postRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("게시물이 없습니다."));
+        postRepository.delete(posts);
+    }
 }

@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header">
     <title>Title</title>
+
 </head>
 <body>
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
@@ -15,14 +16,21 @@
 </div>
 <img id="file-name"/>
 </div>
-<button class="btn btn-primary" onclick="window.location.href='/';" type="button">목록으로</button>
-<button class="btn btn-primary" onclick="window.location.href='/post/update';" type="button">수정</button>
+<div class="footer-button">
+    <button class="btn btn-primary" onclick="window.location.href='/';" type="button">목록으로</button>
+    <button class="btn btn-warning" onclick="goUpdate();" type="button">수정</button>
+    <button class="btn btn-danger" onclick="PostService.delete();" type="button">삭제</button>
+</div>
 <script src="/js/postService.js"></script>
 <script>
     var id = $('#id').html();
     $(document).ready(function () {
         PostService.detail(id);
     })
+
+    function goUpdate() {
+        location.href = '/posts/update/' + id;
+    }
 </script>
 </body>
 </html>

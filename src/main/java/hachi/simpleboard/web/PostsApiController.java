@@ -32,8 +32,14 @@ public class PostsApiController extends BaseApiController {
         return postService.findByid(id);
     }
 
-    @PutMapping("/posts/{id}")
+    @PutMapping("/posts")
     public Posts update(@RequestBody PostDto.Update postUpdateDto) {
-        return postService.save(id);
+        return postService.update(postUpdateDto);
+    }
+
+    @DeleteMapping("/posts/{id}")
+    public Long delete(@PathVariable Long id) {
+        postService.delete(id);
+        return id;
     }
 }

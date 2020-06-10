@@ -2,6 +2,7 @@ package hachi.simpleboard.web.dto;
 
 import hachi.simpleboard.domain.posts.Posts;
 import lombok.Builder;
+import lombok.Getter;
 
 import javax.persistence.Lob;
 import javax.validation.constraints.Size;
@@ -61,13 +62,13 @@ public class PostDto {
         }
     }
 
-    public class Update {
+    @Getter
+    public static class Update {
         private Long id;
         private String title;
         private String category;
         private String contents;
         private String img;
-
 
         @Builder
         public Update(Long id, String title, String category, String contents, String img) {

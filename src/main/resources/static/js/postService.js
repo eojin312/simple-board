@@ -30,7 +30,7 @@ PostService = {
     },
 
     linkToDetail: function (id) {
-        window.location.href = '/post/detail/' + id;
+        window.location.href = '/posts/detail/' + id;
     },
 
     getList: function (_page) {
@@ -182,10 +182,10 @@ PostService = {
             data: JSON.stringify(this.postDto)
         }).done(function (post) {
             alert('정상적으로 변경이 완료되었습니다')
-            window.location.href = '/post/detail' + post.id;
+            window.location.href = '/posts/detail/' + post.id;
         })
     },
-    getUpdateInfo: function () {
+    getUpdateInfo: function (id) {
         $.ajax({
             type: 'GET',
             url: '/api/posts/' + id,
@@ -195,8 +195,19 @@ PostService = {
             $('#title').val(post.title);
             $('#category').val(post.category);
             $('#contents').val(post.contents);
-            $('#file-name').attr("src", '/api/download?file-name=' + post.img)
+            $('#file-name').attr("src", '/api/download?file-name=' + post.img);
         });
+    },
+    delete: function () {
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/posts/' + id,
+            dataType: 'json',
+            contentType: 'application/json',
+        }).done(function () {
+            alert('게시물이 삭제되었습니다.');
+            window.location.href = '/';
+        })
     },
     postDto: {
         title: '',

@@ -27,8 +27,8 @@ public class Posts extends BaseTimeEntity {
     private LocalDateTime createdDate;
 
     @Builder
-
-    public Posts(String title, String contents, String category, String author, String img, LocalDateTime createdDate) {
+    public Posts(Long id, String title, String contents, String category, String author, String img, LocalDateTime createdDate) {
+        this.id = id;
         this.title = title;
         this.contents = contents;
         this.category = category;

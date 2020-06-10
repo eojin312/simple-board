@@ -3,6 +3,7 @@ package hachi.simpleboard.web;
 import hachi.simpleboard.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -22,8 +23,14 @@ public class PostsController {
         return "posts/create";
     }
 
-    @GetMapping("/post/detail/{id}")
+    @GetMapping("/posts/detail/{id}")
     public String detail(@PathVariable Long id) {
         return "posts/detail";
+    }
+
+    @GetMapping("/posts/update/{id}")
+    public String update(@PathVariable Long id, Model model) {
+        model.addAttribute("id", id);
+        return "posts/update";
     }
 }
