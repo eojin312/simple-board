@@ -12,12 +12,15 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 
 @Slf4j
 @RestController
+@SessionAttributes("login")
 @RequiredArgsConstructor
 public class UserApiController extends BaseApiController {
 
@@ -56,5 +59,29 @@ public class UserApiController extends BaseApiController {
     public Long delete(@PathVariable Long id) {
         userService.delete(id);
         return id;
+    }
+
+    @RequestMapping(value = "/login")
+    public ModelAndView loginCheck(@ModelAttribute User user, HttpSession session) {
+        boolean result = userService.loginCheck(user, session);
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("login");
+
+        if (result) {
+            mav.addObject("msg", "로그인 성공");
+        } else {
+            mav.addObject("msg", "로그인 실패");
+        }
+        return mav;
+    }
+
+    @RequestMapping("/logout")
+    public ModelAndView logout(HttpSession session) {
+        userService.logout(session);
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("login");
+        mav.addObject("msg", "logout");
+
+        return mav;
     }
 }

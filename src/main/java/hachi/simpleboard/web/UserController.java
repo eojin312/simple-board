@@ -34,4 +34,9 @@ public class UserController {
     public String upload() {
         return "user/upload";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 }
