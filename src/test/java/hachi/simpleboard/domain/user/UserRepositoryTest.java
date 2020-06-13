@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.transaction.Transactional;
@@ -57,7 +58,7 @@ class UserRepositoryTest {
         );
 
         // when
-        User newUser = userRepository.findByLoginId(LOGIN_ID);
+        User newUser = userRepository.findByLoginId(LOGIN_ID).orElseThrow(() -> new UsernameNotFoundException("존재하지 않는 회원입니다."));
 
         // then
         Assertions.assertEquals(LOGIN_ID, newUser.getLoginId());

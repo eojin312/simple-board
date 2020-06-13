@@ -5,13 +5,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * UserRepository
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    public User findByLoginId(String loginId);
+
+    Optional<User> findByLoginId(String loginId);
 
     Page<User> findByLoginIdContaining(String searchKeyword, Pageable pageable);
 

@@ -12,14 +12,14 @@
             <div class="col-4">
                 <div class="card">
                     <div class="card-body">
-                        <form action="" autocomplete="off">
+                        <form action="login" autocomplete="off" method="POST" name="login-form">
                             <div class="form-group">
-                                <input class="form-control" name="username" placeholder="login" type="text">
+                                <input class="form-control" name="username" placeholder="로그인아이디를 입력해주세요" type="text">
                             </div>
                             <div class="form-group">
-                                <input class="form-control" name="password" placeholder="password" type="password">
+                                <input class="form-control" name="password" placeholder="비밀번호를 입력해주세요" type="password">
                             </div>
-                            <button class="btn btn-primary" id="sendlogin" type="button">login</button>
+                            <button class="btn btn-primary" id="sendlogin" type="submit">login</button>
                         </form>
                     </div>
                 </div>

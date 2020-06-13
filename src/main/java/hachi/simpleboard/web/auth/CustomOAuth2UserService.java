@@ -1,6 +1,5 @@
 package hachi.simpleboard.web.auth;
 
-import hachi.simpleboard.web.dto.OAuthAttributes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -24,8 +23,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 .getProviderDetails()
                 .getUserInfoEndpoint()
                 .getUserNameAttributeName();
-
-        OAuthAttributes authAttribute = OauthAttribute
 
         return null;
     }

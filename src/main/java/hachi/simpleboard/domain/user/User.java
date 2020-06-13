@@ -4,6 +4,7 @@ import hachi.simpleboard.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
@@ -45,5 +46,9 @@ public class User extends BaseTimeEntity {
         this.profileImage = profileImage;
         this.birthYear = birthYear;
         this.gender = gender;
+    }
+
+    public void encodePassword(PasswordEncoder passwordEncoder) {
+        this.loginPassword = passwordEncoder.encode(this.loginPassword);
     }
 }

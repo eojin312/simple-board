@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -23,11 +24,9 @@ public class UserService {
 
     private List<User> users;
 
-//    private final ModelMapper modelMapper;
-
     @Transactional
     public Long save(UserDto.Create userDto) {
-        User user = userRepository.findByLoginId(userDto.getLoginId());
+        User user = userRepository.findByLoginId(userDto.getLoginId()).orElseThrow(() -> new UsernameNotFoundException("존재하지않는 회원입니다."));
         if (user != null) {
             throw new DuplicateLoginIdException("중복된 회원이 존재합니다.");
         }
@@ -67,4 +66,13 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "알 수 없는 검색 타입입니다.");
         }
     }
+
+//    @Override
+//    public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
+//        User user = userRepository.findByLoginId(loginId).orElseThrow(() -> new UsernameNotFoundException("존재하지않는 회원입니다"));
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//        GrantedAuthority authority = new SimpleGrantedAuthority("MEMBER");
+//        authorities.add(authority);
+//        return new org.springframework.security.core.userdetails.User(user.getLoginId(), user.getLoginPassword(), authorities);
+//    }
 }
