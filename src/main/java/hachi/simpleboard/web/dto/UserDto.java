@@ -15,21 +15,21 @@ public class UserDto {
         private String email;
 
         @Size(min = 3, max = 8, message = "아이디는 최소 3자 이상 최대 8자 이하로 입력해주세요")
-        private String loginId;
+        private String username;
 
         @Size(min = 3, max = 10)
-        private String loginPassword;
+        private String password;
         private String profileImage;
         private int birthYear;
         private String gender;
 
 
         @Builder
-        public Create(String name, String email, String loginId, String loginPassword, String profileImage, int birthYear, String gender) {
+        public Create(String name, String email, String username, String password, String profileImage, int birthYear, String gender) {
             this.name = name;
             this.email = email;
-            this.loginId = loginId;
-            this.loginPassword = loginPassword;
+            this.username = username;
+            this.password = password;
             this.profileImage = profileImage;
             this.birthYear = birthYear;
             this.gender = gender;
@@ -39,8 +39,8 @@ public class UserDto {
             return User.builder()
                     .name(name)
                     .email(email)
-                    .loginId(loginId)
-                    .loginPassword(loginPassword)
+                    .username(username)
+                    .password(password)
                     .profileImage(profileImage)
                     .birthYear(birthYear)
                     .gender(gender)
@@ -53,19 +53,19 @@ public class UserDto {
         private Long id;
         private String name;
         private String email;
-        private String loginId;
-        private String loginPassword;
+        private String username;
+        private String password;
         private String profileImage;
         private int birthYear;
         private String gender;
 
         @Builder
-        public Update(Long id, String name, String email, String loginId, String loginPassword, String profileImage, int birthYear, String gender) {
+        public Update(Long id, String name, String email, String username, String password, String profileImage, int birthYear, String gender) {
             this.id = id;
             this.name = name;
             this.email = email;
-            this.loginId = loginId;
-            this.loginPassword = loginPassword;
+            this.username = username;
+            this.password = password;
             this.profileImage = profileImage;
             this.birthYear = birthYear;
             this.gender = gender;
@@ -76,8 +76,8 @@ public class UserDto {
                     .id(id)
                     .name(name)
                     .email(email)
-                    .loginId(loginId)
-                    .loginPassword(loginPassword)
+                    .username(username)
+                    .password(password)
                     .profileImage(profileImage)
                     .birthYear(birthYear)
                     .gender(gender)

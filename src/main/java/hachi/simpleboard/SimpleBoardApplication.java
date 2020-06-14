@@ -44,10 +44,11 @@ public class SimpleBoardApplication {
                             .name("test" + i)
                             .email("test@naver.com" + i)
                             .gender("M")
-                            .loginId("testID" + i)
+                            .username("testID" + i)
                             .profileImage(i + ".jpg")
-                            .loginPassword(encodedPassword)
+                            .password(encodedPassword)
                             .birthYear(200 + i)
+                            .role("MEMBER")
                             .build();
 
                     userRepository.save(user);

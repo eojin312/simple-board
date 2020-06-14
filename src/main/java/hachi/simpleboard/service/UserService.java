@@ -26,7 +26,7 @@ public class UserService {
 
     @Transactional
     public Long save(UserDto.Create userDto) {
-        User user = userRepository.findByLoginId(userDto.getLoginId()).orElseThrow(() -> new UsernameNotFoundException("존재하지않는 회원입니다."));
+        User user = userRepository.findByUsername(userDto.getUsername()).orElseThrow(() -> new UsernameNotFoundException("존재하지않는 회원입니다."));
         if (user != null) {
             throw new DuplicateLoginIdException("중복된 회원이 존재합니다.");
         }
@@ -56,8 +56,8 @@ public class UserService {
     }
 
     public Page<User> findAllBySearchCondition(Pageable pageable, String searchType, String searchKeyword) {
-        if (searchType.equals("loginId")) {
-            return userRepository.findByLoginIdContaining(searchKeyword, pageable);
+        if (searchType.equals("username")) {
+            return userRepository.findByUsernameContaining(searchKeyword, pageable);
         } else if (searchType.equals("name")) {
             return userRepository.findByNameContaining(searchKeyword, pageable);
         } else if (searchType.equals("email")) {
@@ -66,13 +66,4 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "알 수 없는 검색 타입입니다.");
         }
     }
-
-//    @Override
-//    public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
-//        User user = userRepository.findByLoginId(loginId).orElseThrow(() -> new UsernameNotFoundException("존재하지않는 회원입니다"));
-//        List<GrantedAuthority> authorities = new ArrayList<>();
-//        GrantedAuthority authority = new SimpleGrantedAuthority("MEMBER");
-//        authorities.add(authority);
-//        return new org.springframework.security.core.userdetails.User(user.getLoginId(), user.getLoginPassword(), authorities);
-//    }
 }

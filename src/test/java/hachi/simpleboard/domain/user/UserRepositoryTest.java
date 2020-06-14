@@ -28,7 +28,7 @@ import java.util.List;
         // 각 유닛테스트 시 마다 rollback을 수행토록해줌 (각 유니테스트 별로 독립적인 테스트 가능)
 class UserRepositoryTest {
 
-    public static final String LOGIN_ID = "hachi";
+    public static final String USERNAME = "hachi";
 
     @Autowired
     private UserRepository userRepository;
@@ -49,8 +49,8 @@ class UserRepositoryTest {
         User user = userRepository.save(User.builder()
                 .name("이어진")
                 .email("eojin312@naver.com")
-                .loginId(LOGIN_ID)
-                .loginPassword("1234")
+                .username(USERNAME)
+                .password("1234")
                 .profileImage("a.jpg")
                 .birthYear(2002)
                 .gender("M")
@@ -58,10 +58,10 @@ class UserRepositoryTest {
         );
 
         // when
-        User newUser = userRepository.findByLoginId(LOGIN_ID).orElseThrow(() -> new UsernameNotFoundException("존재하지 않는 회원입니다."));
+        User newUser = userRepository.findByUsername(USERNAME).orElseThrow(() -> new UsernameNotFoundException("존재하지 않는 회원입니다."));
 
         // then
-        Assertions.assertEquals(LOGIN_ID, newUser.getLoginId());
+        Assertions.assertEquals(USERNAME, newUser.getUsername());
     }
 
     @Test
@@ -97,7 +97,7 @@ class UserRepositoryTest {
     @Test
     public void 검색기능테스트loginId() {
         Pageable pageable = PageRequest.of(0, 10);
-        Page<User> userListPage = userRepository.findByLoginIdContaining("testID101", pageable);
+        Page<User> userListPage = userRepository.findByUsernameContaining("testID101", pageable);
         List<User> userList = userListPage.getContent();
         Assertions.assertTrue(userList.size() > 0);
     }

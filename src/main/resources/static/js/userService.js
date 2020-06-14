@@ -9,8 +9,8 @@ UserService = {
     userDto: {
         name: '',
         email: '',
-        loginId: '',
-        loginPassword: '',
+        username: '',
+        password: '',
         gender: '',
         profileImage: '',
         toDto: function () {
@@ -19,8 +19,8 @@ UserService = {
             }
             this.name = $.trim($('#name').val());
             this.email = $.trim($('#email').val());
-            this.loginId = $.trim($('#login-id').val());
-            this.loginPassword = $.trim($('#login-password').val());
+            this.username = $.trim($('#username').val());
+            this.password = $.trim($('#password').val());
             this.birthYear = $.trim($('#birth-year').val());
             this.gender = $.trim($('#gender').val());
             this.profileImage = $.trim($('#file-name').val());
@@ -85,25 +85,25 @@ UserService = {
         if (this.isEmptyAndAlert('email', '이메일') == false) {
             return false;
         }
-        if (this.userDto.loginId == '') {
+        if (this.userDto.username == '') {
             alert('아이디를 입력해주세요');
-            $('#login-id').focus();
+            $('#username').focus();
             return false;
         }
-        if (this.userDto.loginId.length < this.constantValue.MIN_LOGIN_ID) {
+        if (this.userDto.username.length < this.constantValue.MIN_LOGIN_ID) {
             alert(`아이디는 최소 ${this.constantValue.MIN_LOGIN_ID}자 이상 입력해주세요`);
-            $('#login-id').focus();
+            $('#username').focus();
             return false;
         }
-        if (this.userDto.loginPassword == '') {
+        if (this.userDto.password == '') {
             alert('비밀번호를 입력해주세요');
-            $('#login-password').focus();
+            $('#password').focus();
             return false;
         }
         this.isEmptyAndAlert('email', '이메일');
-        if (this.userDto.loginPassword.length < this.constantValue.MIN_LOGIN_PASSWORD) {
+        if (this.userDto.password.length < this.constantValue.MIN_LOGIN_PASSWORD) {
             alert(`비밀번호는 최소 ${this.constantValue.MIN_LOGIN_PASSWORD}자 이상 입력해주세요`);
-            $('#login-password').focus();
+            $('#password').focus();
             return false;
         }
     },
@@ -208,7 +208,7 @@ UserService = {
             let genderString = (userList[i].gender == 'M') ? '남' : '여';
             rowHtml += '<tr>';
             rowHtml += '\t<td>' + userList[i].id + '</td>';
-            rowHtml += '\t<td>' + userList[i].loginId + '</td>';
+            rowHtml += '\t<td>' + userList[i].username + '</td>';
             rowHtml += '\t<td>' + '<a href="/users/detail/' + userList[i].id + '">' + userList[i].name + '</a>' + '</td>';
             rowHtml += '\t<td>' + userList[i].email + '</td>';
             rowHtml += '\t<td>' + userList[i].birthYear + '년</td>';
@@ -225,7 +225,7 @@ UserService = {
             contentType: 'application/json'
         }).done(function (user) {
             $('#name').html(user.name);
-            $('#login-id').html(user.loginId);
+            $('#username').html(user.username);
             $('#email').html(user.email);
             $('#birth-year').html(user.birthYear);
             $('#gender').html(user.gender);
@@ -241,8 +241,8 @@ UserService = {
             contentType: 'application/json'
         }).done(function (user) {
             $('#name').val(user.name);
-            $('#login-id').val(user.loginId);
-            $('#login-password').val(user.loginPassword);
+            $('#username').val(user.username);
+            $('#password').val(user.password);
             $('#email').val(user.email);
             $('#birth-year').val(user.birthYear);
             $('#gender').val(user.gender);

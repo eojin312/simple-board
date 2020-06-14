@@ -25,10 +25,10 @@ public class User extends BaseTimeEntity {
 
     //    @Column(nullable = false, unique = true)
     @Column(nullable = false, unique = false)
-    private String loginId;
+    private String username;
 
     @Column(nullable = false)
-    private String loginPassword;
+    private String password;
 
     private String profileImage;
 
@@ -36,19 +36,22 @@ public class User extends BaseTimeEntity {
 
     private String gender;
 
+    private String role;
+
     @Builder
-    public User(Long id, String name, String email, String loginId, String loginPassword, String profileImage, int birthYear, String gender) {
+    public User(Long id, String name, String email, String username, String password, String profileImage, int birthYear, String gender, String role) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.loginId = loginId;
-        this.loginPassword = loginPassword;
+        this.username = username;
+        this.password = password;
         this.profileImage = profileImage;
         this.birthYear = birthYear;
         this.gender = gender;
+        this.role = role;
     }
 
     public void encodePassword(PasswordEncoder passwordEncoder) {
-        this.loginPassword = passwordEncoder.encode(this.loginPassword);
+        this.password = passwordEncoder.encode(this.password);
     }
 }
