@@ -14,6 +14,11 @@ public class AccountController {
 
     private final AccountService accountService;
 
+    /**
+     * 회원가입 페이지(securiry test 를 위한 임시 가입 페이지)
+     *
+     * @return
+     */
     @GetMapping("/account/join")
     public String joinPage() {
         return "/account/join";
