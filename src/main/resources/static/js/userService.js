@@ -13,6 +13,7 @@ UserService = {
         password: '',
         gender: '',
         profileImage: '',
+        role: 'MEMBER',
         toDto: function () {
             if ($('#id') != undefined) {
                 this.id = $.trim($('#id').text());
@@ -24,6 +25,7 @@ UserService = {
             this.birthYear = $.trim($('#birth-year').val());
             this.gender = $.trim($('#gender').val());
             this.profileImage = $.trim($('#file-name').val());
+            this.role = $.trim($('#role').val());
         },
     },
     bindEvent: function () {
@@ -44,7 +46,7 @@ UserService = {
             data: JSON.stringify(this.userDto)
         }).done(function (id) {
             alert('정상적으로 회원이 등록되었습니다');
-            window.location.href = '/users/detail/' + id; // TODO : 회원상세페이지로 이동으로 변겨애ㅑ ㅇㅇs
+            window.location.href = '/users/detail/' + id;
         }).fail(function (errorResponse) {
             if (errorResponse.message == undefined) {
                 alert(errorResponse.responseJSON.errors[0].defaultMessage);

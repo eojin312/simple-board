@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 @RequiredArgsConstructor
 public class PostsApiController extends BaseApiController {
@@ -18,7 +20,8 @@ public class PostsApiController extends BaseApiController {
     private PostService postService;
 
     @GetMapping("/posts")
-    public Page<Posts> list(@PageableDefault Pageable pageable) {
+    public Page<Posts> list(@PageableDefault Pageable pageable, Principal principal) {
+        principal.getName();
         return postService.findAll(pageable);
     }
 

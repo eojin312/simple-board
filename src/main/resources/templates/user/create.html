@@ -34,6 +34,7 @@
             <label>생년</label>
             <input class="form-control" id="birth-year" placeholder="생년을를 입력해주세요" type="text">
         </div>
+        <input type="hidden">
 
         <div class="img-area">
             <label>프로필사진</label>
@@ -41,7 +42,7 @@
                 <input name="attach-file" type="file">
                 <input onclick="UserService.upload();" type="button" value="upload">
             </form>
-            <input id="file-name" type="hidden" value=""/>
+            <input id="file-name" id="role" type="hidden" value="MEMBER"/>
             <div class="select-img">
                 <img id="profile-image"/>
             </div>

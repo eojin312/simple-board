@@ -165,7 +165,6 @@ PostService = {
             $('#category').html(post.category);
             $('#contents').html(post.contents);
             $('#file-name').attr('src', '/api/download?file-name=' + post.img);
-
         })
 
     },
