@@ -7,7 +7,7 @@
 <body>
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
 <br/>
-<div class="container">
+
     <div class="create">
         <div class="form-group">
             <label>제목</label>
@@ -15,7 +15,8 @@
         </div>
         <div class="form-group">
             <label>작성자</label>
-            <input class="form-control" id="author" placeholder="작성자를 입력해주세요" type="text">
+            <input class="form-control" id="author" placeholder="작성자를 입력해주세요" th:value="${authUser.getUser().getName()}"
+                   type="text">
         </div>
         <div class="form-group">
             <label for="contents"></label>
@@ -43,7 +44,7 @@
         <button class="btn btn-primary" id="create_button" onclick="PostService.save();" type="button">등록</button>
         <br/>
     </div>
-</div>
+<script src="/js/commonUtil.js"></script>
 <script src="/js/postService.js"></script>
 <script>
     $(document).ready(function () {

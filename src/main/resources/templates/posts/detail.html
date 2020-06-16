@@ -6,14 +6,12 @@
 </head>
 <body>
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-<div class="container">
     <div>
         <p id="id" th:text="${id}"></p>
         <h3 id="title"></h3>
         <h4 id="category"></h4>
     </div>
     <p id="contents"></p>
-</div>
 <img id="file-name"/>
 </div>
 <div class="footer-button">
@@ -21,6 +19,7 @@
     <button class="btn btn-warning" onclick="goUpdate();" type="button">수정</button>
     <button class="btn btn-danger" onclick="PostService.delete();" type="button">삭제</button>
 </div>
+<script src="/js/commonUtil.js"></script>
 <script src="/js/postService.js"></script>
 <script>
     var id = $('#id').html();

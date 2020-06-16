@@ -7,7 +7,6 @@
 <body>
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
 <br/>
-<div class="container">
     <div class="create">
         <tr>
             <th>회원번호</th>
@@ -48,6 +47,7 @@
         <br/>
     </div>
     <input id="" type="hidden">
+    <script src="/js/commonUtil.js"></script>
     <script src="/js/postService.js"></script>
     <script>
         var id = $('#id').html();
@@ -55,6 +55,5 @@
             PostService.getUpdateInfo(id);
         });
     </script>
-</div>
 </body>
 </html>

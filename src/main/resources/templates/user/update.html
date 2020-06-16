@@ -5,7 +5,6 @@
 </head>
 <body>
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-<div class="container">
     <div class="list-area">
         <table class="table table-striped">
             <tr>
@@ -55,11 +54,11 @@
                 </td>
             </tr>
         </table>
-    </div>
     <input onclick="location.href='/users';" type="button" value="목록"/>
     <input onclick="UserService.update();" type="button" value="수정완료"/>
 </div>
 <input id="" type="hidden">
+<script src="/js/commonUtil.js"></script>
 <script src="/js/userService.js"></script>
 
 <script>

@@ -20,9 +20,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .mvcMatchers("/js/**", "/css/**", "/img/**").permitAll()
-//                .mvcMatchers("/h2-console/**").access("hasRole('ADMIN') and hasRole('DBA')")
-                .mvcMatchers("/users/list", "/post/create").authenticated()
+                .mvcMatchers("/users/**").authenticated()
+                .mvcMatchers("/").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
@@ -33,12 +32,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .and()
                 .csrf()
-                .disable()
-//                .and()
-//            .csrf()
-//                .ignoringAntMatchers("/h2-console/**")
-//                .and()
-//            .headers().frameOptions().disable()
-        ;
+                .disable();
     }
 }

@@ -57,7 +57,6 @@ public class PostDto {
                     .author(author)
                     .category(category)
                     .img(img)
-                    .createdDate(createdDate)
                     .build();
         }
     }

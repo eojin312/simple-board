@@ -5,14 +5,13 @@
 </head>
 <body>
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-<div class="container">
     <div class="list-area">
-        <table class="table">
+        <table class="table table-hover">
             <thead class="thead-dark">
-            <th>#</th>
+            <th style=" width: 10px;">#</th>
             <th>제목</th>
             <th>작성자</th>
-            <th>카테고리</th>
+            <th style="width: 100px;">카테고리</th>
             <th>시간</th>
             </thead>
             <tbody id="list-tbody"></tbody>
@@ -22,9 +21,8 @@
     <div class="list-footer-area">
         <button class="btn btn-primary" onclick="location.href='/posts/create'" type="button">글쓰러가기</button>
     </div>
-</div>
 
-
+<script src="/js/commonUtil.js"></script>
 <script src="/js/postService.js"></script>
 <script>
     $(document).ready(function () {

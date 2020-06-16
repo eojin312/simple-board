@@ -5,7 +5,7 @@
 </head>
 <body>
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-<div class="container">
+
     <div class="create">
         <div class="form-group">
             <label>이름</label>
@@ -51,7 +51,7 @@
         <a class="btn btn-secondary" href="/user/list" role="button">취소</a>
         <button class="btn btn-primary" id="create_button" onclick="UserService.save();" type="button">등록</button>
     </div>
-</div>
+<script src="/js/commonUtil.js"></script>
 <script src="/js/userService.js"></script>
 <script>
     $(document).ready(function () {
