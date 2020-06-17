@@ -15,8 +15,8 @@
         </div>
         <div class="form-group">
             <label>작성자</label>
-            <input class="form-control" id="author" placeholder="작성자를 입력해주세요" th:value="${authUser.getUser().getName()}"
-                   type="text">
+            <input class="form-control" id="author" placeholder="작성자를 입력해주세요" readonly
+                   th:value="${authUser.getUser().getName()}" type="text">
         </div>
         <div class="form-group">
             <label for="contents"></label>

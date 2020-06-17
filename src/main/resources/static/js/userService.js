@@ -150,7 +150,7 @@ UserService = {
      */
     renderPagination: function (totalPage, _crrentPage, size, totalElements, _areaClassId) {
 
-        let areaClassId = (_areaClassId == undefined || _areaClassId == null) ? '.pagination-area' : _areaClassId;
+        let areaClassId = (_areaClassId === undefined || _areaClassId == null) ? '.pagination-area' : _areaClassId;
         let crrentPage = (_crrentPage < 1) ? 1 : _crrentPage;
         let currentBlock = Math.ceil(crrentPage / this.config.PAGES_PER_BLOCK);
         let startPageOfBlock = Math.ceil((currentBlock - 1) * this.config.PAGES_PER_BLOCK) + 1;

@@ -115,7 +115,7 @@ PostService = {
             data: JSON.stringify(this.postDto)
         }).done(function (id) {
             alert('정상적으로 글이 등록되었습니다');
-            window.location.href = '/post/detail/' + id;
+            window.location.href = '/posts/detail/' + id;
         })
     },
     bindEvent: function () {
@@ -131,11 +131,9 @@ PostService = {
         if (this.postDto.contents == '') {
             alert('글을 입력해주세요')
             $('#contents').focus();
+            return false;
         }
-        if (this.postDto.author == '') {
-            alert('작성자를 입력해주세요')
-            $('#author').focus();
-        }
+
     },
     upload: function (event) {
         let form = $('#upload-form')[0];
