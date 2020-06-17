@@ -29,7 +29,8 @@ public class PostsController {
     }
 
     @GetMapping("/posts/detail/{id}")
-    public String detail(@PathVariable Long id) {
+    public String detail(@PathVariable Long id, Model model, @AuthenticationPrincipal AuthUser authUser) {
+        model.addAttribute("authUser", authUser);
         return "posts/detail";
     }
 

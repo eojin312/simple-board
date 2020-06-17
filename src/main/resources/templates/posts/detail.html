@@ -6,19 +6,37 @@
 </head>
 <body>
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-    <div>
-        <p id="id" th:text="${id}"></p>
-        <h3 id="title"></h3>
-        <h4 id="category"></h4>
+<div class="container">
+    <p id="id" th:text="${id}"></p>
+    <div class="container">
+        <div>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <td id="title"></td>
+                </tr>
+                <tr>
+                    <td id="category"></td>
+                    <td th:value="${authUser.getUser().getName()}"></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td id="contents"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <img id="file-name" onerror="this.parentNode.style.display='none'"/>
+            </div>
+        </div>
+        <br/>
+        <div class="footer-button">
+            <button class="btn btn-primary" onclick="window.location.href='/';" type="button">목록으로</button>
+            <button class="btn btn-warning" onclick="goUpdate();" type="button">수정</button>
+            <button class="btn btn-danger" onclick="PostService.delete();" type="button">삭제</button>
+        </div>
     </div>
-    <p id="contents"></p>
-<img id="file-name"/>
-</div>
-<div class="footer-button">
-    <button class="btn btn-primary" onclick="window.location.href='/';" type="button">목록으로</button>
-    <button class="btn btn-warning" onclick="goUpdate();" type="button">수정</button>
-    <button class="btn btn-danger" onclick="PostService.delete();" type="button">삭제</button>
-</div>
 <script src="/js/commonUtil.js"></script>
 <script src="/js/postService.js"></script>
 <script>

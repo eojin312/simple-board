@@ -7,7 +7,7 @@
 <body>
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
 <br/>
-
+<div class="container">
     <div class="create">
         <div class="form-group">
             <label>제목</label>
@@ -44,6 +44,7 @@
         <button class="btn btn-primary" id="create_button" onclick="PostService.save();" type="button">등록</button>
         <br/>
     </div>
+</div>
 <script src="/js/commonUtil.js"></script>
 <script src="/js/postService.js"></script>
 <script>
