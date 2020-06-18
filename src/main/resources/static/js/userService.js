@@ -44,9 +44,9 @@ UserService = {
             contentType: 'application/json',
             datatype: 'json',
             data: JSON.stringify(this.userDto)
-        }).done(function (id) {
+        }).done(function (user) {
             alert('정상적으로 회원이 등록되었습니다');
-            window.location.href = '/users/detail/' + id;
+            window.location.href = '/users/detail/' + user.id;
         }).fail(function (errorResponse) {
             if (errorResponse.message == undefined) {
                 alert(errorResponse.responseJSON.errors[0].defaultMessage);
