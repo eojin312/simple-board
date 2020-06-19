@@ -45,7 +45,7 @@ public class SimpleBoardApplication {
                             .email("test@naver.com" + i)
                             .gender("M")
                             .username("testID" + i)
-                            .profileImage(i + ".jpg")
+                            .profileImage("/Users/user/Downloads/로봇생각.jpg")
                             .password(encodedPassword)
                             .birthYear(200 + i)
                             .role("MEMBER")
