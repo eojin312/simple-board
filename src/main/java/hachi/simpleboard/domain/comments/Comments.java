@@ -1,7 +1,6 @@
 package hachi.simpleboard.domain.comments;
 
 import hachi.simpleboard.domain.BaseTimeEntity;
-import hachi.simpleboard.domain.posts.Posts;
 import hachi.simpleboard.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,13 +24,9 @@ public class Comments extends BaseTimeEntity {
     @OneToMany
     private List<User> users = new ArrayList<>();
 
-    @ManyToOne
-    private Posts posts;
-
     @Builder
-    public Comments(Long id, String comments, Posts posts) {
+    public Comments(Long id, String comments) {
         this.id = id;
         this.comments = comments;
-        this.posts = posts;
     }
 }
