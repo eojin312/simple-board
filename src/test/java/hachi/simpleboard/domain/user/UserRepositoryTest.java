@@ -54,6 +54,7 @@ class UserRepositoryTest {
                 .profileImage("a.jpg")
                 .birthYear(2002)
                 .gender("M")
+                .role("MEMBER")
                 .build()
         );
 

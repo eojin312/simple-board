@@ -1,14 +1,18 @@
 package hachi.simpleboard.domain.posts;
 
 import hachi.simpleboard.config.BaseTimeEntity;
+import hachi.simpleboard.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
+@Table(name = "posts")
 @NoArgsConstructor
 public class Posts extends BaseTimeEntity {
 
@@ -19,11 +23,32 @@ public class Posts extends BaseTimeEntity {
 
     @Column(nullable = false, length = 200)
     private String title;
+
+    @Column(nullable = false)
     private String contents;
+
+    @Column(nullable = false, columnDefinition = "varchar(10) default 'humor'")
     private String category;
+
+    @Column(nullable = false)
     private String author;
     private String img;
 
+    /**
+     * 회원이 작성한 글들을 모아보기 위해
+     */
+    @OneToMany(mappedBy = "posts", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<User> users = new ArrayList<>();
+
+    /**
+     * 회원 이름 가져오
+     */
+    @ManyToOne
+    @JoinColumn(name = "user_no")
+    private User user;
+
+//    @OneToMany(mappedBy = "comments")
+//    private List<Comments> comments = new ArrayList<>();
 
     @Builder
     public Posts(Long id, String title, String contents, String category, String author, String img) {
