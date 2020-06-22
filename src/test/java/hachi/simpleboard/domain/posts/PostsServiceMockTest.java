@@ -1,6 +1,7 @@
 package hachi.simpleboard.domain.posts;
 
 import hachi.simpleboard.domain.BaseTest;
+import hachi.simpleboard.domain.comments.CommentsRepository;
 import hachi.simpleboard.service.PostsService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +18,9 @@ public class PostsServiceMockTest extends BaseTest {
 
     @Mock
     private PostsRepository postsRepository;
+
+    @Mock
+    private CommentsRepository commentsRepository;
 
     @InjectMocks
     private PostsService postsService;
@@ -38,7 +42,14 @@ public class PostsServiceMockTest extends BaseTest {
 
     @Test
     public void 게시물_조회_테스트() {
+        // given
+        // comments를 등록해둔다
+
+
+        // when
         Posts posts = postsService.findByid(1L);
+
+        // then
         Assertions.assertEquals(mockPosts.getAuthor(), posts.getAuthor());
     }
 }

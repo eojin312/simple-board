@@ -1,5 +1,7 @@
 package hachi.simpleboard.domain.posts;
 
+import hachi.simpleboard.domain.comments.Comments;
+import hachi.simpleboard.domain.comments.CommentsRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -23,6 +25,9 @@ class PostsRepositoryTest {
     @Autowired
     private PostsRepository postsRepository;
 
+    @Autowired
+    private CommentsRepository commentsRepository;
+
     @Test
     public void 게시글_입력_테스트() {
         Posts posts = postsRepository.save(Posts.builder()
@@ -37,13 +42,42 @@ class PostsRepositoryTest {
 
     @Test
     public void 게시글_수정() {
+        Comments comments = commentsRepository.save(Comments.builder()
+                .comments("테스트용 댓글")
+                .build()
+        );
 
     }
 
     @Test
-    public void 게시글_조회_테스트() {
+    public void 게시글_목록_조회_테스트() {
         List<Posts> posts = postsRepository.findAll();
         Assertions.assertTrue(posts.size() > 1);
+    }
+
+    @Test
+    public void 게시글_단건_조회_테스트() throws Exception {
+        // given
+        // 글을 하나 등록한다.
+        Posts posts = postsRepository.save(Posts.builder()
+                .title("테스트용제목")
+                .contents("테스트용 게시물")
+                .author("testID100001")
+                .category("humor")
+                .img("/a.jpg")
+                .build());
+
+        // 방금 등록한 글에 다가 댓글을 등록한다.
+        Comments comments1 = commentsRepository.save(Comments.builder().posts(posts).comments("방가").build());
+        Comments comments2 = commentsRepository.save(Comments.builder().posts(posts).comments("이빠").build());
+
+        // when
+        // 댓글을 등록한 게시물 하나를 가지고온다.
+        Posts postsWithCommmets = postsRepository.findById(posts.getId()).orElseThrow(() -> new Exception());
+
+        // then
+        // 게시물 조회한 결과에 댓글이 달려있는지 검증한다.
+        Assertions.assertTrue(postsWithCommmets.getComments().size() == 2);
     }
 
     @Test
