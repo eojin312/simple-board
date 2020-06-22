@@ -1,7 +1,6 @@
 package hachi.simpleboard.domain.comments;
 
 import hachi.simpleboard.domain.BaseTimeEntity;
-import hachi.simpleboard.domain.posts.Posts;
 import hachi.simpleboard.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,9 +23,9 @@ public class Comments extends BaseTimeEntity {
     @JoinColumn(name = "user_no")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "post_no")
-    private Posts posts;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "posts_no")
+//    private Posts posts;
 
     @Builder
     public Comments(Long id, String comments) {

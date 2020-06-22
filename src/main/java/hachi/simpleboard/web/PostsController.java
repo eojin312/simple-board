@@ -1,6 +1,6 @@
 package hachi.simpleboard.web;
 
-import hachi.simpleboard.service.PostService;
+import hachi.simpleboard.service.PostsService;
 import hachi.simpleboard.web.auth.AuthUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class PostsController {
 
     @Autowired
-    private PostService postService;
+    private PostsService postsService;
 
     @GetMapping("/")
     public String list() {

@@ -13,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
-public class PostService {
+public class PostsService {
 
     @Autowired
     private final PostsRepository postRepository;

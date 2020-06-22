@@ -36,6 +36,11 @@ class PostsRepositoryTest {
     }
 
     @Test
+    public void 게시글_수정() {
+
+    }
+
+    @Test
     public void 게시글_조회_테스트() {
         List<Posts> posts = postsRepository.findAll();
         Assertions.assertTrue(posts.size() > 1);
