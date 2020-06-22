@@ -1,14 +1,13 @@
 package hachi.simpleboard.domain.comments;
 
 import hachi.simpleboard.domain.BaseTimeEntity;
+import hachi.simpleboard.domain.posts.Posts;
 import hachi.simpleboard.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Entity
@@ -21,8 +20,13 @@ public class Comments extends BaseTimeEntity {
     @Lob
     private String comments;
 
-    @OneToMany
-    private List<User> users = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "user_no")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "post_no")
+    private Posts posts;
 
     @Builder
     public Comments(Long id, String comments) {

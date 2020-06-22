@@ -1,6 +1,7 @@
 package hachi.simpleboard.domain.posts;
 
 import hachi.simpleboard.config.BaseTimeEntity;
+import hachi.simpleboard.domain.comments.Comments;
 import hachi.simpleboard.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,14 +42,11 @@ public class Posts extends BaseTimeEntity {
     private List<User> users = new ArrayList<>();
 
     /**
-     * 회원 이름 가져오
+     * 글 내 댓글들을 보기위해
      */
-    @ManyToOne
-    @JoinColumn(name = "user_no")
-    private User user;
+    @OneToMany(mappedBy = "posts", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Comments> comments = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "comments")
-//    private List<Comments> comments = new ArrayList<>();
 
     @Builder
     public Posts(Long id, String title, String contents, String category, String author, String img) {

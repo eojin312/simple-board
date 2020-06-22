@@ -1,6 +1,7 @@
 package hachi.simpleboard.domain.user;
 
 import hachi.simpleboard.domain.BaseTimeEntity;
+import hachi.simpleboard.domain.comments.Comments;
 import hachi.simpleboard.domain.posts.Posts;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,6 +10,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -49,11 +52,8 @@ public class User extends BaseTimeEntity implements Serializable {
     @JoinColumn(name = "posts_no")
     private Posts posts;
 
-//    /**
-//     * 회원이 작성한 댓글들을 모아보기 위해
-//     */
-//    @OneToMany(mappedBy = "comments")
-//    private List<Comments> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<Comments> comments = new ArrayList<>();
 
     @Builder
     public User(Long id, String name, String email, String username, String password, String profileImage, int birthYear, String gender, String role) {

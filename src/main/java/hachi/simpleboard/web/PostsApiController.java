@@ -23,8 +23,8 @@ public class PostsApiController extends BaseApiController {
     }
 
     @PostMapping("/posts")
-    public Long create(@RequestBody PostDto.Create userDto) {
-        return postService.save(userDto);
+    public Long create(@RequestBody PostDto.Create postDto) {
+        return postService.save(postDto);
     }
 
     @GetMapping("/posts/{id}")
