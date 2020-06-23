@@ -2,8 +2,8 @@ package hachi.simpleboard.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import hachi.simpleboard.domain.BaseTimeEntity;
-import hachi.simpleboard.domain.comments.Comments;
-import hachi.simpleboard.domain.posts.Posts;
+import hachi.simpleboard.domain.comment.Comment;
+import hachi.simpleboard.domain.post.Post;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -50,12 +50,11 @@ public class User extends BaseTimeEntity implements Serializable {
     @Column(nullable = false, columnDefinition = "varchar(10) default 'MEMBER'")
     private String role;
 
-    @ManyToOne
-    @JoinColumn(name = "posts_no")
-    private Posts posts;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    List<Comments> comments = new ArrayList<>();
+    List<Comment> comments = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "post_no")
+    private Post post;
 
     @Builder
     public User(Long id, String name, String email, String username, String password, String profileImage, int birthYear, String gender, String role) {

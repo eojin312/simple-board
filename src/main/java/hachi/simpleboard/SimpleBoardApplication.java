@@ -1,7 +1,7 @@
 package hachi.simpleboard;
 
-import hachi.simpleboard.domain.posts.Posts;
-import hachi.simpleboard.domain.posts.PostsRepository;
+import hachi.simpleboard.domain.post.Post;
+import hachi.simpleboard.domain.post.PostRepository;
 import hachi.simpleboard.domain.user.User;
 import hachi.simpleboard.domain.user.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -56,17 +56,17 @@ public class SimpleBoardApplication {
     }
 
     @Bean
-    public CommandLineRunner initPostData(PostsRepository postsRepository) {
+    public CommandLineRunner initPostData(PostRepository postRepository) {
         return args ->
                 IntStream.rangeClosed(10001, END_USER_COUNT).forEach(i -> {
-                    Posts posts = Posts.builder()
+                    Post post = Post.builder()
                             .title("test" + i)
                             .contents("test Contents")
                             .author("testID" + i)
                             .category("humor")
                             .build();
 
-                    postsRepository.save(posts);
+                    postRepository.save(post);
                 });
     }
 }

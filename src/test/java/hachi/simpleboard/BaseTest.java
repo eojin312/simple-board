@@ -1,4 +1,4 @@
-package hachi.simpleboard.domain;
+package hachi.simpleboard;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,0 +1,35 @@
+package hachi.simpleboard.service;
+
+import hachi.simpleboard.domain.comment.Comment;
+import hachi.simpleboard.domain.comment.CommentRepository;
+import hachi.simpleboard.domain.post.Post;
+import hachi.simpleboard.domain.post.PostRepository;
+import hachi.simpleboard.domain.user.User;
+import hachi.simpleboard.domain.user.UserRepository;
+import hachi.simpleboard.exception.BadParameterExcpetion;
+import hachi.simpleboard.web.dto.CommentDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class CommentService {
+
+    private final CommentRepository commentRepository;
+
+    private final PostRepository postRepository;
+
+    private final UserRepository userRepository;
+
+    public Long save(CommentDto.Create commentCreateDto) {
+        Post post = postRepository.findById(commentCreateDto.getPostNo()).orElseThrow(() -> new BadParameterExcpetion("존재하지 않는 포스트번호 입니다"));
+        User user = userRepository.findById(commentCreateDto.getUserNo()).orElseThrow(() -> new BadParameterExcpetion("존재하지 않는 회원번호 입니다."));
+        return commentRepository.save(commentCreateDto.toEntity(post, user)).getId();
+    }
+
+    public List<Comment> findAllByPost(Post post) {
+        return commentRepository.findAllByPost(post);
+    }
+}

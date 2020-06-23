@@ -1,4 +1,4 @@
-package hachi.simpleboard.web;
+package hachi.simpleboard;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;

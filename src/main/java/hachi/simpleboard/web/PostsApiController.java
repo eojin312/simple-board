@@ -1,7 +1,7 @@
 package hachi.simpleboard.web;
 
-import hachi.simpleboard.domain.posts.Posts;
-import hachi.simpleboard.service.PostsService;
+import hachi.simpleboard.domain.post.Post;
+import hachi.simpleboard.service.PostService;
 import hachi.simpleboard.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,31 +15,31 @@ import org.springframework.web.bind.annotation.*;
 public class PostsApiController extends BaseApiController {
 
     @Autowired
-    private PostsService postsService;
+    private PostService postService;
 
     @GetMapping("/posts")
-    public Page<Posts> list(@PageableDefault Pageable pageable) {
-        return postsService.findAll(pageable);
+    public Page<Post> list(@PageableDefault Pageable pageable) {
+        return postService.findAll(pageable);
     }
 
     @PostMapping("/posts")
     public Long create(@RequestBody PostDto.Create postDto) {
-        return postsService.save(postDto);
+        return postService.save(postDto);
     }
 
     @GetMapping("/posts/{id}")
-    public Posts detail(@PathVariable Long id) {
-        return postsService.findByid(id);
+    public Post detail(@PathVariable Long id) {
+        return postService.findById(id);
     }
 
     @PutMapping("/posts")
-    public Posts update(@RequestBody PostDto.Update postUpdateDto) {
-        return postsService.update(postUpdateDto);
+    public Post update(@RequestBody PostDto.Update postUpdateDto) {
+        return postService.update(postUpdateDto);
     }
 
     @DeleteMapping("/posts/{id}")
     public Long delete(@PathVariable Long id) {
-        postsService.delete(id);
+        postService.delete(id);
         return id;
     }
 }

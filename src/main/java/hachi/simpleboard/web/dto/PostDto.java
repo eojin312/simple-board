@@ -1,6 +1,6 @@
 package hachi.simpleboard.web.dto;
 
-import hachi.simpleboard.domain.posts.Posts;
+import hachi.simpleboard.domain.post.Post;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -18,7 +18,7 @@ public class PostDto {
         private String category;
         private LocalDateTime modifiedDate;
 
-        public ResponseListDto(Posts entity) {
+        public ResponseListDto(Post entity) {
             this.id = entity.getId();
             this.title = entity.getTitle();
             this.contents = entity.getContents();
@@ -50,8 +50,8 @@ public class PostDto {
             this.createdDate = createdDate;
         }
 
-        public Posts toEntity() {
-            return Posts.builder()
+        public Post toEntity() {
+            return Post.builder()
                     .title(title)
                     .contents(contents)
                     .author(author)
@@ -63,24 +63,24 @@ public class PostDto {
 
     @Getter
     public static class Update {
-        private Long id;
+        private Long postsNo;
         private String title;
         private String category;
         private String contents;
         private String img;
 
         @Builder
-        public Update(Long id, String title, String category, String contents, String img) {
-            this.id = id;
+        public Update(Long postsNo, String title, String category, String contents, String img) {
+            this.postsNo = postsNo;
             this.title = title;
             this.category = category;
             this.contents = contents;
             this.img = img;
         }
 
-        public Posts toEntity() {
-            return Posts.builder()
-                    .id(id)
+        public Post toEntity() {
+            return Post.builder()
+                    .id(postsNo)
                     .title(title)
                     .category(category)
                     .contents(contents)

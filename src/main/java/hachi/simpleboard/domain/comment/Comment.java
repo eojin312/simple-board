@@ -1,8 +1,8 @@
-package hachi.simpleboard.domain.comments;
+package hachi.simpleboard.domain.comment;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import hachi.simpleboard.domain.BaseTimeEntity;
-import hachi.simpleboard.domain.posts.Posts;
+import hachi.simpleboard.domain.post.Post;
 import hachi.simpleboard.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class Comments extends BaseTimeEntity {
+public class Comment extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,14 +28,14 @@ public class Comments extends BaseTimeEntity {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "posts_no")
-    private Posts posts;
+    @JoinColumn(name = "post_no")
+    private Post post;
 
     @Builder
-    public Comments(Long id, String comments, Posts posts, User user) {
+    public Comment(Long id, String comments, Post post, User user) {
         this.id = id;
         this.comments = comments;
-        this.posts = posts;
+        this.post = post;
         this.user = user;
     }
 }

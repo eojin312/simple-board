@@ -1,12 +1,12 @@
 package hachi.simpleboard.service;
 
-import hachi.simpleboard.domain.BaseTest;
+import hachi.simpleboard.BaseTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 class CommentsServiceTest extends BaseTest {
 
     @Autowired
-    private CommentsService commentsService;
+    private CommentService commentService;
 
 //    @Test
 //    public void 댓글추가테스트() {

@@ -1,6 +1,7 @@
 package hachi.simpleboard.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hachi.simpleboard.BaseApiControllerTest;
 import hachi.simpleboard.web.dto.UserDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

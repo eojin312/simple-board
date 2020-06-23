@@ -1,8 +1,8 @@
-package hachi.simpleboard.domain.posts;
+package hachi.simpleboard.domain.post;
 
-import hachi.simpleboard.domain.BaseTest;
-import hachi.simpleboard.domain.comments.CommentsRepository;
-import hachi.simpleboard.service.PostsService;
+import hachi.simpleboard.BaseTest;
+import hachi.simpleboard.domain.comment.CommentRepository;
+import hachi.simpleboard.service.PostService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,30 +14,31 @@ import java.util.Optional;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 
-public class PostsServiceMockTest extends BaseTest {
+public class PostServiceMockTest extends BaseTest {
 
     @Mock
-    private PostsRepository postsRepository;
+    private PostRepository postRepository;
 
     @Mock
-    private CommentsRepository commentsRepository;
+    private CommentRepository commentRepository;
 
     @InjectMocks
-    private PostsService postsService;
+    private PostService postService;
 
 
-    private Posts mockPosts;
+    private Post mockPost;
 
     @BeforeEach
     void setMockObject() {
-        this.mockPosts = Posts.builder()
+        this.mockPost = Post.builder()
+                .id(1L)
                 .title("제목")
                 .contents("테스트용 게시물")
                 .author("testID10001")
                 .category("humor")
                 .img("/a.jpg")
                 .build();
-        given(postsRepository.findById(anyLong())).willReturn(Optional.ofNullable(mockPosts));
+        given(postRepository.findById(anyLong())).willReturn(Optional.ofNullable(mockPost));
     }
 
     @Test
@@ -47,9 +48,9 @@ public class PostsServiceMockTest extends BaseTest {
 
 
         // when
-        Posts posts = postsService.findByid(1L);
+        Post post = postService.findById(1L);
 
         // then
-        Assertions.assertEquals(mockPosts.getAuthor(), posts.getAuthor());
+        Assertions.assertEquals(mockPost.getAuthor(), post.getAuthor());
     }
 }
