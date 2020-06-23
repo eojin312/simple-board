@@ -26,8 +26,8 @@ public class PostsService {
         return postRepository.findByOrderByIdDesc(pageable);
     }
 
-    public Long save(PostDto.Create userDto) {
-        return postRepository.save(userDto.toEntity()).getId();
+    public Long save(PostDto.Create postDto) {
+        return postRepository.save(postDto.toEntity()).getId();
     }
 
     public Posts findByid(Long id) {

@@ -1,5 +1,6 @@
 package hachi.simpleboard.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import hachi.simpleboard.domain.BaseTimeEntity;
 import hachi.simpleboard.domain.comments.Comments;
 import hachi.simpleboard.domain.posts.Posts;
@@ -16,6 +17,7 @@ import java.util.List;
 @Getter
 @Entity
 @NoArgsConstructor
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class User extends BaseTimeEntity implements Serializable {
 
     @Id
@@ -52,7 +54,7 @@ public class User extends BaseTimeEntity implements Serializable {
     @JoinColumn(name = "posts_no")
     private Posts posts;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Comments> comments = new ArrayList<>();
 
     @Builder

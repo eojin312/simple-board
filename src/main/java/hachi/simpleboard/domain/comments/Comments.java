@@ -1,5 +1,6 @@
 package hachi.simpleboard.domain.comments;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import hachi.simpleboard.domain.BaseTimeEntity;
 import hachi.simpleboard.domain.posts.Posts;
 import hachi.simpleboard.domain.user.User;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @NoArgsConstructor
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Comments extends BaseTimeEntity {
 
     @Id
@@ -25,7 +27,7 @@ public class Comments extends BaseTimeEntity {
     @JoinColumn(name = "user_no")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "posts_no")
     private Posts posts;
 

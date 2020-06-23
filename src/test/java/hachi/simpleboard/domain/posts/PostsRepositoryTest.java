@@ -2,6 +2,8 @@ package hachi.simpleboard.domain.posts;
 
 import hachi.simpleboard.domain.comments.Comments;
 import hachi.simpleboard.domain.comments.CommentsRepository;
+import hachi.simpleboard.domain.user.User;
+import hachi.simpleboard.domain.user.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -27,6 +29,9 @@ class PostsRepositoryTest {
 
     @Autowired
     private CommentsRepository commentsRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Test
     public void 게시글_입력_테스트() {
@@ -66,10 +71,21 @@ class PostsRepositoryTest {
                 .category("humor")
                 .img("/a.jpg")
                 .build());
-
+        // 댓글 쓰는 사람 = user 도 추가
+        User user = userRepository.save(User.builder()
+                .name("이어진")
+                .username("eojin312")
+                .password("1234")
+                .gender("M")
+                .birthYear(2002)
+                .email("eojin312@naver.com")
+                .role("MEMBER")
+                .profileImage("/a.jpg")
+                .build()
+        );
         // 방금 등록한 글에 다가 댓글을 등록한다.
-        Comments comments1 = commentsRepository.save(Comments.builder().posts(posts).comments("방가").build());
-        Comments comments2 = commentsRepository.save(Comments.builder().posts(posts).comments("이빠").build());
+        Comments comments1 = commentsRepository.save(Comments.builder().posts(posts).comments("방가").user(user).build());
+        Comments comments2 = commentsRepository.save(Comments.builder().posts(posts).comments("이빠").user(user).build());
 
         // when
         // 댓글을 등록한 게시물 하나를 가지고온다.
