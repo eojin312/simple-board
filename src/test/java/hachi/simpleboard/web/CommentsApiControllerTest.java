@@ -9,6 +9,11 @@ import hachi.simpleboard.service.UserService;
 import hachi.simpleboard.web.dto.CommentsDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class CommentsApiControllerTest extends BaseApiControllerTest {
 
@@ -37,6 +42,12 @@ class CommentsApiControllerTest extends BaseApiControllerTest {
                             .user(user)
                             .build()
             );
+            mockMvc.perform(
+                    MockMvcRequestBuilders.post("/api/comments")
+                            .content(comments)
+                            .contentType(MediaType.APPLICATION_JSON)
+            ).andExpect(status().isOk())
+                    .andDo(print());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
