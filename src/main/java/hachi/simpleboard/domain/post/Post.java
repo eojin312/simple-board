@@ -3,7 +3,6 @@ package hachi.simpleboard.domain.post;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import hachi.simpleboard.config.BaseTimeEntity;
 import hachi.simpleboard.domain.comment.Comment;
-import hachi.simpleboard.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,20 +37,41 @@ public class Post extends BaseTimeEntity {
     private String img;
 
     /**
-     * 회원이 작성한 글들을 모아보기 위해
-     */
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<User> users = new ArrayList<>();
-
-    /**
      * 댓글들을 보기위해
      */
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany
     private List<Comment> comments = new ArrayList<>();
 
-
+    /**
+     * 생성용 생성자
+     *
+     * @param title
+     * @param contents
+     * @param category
+     * @param author
+     * @param img
+     */
     @Builder
-    public Post(Long id, String title, String contents, String category, String author, String img) {
+    public Post(String title, String contents, String category, String author, String img) {
+        this.title = title;
+        this.contents = contents;
+        this.category = category;
+        this.author = author;
+        this.img = img;
+    }
+
+    /**
+     * 수정용 생성자
+     *
+     * @param id
+     * @param title
+     * @param contents
+     * @param category
+     * @param author
+     * @param img
+     */
+    @Builder
+    public Post(long id, String title, String contents, String category, String author, String img) {
         this.id = id;
         this.title = title;
         this.contents = contents;

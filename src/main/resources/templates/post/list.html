@@ -5,6 +5,8 @@
 </head>
 <body>
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+<div class="container">
+    <h1>글 게시판</h1>
     <div class="list-area">
         <table class="table table-hover">
             <thead class="thead-dark">
@@ -21,6 +23,7 @@
     <div class="list-footer-area">
         <button class="btn btn-primary" onclick="location.href='/post/create'" type="button">글쓰러가기</button>
     </div>
+</div>
 
 <script src="/js/commonUtil.js"></script>
 <script src="/js/postService.js"></script>

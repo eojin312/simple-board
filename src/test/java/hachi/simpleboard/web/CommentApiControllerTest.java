@@ -22,9 +22,8 @@ class CommentApiControllerTest extends BaseApiControllerTest {
         // given
         String comments = objectMapper.writeValueAsString(
                 CommentDto.Create.builder()
-                        .comments("1빠")
+                        .comment("1빠")
                         .postNo(1L)
-                        .userNo(1L)
                         .build()
         );
 

@@ -19,24 +19,25 @@ public class PostsController {
 
     @GetMapping("/")
     public String list() {
-        return "posts/list";
+        return "post/list";
     }
 
-    @GetMapping("/posts/create")
+    @GetMapping("/post/create")
     public String create(Model model, @AuthenticationPrincipal AuthUser authUser) {
         model.addAttribute("authUser", authUser);
-        return "posts/create";
+        return "post/create";
     }
 
-    @GetMapping("/posts/detail/{id}")
+    @GetMapping("/post/detail/{id}")
     public String detail(@PathVariable Long id, Model model, @AuthenticationPrincipal AuthUser authUser) {
+        model.addAttribute("id", id);
         model.addAttribute("authUser", authUser);
-        return "posts/detail";
+        return "post/detail";
     }
 
-    @GetMapping("/posts/update/{id}")
+    @GetMapping("/post/update/{id}")
     public String update(@PathVariable Long id, Model model) {
         model.addAttribute("id", id);
-        return "posts/update";
+        return "post/update";
     }
 }
