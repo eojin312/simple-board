@@ -45,7 +45,7 @@ public class UserApiController extends BaseApiController {
 
     @GetMapping("/users/{id}")
     public User detail(@PathVariable Long id) {
-        return userService.findByid(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지않는 회원입니다."));
+        return userService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지않는 회원입니다."));
     }
 
     @PutMapping("/users")
