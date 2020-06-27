@@ -27,10 +27,6 @@ public class PostsApiController extends BaseApiController {
         return postService.save(postDto);
     }
 
-    @GetMapping("/posts/{id}")
-    public Post detail(@PathVariable Long id) {
-        return postService.findById(id);
-    }
 
     @PutMapping("/posts")
     public Post update(@RequestBody PostDto.Update postUpdateDto) {

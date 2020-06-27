@@ -30,6 +30,7 @@ public class UserController {
         return "user/update";
     }
 
+    @Deprecated
     @GetMapping("/users/upload-test")
     public String upload() {
         return "user/upload";

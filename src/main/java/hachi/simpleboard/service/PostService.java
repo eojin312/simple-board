@@ -5,7 +5,6 @@ import hachi.simpleboard.domain.post.PostRepository;
 import hachi.simpleboard.domain.post.PostUserRepository;
 import hachi.simpleboard.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,11 +13,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PostService {
 
-    @Autowired
     private final PostRepository postRepository;
-
-    @Autowired
     private final PostUserRepository postUserRepository;
+
 
     public Page<Post> findAll(Pageable pageable) {
         return postRepository.findAll(pageable);
@@ -30,10 +27,6 @@ public class PostService {
 
     public Long save(PostDto.Create postDto) {
         return postRepository.save(postDto.toEntity()).getId();
-    }
-
-    public Post findById(Long id) {
-        return postUserRepository.findByPostNo(id);
     }
 
     public Post update(PostDto.Update postUpdateDto) {

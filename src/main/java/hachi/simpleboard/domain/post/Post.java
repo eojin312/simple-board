@@ -1,7 +1,6 @@
 package hachi.simpleboard.domain.post;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import hachi.simpleboard.config.BaseTimeEntity;
+import hachi.simpleboard.domain.BaseTimeEntity;
 import hachi.simpleboard.domain.comment.Comment;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,10 +10,12 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 게시물 Entity
+ */
 @Getter
 @Entity
 @Table(name = "post")
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @NoArgsConstructor
 public class Post extends BaseTimeEntity {
 
@@ -43,7 +44,7 @@ public class Post extends BaseTimeEntity {
     private List<Comment> comments = new ArrayList<>();
 
     /**
-     * 생성용 생성자
+     * 게시물 생성용 생성자
      *
      * @param title
      * @param contents
@@ -61,8 +62,7 @@ public class Post extends BaseTimeEntity {
     }
 
     /**
-     * 수정용 생성자
-     *
+     * 게시물 수정용 생성자
      * @param id
      * @param title
      * @param contents

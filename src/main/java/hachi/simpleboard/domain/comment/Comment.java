@@ -1,6 +1,5 @@
 package hachi.simpleboard.domain.comment;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import hachi.simpleboard.domain.BaseTimeEntity;
 import hachi.simpleboard.domain.post.Post;
 import hachi.simpleboard.domain.user.User;
@@ -10,10 +9,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * 댓글 Entity
+ */
 @Getter
 @Entity
 @NoArgsConstructor
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Comment extends BaseTimeEntity {
 
     @Id

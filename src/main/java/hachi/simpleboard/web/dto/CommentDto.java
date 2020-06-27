@@ -7,10 +7,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+/**
+ * 댓글 DTO
+ */
 @Getter
 @AllArgsConstructor
 public class CommentDto {
 
+    /**
+     * 댓글 생성용 DTO
+     */
     @Getter
     public static class Create {
 

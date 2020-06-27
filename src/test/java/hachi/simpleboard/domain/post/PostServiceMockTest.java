@@ -3,9 +3,7 @@ package hachi.simpleboard.domain.post;
 import hachi.simpleboard.BaseTest;
 import hachi.simpleboard.domain.comment.CommentRepository;
 import hachi.simpleboard.service.PostService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
@@ -39,18 +37,5 @@ public class PostServiceMockTest extends BaseTest {
                 .img("/a.jpg")
                 .build();
         given(postRepository.findById(anyLong())).willReturn(Optional.ofNullable(mockPost));
-    }
-
-    @Test
-    public void 게시물_조회_테스트() {
-        // given
-        // comments를 등록해둔다
-
-
-        // when
-        Post post = postService.findById(1L);
-
-        // then
-        Assertions.assertEquals(mockPost.getAuthor(), post.getAuthor());
     }
 }
