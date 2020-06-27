@@ -23,14 +23,14 @@
 
 # SpringBoot
 ## package 구조
-**web**
+- web
   - DTO - entity converting 용 toEntity 구현
   - Controller
     - BaseApiController - Api 추상클래스
     - *Controller - 화면
     - *ApiController - api
-**Service**
-**domain**
+- Service
+- domain
   - entity
   - repositoty
 
