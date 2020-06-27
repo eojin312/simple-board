@@ -4,18 +4,19 @@ import hachi.simpleboard.domain.post.Post;
 import hachi.simpleboard.service.PostService;
 import hachi.simpleboard.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * postApiController
+ */
 @RestController
 @RequiredArgsConstructor
 public class PostsApiController extends BaseApiController {
 
-    @Autowired
-    private PostService postService;
+    private final PostService postService;
 
     @GetMapping("/posts")
     public Page<Post> list(@PageableDefault Pageable pageable) {

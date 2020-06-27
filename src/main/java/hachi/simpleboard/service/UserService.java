@@ -24,12 +24,6 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    /**
-     * 회원가입 처리
-     *
-     * @param userDto
-     * @return
-     */
     @Transactional
     public Long save(UserDto.Create userDto) {
         User user = userRepository.findByUsername(userDto.getUsername()).orElseThrow(() -> new UsernameNotFoundException("존재하지않는 회원입니다."));
@@ -39,12 +33,6 @@ public class UserService {
         return userRepository.save(userDto.toEntity()).getId();
     }
 
-    /**
-     * 회원 목록 조회
-     *
-     * @param pageable
-     * @return
-     */
     public Page<User> findAll(Pageable pageable) {
 //        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
 //        pageable = PageRequest.of(page, 10); // getter, setter 가 없어서 PageRequest.of 로 새로운 객체 생성

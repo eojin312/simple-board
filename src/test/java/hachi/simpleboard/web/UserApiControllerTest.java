@@ -50,6 +50,7 @@ class UserApiControllerTest extends BaseApiControllerTest {
                         .content(content)
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk())
+
                 .andDo(print());
     }
 

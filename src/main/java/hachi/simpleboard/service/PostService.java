@@ -2,20 +2,20 @@ package hachi.simpleboard.service;
 
 import hachi.simpleboard.domain.post.Post;
 import hachi.simpleboard.domain.post.PostRepository;
-import hachi.simpleboard.domain.post.PostUserRepository;
 import hachi.simpleboard.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+/**
+ * postService
+ */
 @Service
 @RequiredArgsConstructor
 public class PostService {
 
     private final PostRepository postRepository;
-    private final PostUserRepository postUserRepository;
-
 
     public Page<Post> findAll(Pageable pageable) {
         return postRepository.findAll(pageable);

@@ -1,3 +1,7 @@
+/**
+ * commentService
+ * @type {{commentDto: {postNo: number, init: CommentService.commentDto.init, comment: string}, save: CommentService.save, bindEvent: CommentService.bindEvent}}
+ */
 CommentService = {
 
     commentDto: {

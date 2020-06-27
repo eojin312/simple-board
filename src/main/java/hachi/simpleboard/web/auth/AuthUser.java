@@ -7,6 +7,9 @@ import org.springframework.security.core.userdetails.User;
 
 import java.util.List;
 
+/**
+ * 회원 인증하는 클래스
+ */
 @Getter
 @ToString
 public class AuthUser extends User {

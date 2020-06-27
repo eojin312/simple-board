@@ -1,3 +1,7 @@
+/**
+ *  postService
+ * @type {{upload: PostService.upload, save: PostService.save, renderPagination: PostService.renderPagination, update: PostService.update, linkToDetail: PostService.linkToDetail, delete: PostService.delete, postDto: {img: string, toDto: PostService.postDto.toDto, createdDate: string, contents: string, author: string, title: string, category: string}, getUpdateInfo: PostService.getUpdateInfo, getList: PostService.getList, detail: PostService.detail, renderList: PostService.renderList, config: {PAGES_PER_BLOCK: number}, bindEvent: PostService.bindEvent, validate: PostService.validate}}
+ */
 PostService = {
     config: {
         PAGES_PER_BLOCK: 5

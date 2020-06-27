@@ -20,6 +20,9 @@ import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * 파일 업로드 테스트를 위해 만든 controller
+ */
 @RestController
 public class UploadController {
 

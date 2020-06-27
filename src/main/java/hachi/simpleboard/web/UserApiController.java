@@ -5,7 +5,6 @@ import hachi.simpleboard.service.UserService;
 import hachi.simpleboard.web.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -15,14 +14,14 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
-
+/**
+ * userApiController
+ */
 @Slf4j
 @RestController
 @SessionAttributes("login")
 @RequiredArgsConstructor
 public class UserApiController extends BaseApiController {
-
-    private final ModelMapper modelMapper;
 
     private final UserService userService;
 

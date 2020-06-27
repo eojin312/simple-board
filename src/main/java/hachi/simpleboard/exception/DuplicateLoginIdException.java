@@ -1,5 +1,8 @@
 package hachi.simpleboard.exception;
 
+/**
+ * 유저 예외처리
+ */
 public class DuplicateLoginIdException extends RuntimeException {
     public DuplicateLoginIdException() {
         super();

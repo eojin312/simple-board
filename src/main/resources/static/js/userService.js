@@ -1,3 +1,7 @@
+/**
+ * userService
+ * @type {{upload: UserService.upload, getDetail: UserService.getDetail, save: UserService.save, update: UserService.update, renderPagination: UserService.renderPagination, getUserList: UserService.getUserList, delete: UserService.delete, userDto: {password: string, toDto: UserService.userDto.toDto, role: string, gender: string, name: string, profileImage: string, email: string, username: string}, isEmptyAndAlert(*, *): (boolean|undefined), search: UserService.search, getUpdateInfo: UserService.getUpdateInfo, renderList: UserService.renderList, config: {PAGES_PER_BLOCK: number}, bindEvent: UserService.bindEvent, constantValue: {MIN_LOGIN_PASSWORD: number, MIN_LOGIN_ID: number}, validate: UserService.validate}}
+ */
 UserService = {
     config: {
         PAGES_PER_BLOCK: 5
