@@ -1,8 +1,5 @@
 # simple-board
-심플 게시판 프로젝트
-
-# 계기
-
+심플 게시판 프로젝트 향후에 다른 프로젝트 개발할 때 이 프로젝트의 기술스택 예제들을 보며 참고하면서 개발하기 위한 템플릿 프로젝트
 # 기술스택
   - jdk11
   - maven
@@ -106,10 +103,12 @@ public class UserAuthService implements UserDetailsService {
 |GrantedAuthority|권한 있는 사용자인지 판단해주는 타입
 |UsernameNotFoundException|UsernameNotFoundException 은 Spring Security 에서 제공하는 Exception 입니다
 
+![Jun-27-2020 14-41-57](https://user-images.githubusercontent.com/45488643/85915987-22abc680-b887-11ea-9eeb-e97cb3f5437d.gif)
+
 더 자세한 spring security 설명은 제 블로그를 참조해주세요 -> [Spring Security 도전기](https://eojin312.github.io/%EA%B3%B5%EB%B6%80/springsecurity/)
 
 ## Front 구현
-  tymeleaf 최소로 사용
+  tymeleaf 최소로 사용 -> 
   가급적 jquery 로 UI 렌더링 -> 향후 Vue.js 로 전환 계획
   
 ## Unit Test
