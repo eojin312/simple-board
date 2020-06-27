@@ -1,14 +1,38 @@
 # simple-board
 심플 게시판 프로젝트
 
+# 계기
+
 # 기술스택
-- jdk11
-- springboot 2.*
-- h2 (mysql)
-- jpa
-- thymeleaf
-- junit5
-- jquery
+  - jdk11
+  - maven
+  - springboot 2.2.7
+  - DBMS
+    - h2
+    - MySQL
+  - jpa
+    - Spring Data JPA
+    - JPA Interface 사용
+    - JPQL
+    - queryDSL
+  - FrontEnd
+    - bootstrap 5.x
+    - jquery 3.5.1
+    - thymeleaf
+  - junit5
+
+# SpringBoot
+## package 구조
+**web**
+  - DTO - entity converting 용 toEntity 구현
+  - Controller
+    - BaseApiController - Api 추상클래스
+    - *Controller - 화면
+    - *ApiController - api
+**Service**
+**domain**
+  - entity
+  - repositoty
 
 # 목표
 - 단순 CRUD를 넘어선 정말 사용가능한 게시판을 만들어야
