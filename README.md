@@ -7,6 +7,7 @@
   - jdk11
   - maven
   - springboot 2.2.7
+  - spring security
   - DBMS
     - h2
     - MySQL
@@ -42,6 +43,7 @@
   
 ## Spring Security
   - 로그인/로그아웃 + 권한제어 기능을 추가하려고 spring security 를 추가했습니다.
+  
 **SpringSecurityConfig**
 ```java
 @Configuration
@@ -102,6 +104,21 @@ public class UserAuthService implements UserDetailsService {
 |UserDetails|Spring Security에서 사용자의 정보를 담는 인터페이스는 UserDetails 인터페이스우리가 이 인터페이스를 구현하게 되면 Spring Security에서 구현한 클래스를 사용자 정보로 인식하고 인증 작업을 합니다
 |UserDetailsService|DB에서 유저 정보를 직접 가져오는 인터페이스를 구현
 |GrantedAuthority|권한 있는 사용자인지 판단해주는 타입
+|UsernameNotFoundException|UsernameNotFoundException 은 Spring Security 에서 제공하는 Exception 입니다
+
+더 자세한 spring security 설명은 제 블로그를 참조해주세요 -> [Spring Security 도전기](https://eojin312.github.io/%EA%B3%B5%EB%B6%80/springsecurity/)
+
+## Front 구현
+  tymeleaf 최소로 사용
+  가급적 jquery 로 UI 렌더링 -> 향후 Vue.js 로 전환 계획
+  
+## Unit Test
+- Junit5
+- repository Test
+- service Test
+  - mock Test
+  - service Test
+- mvcmock Test
 
 # 목표
 - 단순 CRUD를 넘어선 정말 사용가능한 게시판을 만들어야
