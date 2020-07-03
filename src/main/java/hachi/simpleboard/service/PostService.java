@@ -21,10 +21,6 @@ public class PostService {
         return postRepository.findAll(pageable);
     }
 
-    public Page<Post> findAllDefaultDesc(Pageable pageable) {
-        return postRepository.findByOrderByIdDesc(pageable);
-    }
-
     public Long save(PostDto.Create postDto) {
         return postRepository.save(postDto.toEntity()).getId();
     }

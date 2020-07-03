@@ -15,5 +15,4 @@ class PostApiControllerTest extends BaseApiControllerTest {
         mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
-
 }
