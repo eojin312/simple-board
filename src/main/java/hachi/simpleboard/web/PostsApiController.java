@@ -21,28 +21,28 @@ public class PostsApiController extends BaseApiController {
     private final PostService postService;
     private final PostUserService postUserService;
 
-    @GetMapping("/posts")
+    @GetMapping("/post")
     public Page<Post> list(@PageableDefault Pageable pageable) {
         return postService.findAll(pageable);
     }
 
-    @PostMapping("/posts")
+    @PostMapping("/post")
     public Long create(@RequestBody PostDto.Create postDto) {
         return postService.save(postDto);
     }
 
 
-    @PutMapping("/posts")
+    @PutMapping("/post")
     public Post update(@RequestBody PostDto.Update postUpdateDto) {
         return postService.update(postUpdateDto);
     }
 
-    @GetMapping("/posts/{id}")
+    @GetMapping("/post/{id}")
     public PostUser detail(@PathVariable Long id) {
         return postUserService.detail(id);
     }
 
-    @DeleteMapping("/posts/{id}")
+    @DeleteMapping("/post/{id}")
     public Long delete(@PathVariable Long id) {
         postService.delete(id);
         return id;

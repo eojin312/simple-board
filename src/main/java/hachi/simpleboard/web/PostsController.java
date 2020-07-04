@@ -1,6 +1,5 @@
 package hachi.simpleboard.web;
 
-import hachi.simpleboard.domain.post.PostUser;
 import hachi.simpleboard.service.PostUserService;
 import hachi.simpleboard.web.auth.AuthUser;
 import lombok.extern.slf4j.Slf4j;
@@ -32,15 +31,14 @@ public class PostsController {
         return "post/create";
     }
 
-    @GetMapping("/post/detail/{id}")
+    @GetMapping("/post/{id}")
     public String detail(@PathVariable Long id, Model model, @AuthenticationPrincipal AuthUser authUser) {
-        PostUser postUser = postUserService.detail(id);
         model.addAttribute("id", id);
         model.addAttribute("authUser", authUser);
         return "post/detail";
     }
 
-    @GetMapping("/post/update/{id}")
+    @GetMapping("/post/{id}")
     public String update(@PathVariable Long id, Model model) {
         model.addAttribute("id", id);
         return "post/update";
