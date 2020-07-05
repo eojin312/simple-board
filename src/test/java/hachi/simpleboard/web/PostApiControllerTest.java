@@ -11,7 +11,7 @@ class PostApiControllerTest extends BaseApiControllerTest {
 
     @Test
     public void 게시판목록Api테스트() throws Exception {
-        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/api/posts").contentType(MediaType.APPLICATION_JSON);
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/api/post").contentType(MediaType.APPLICATION_JSON);
         mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }

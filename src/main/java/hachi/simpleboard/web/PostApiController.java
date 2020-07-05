@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequiredArgsConstructor
-public class PostsApiController extends BaseApiController {
+public class PostApiController extends BaseApiController {
 
     private final PostService postService;
     private final PostUserService postUserService;

@@ -34,7 +34,7 @@ PostService = {
     },
 
     linkToDetail: function (id) {
-        window.location.href = '/post/detail/' + id;
+        window.location.href = '/post/' + id;
     },
 
     getList: function (_page) {
@@ -42,7 +42,7 @@ PostService = {
             _page = 0;
         }
         $.ajax({
-            url: '/api/posts',
+            url: '/api/post',
             type: 'GET',
             context: window.PostService,
             data: {
@@ -113,13 +113,13 @@ PostService = {
 
         $.ajax({
             type: 'POST',
-            url: '/api/posts',
+            url: '/api/post',
             contentType: 'application/json',
             datatype: 'json',
             data: JSON.stringify(this.postDto)
         }).done(function (id) {
             alert('정상적으로 글이 등록되었습니다');
-            window.location.href = '/post/detail/' + id;
+            window.location.href = '/post/' + id;
         })
     },
     bindEvent: function () {
@@ -159,7 +159,7 @@ PostService = {
     detail: function (id) {
         $.ajax({
             type: 'GET',
-            url: '/api/posts/' + id,
+            url: '/api/post/' + id,
             dataType: 'json',
             contentType: 'application/json'
         }).done(function (post) {
@@ -177,19 +177,19 @@ PostService = {
         }
         $.ajax({
             type: 'PUT',
-            url: '/api/posts/',
+            url: '/api/post',
             dataType: 'json',
             contentType: 'application/json',
             data: JSON.stringify(this.postDto)
         }).done(function (post) {
             alert('정상적으로 변경이 완료되었습니다')
-            window.location.href = '/posts/detail/' + post.id;
+            window.location.href = '/post/' + post.id;
         })
     },
     getUpdateInfo: function (id) {
         $.ajax({
             type: 'GET',
-            url: '/api/posts/' + id,
+            url: '/api/post/' + id,
             dataType: 'json',
             contentType: 'application/json'
         }).done(function (post) {
@@ -202,7 +202,7 @@ PostService = {
     delete: function () {
         $.ajax({
             type: 'DELETE',
-            url: '/api/posts/' + id,
+            url: '/api/post/' + id,
             dataType: 'json',
             contentType: 'application/json',
         }).done(function () {

@@ -1,9 +1,7 @@
 package hachi.simpleboard.web;
 
-import hachi.simpleboard.service.PostUserService;
 import hachi.simpleboard.web.auth.AuthUser;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 @Slf4j
 @Controller
-public class PostsController {
+public class PostController {
 
-    @Autowired
-    private PostUserService postUserService;
-
-    @GetMapping("/")
+    @GetMapping("/post")
     public String list() {
         return "post/list";
     }
@@ -38,7 +33,7 @@ public class PostsController {
         return "post/detail";
     }
 
-    @GetMapping("/post/{id}")
+    @GetMapping("/post/{id}/update")
     public String update(@PathVariable Long id, Model model) {
         model.addAttribute("id", id);
         return "post/update";
