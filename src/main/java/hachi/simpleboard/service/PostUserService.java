@@ -11,7 +11,7 @@ public class PostUserService {
 
     private final PostUserRepository postUserRepository;
 
-    public PostUser detail(Long id) {
+    public PostUser findByPostUserByPostId(Long id) {
         return postUserRepository.findPostUserByPostId(id);
     }
 }

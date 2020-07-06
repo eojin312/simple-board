@@ -13,16 +13,16 @@
             <table class="table">
                 <thead class="thead-light">
                 <tr>
-                    <td id="title"></td>
+                    <td id="title" th:value="${responseDetailDto.getTitle()}"></td>
                 </tr>
                 <tr>
-                    <td id="category"></td>
+                    <td id="category" th:value="${responseDetailDto.getCategory()}"></td>
                     <td th:value="${authUser.getUser().getName()}"></td>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td id="contents"></td>
+                    <td id="contents" th:value="${responseDetailDto.getContents()}"></td>
                 </tr>
                 </tbody>
             </table>

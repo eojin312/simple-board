@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequiredArgsConstructor
-public class PostApiController extends BaseApiController {
+public class PostsApiController extends BaseApiController {
 
     private final PostService postService;
     private final PostUserService postUserService;
@@ -38,8 +38,8 @@ public class PostApiController extends BaseApiController {
     }
 
     @GetMapping("/post/{id}")
-    public PostUser detail(@PathVariable Long id) {
-        return postUserService.detail(id);
+    public PostUser findByPostUserByPostId(@PathVariable Long id) {
+        return postUserService.findByPostUserByPostId(id);
     }
 
     @DeleteMapping("/post/{id}")

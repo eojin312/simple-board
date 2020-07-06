@@ -1,6 +1,7 @@
 package hachi.simpleboard.web;
 
 import hachi.simpleboard.web.auth.AuthUser;
+import hachi.simpleboard.web.dto.PostUserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -27,8 +28,9 @@ public class PostController {
     }
 
     @GetMapping("/post/{id}")
-    public String detail(@PathVariable Long id, Model model, @AuthenticationPrincipal AuthUser authUser) {
+    public String findByPostUserByPostId(@PathVariable Long id, Model model, @AuthenticationPrincipal AuthUser authUser, PostUserDto.ResponseDetailDto responseDetailDto) {
         model.addAttribute("id", id);
+        model.addAttribute("responseDetailDto", responseDetailDto);
         model.addAttribute("authUser", authUser);
         return "post/detail";
     }

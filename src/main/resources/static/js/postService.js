@@ -139,7 +139,7 @@ PostService = {
         }
 
     },
-    upload: function (event) {
+    upload: function () {
         let form = $('#upload-form')[0];
         let data = new FormData(form);
         $.ajax({
@@ -155,20 +155,6 @@ PostService = {
                 $('#file-name').val(fileName);
             }
         })
-    },
-    detail: function (id) {
-        $.ajax({
-            type: 'GET',
-            url: '/api/post/' + id,
-            dataType: 'json',
-            contentType: 'application/json'
-        }).done(function (post) {
-            $('#title').html(post.title);
-            $('#category').html(post.category);
-            $('#contents').html(post.contents);
-            $('#file-name').attr('src', '/api/download?file-name=' + post.img);
-        })
-
     },
     update: function () {
         this.postDto.toDto();
