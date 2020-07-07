@@ -57,6 +57,7 @@ class PostRepositoryTest {
     @Test
     public void 게시글_목록_조회_테스트() {
         List<Post> posts = postRepository.findAll();
+        Assertions.assertNotNull(posts);
         Assertions.assertTrue(posts.size() > 1);
     }
 
