@@ -41,6 +41,16 @@ class PostRepositoryTest {
         System.out.println("After");
     }
 
+    @BeforeEach
+    void beforeEach() {
+        System.out.println("before Each");
+    }
+
+    @AfterEach
+    void afterEach() {
+        System.out.println("After Each");
+    }
+
     @Test
     public void 게시글_입력_테스트() {
         Post post = postRepository.save(Post.builder()
