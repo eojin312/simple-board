@@ -4,9 +4,7 @@ import hachi.simpleboard.domain.comment.Comment;
 import hachi.simpleboard.domain.comment.CommentRepository;
 import hachi.simpleboard.domain.user.User;
 import hachi.simpleboard.domain.user.UserRepository;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,6 +30,16 @@ class PostRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @BeforeAll
+    static void beforeAll() {
+        System.out.println("before");
+    }
+
+    @AfterAll
+    static void afterAll() {
+        System.out.println("After");
+    }
 
     @Test
     public void 게시글_입력_테스트() {
