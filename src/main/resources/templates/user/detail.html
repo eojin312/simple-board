@@ -5,7 +5,7 @@
 </head>
 <body>
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-
+<div class="container">
     <div class="list-area">
         <table class="table table-striped">
             <tr>
@@ -38,7 +38,8 @@
             </tr>
         </table>
     </div>
-<br/>
+    <br/>
+</div>
 <input class="btn btn-primary" onclick="location.href='/users';" type="button" value="목록"/>
 <input class="btn btn-warning" onclick="goUpdate();" type="button" value="수정"/>
 <input class="btn btn-danger" onclick="UserService.delete()" type="button" value="삭제"/>
