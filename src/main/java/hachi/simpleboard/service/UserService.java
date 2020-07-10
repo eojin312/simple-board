@@ -55,6 +55,14 @@ public class UserService {
         userRepository.delete(user);
     }
 
+    /**
+     * 검색용 메소드
+     *
+     * @param pageable
+     * @param searchType
+     * @param searchKeyword
+     * @return
+     */
     public Page<User> findAllBySearchCondition(Pageable pageable, String searchType, String searchKeyword) {
         if (searchType.equals("username")) {
             return userRepository.findByUsernameContaining(searchKeyword, pageable);
