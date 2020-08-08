@@ -1,6 +1,6 @@
 package hachi.simpleboard.domain.post;
 
-import com.mysema.query.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import hachi.simpleboard.domain.user.QUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -18,6 +18,7 @@ public class PostUserRepository {
 
     private final EntityManager em;
 
+
     /**
      * post 객체로 게시물 번호 받아보는 메소드
      *
@@ -25,28 +26,31 @@ public class PostUserRepository {
      * @return
      */
     public Post findByPostNo(Long id) {
-        JPAQuery query = new JPAQuery(em);
-        QPost post = QPost.post;
-        return query.from(post)
-                .where(post.id.eq(id))
-                .uniqueResult(post);
+        QPost qpost = QPost.post;
+        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(em);
+        Post post = jpaQueryFactory
+                .selectFrom(qpost)
+                .where(qpost.id.eq(id))
+                .fetchOne();
+        return post;
     }
 
     /**
      * PostUser 객체로 게시물 번호 받아보는 메소드
-     *
      * @param id
      * @return
      */
     public PostUser findPostUserByPostId(Long id) {
-        JPAQuery query = new JPAQuery(em);
-        QUser user = QUser.user;
-        QPostUser postUser = QPostUser.postUser;
-
-        return query.from(postUser)
-                .join(postUser.user, user)
-                .where(postUser.id.eq(id))
-                .uniqueResult(postUser);
+        QUser qUser = QUser.user;
+        QPostUser qPostUser = QPostUser.postUser;
+        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(em);
+        PostUser postUser = jpaQueryFactory
+                .select(qPostUser)
+                .from(qPostUser)
+                .join(qUser).on(qUser.id.eq(qPostUser.user.id))
+                .where(qPostUser.id.eq(id))
+                .fetchOne();
+        return postUser;
     }
 
     /**

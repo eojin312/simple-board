@@ -38,10 +38,14 @@ public class Post extends BaseTimeEntity {
     private String img;
 
     /**
-     * 댓글들을 보기위해
+     * 한 게시물에 여러 댓글들을 보기위해 oneToMany 로 설정
      */
     @OneToMany
     private List<Comment> comments = new ArrayList<>();
+
+/*
+    @ManyToOne
+    private User user;*/
 
     /**
      * 게시물 생성용 생성자

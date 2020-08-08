@@ -20,7 +20,6 @@ public class CommentApiController extends BaseApiController {
 
     /**
      * 댓글 생성하는 메소드 (미완) querydsl 이나 mybatis 로 댓글 이번주까지 완성시킨다
-     *
      * @param commentsDto
      * @param authUser
      * @return
