@@ -24,6 +24,13 @@ public class CommentService {
 
     private final PostRepository postRepository;
 
+    /**
+     * comments 저장 메소드
+     *
+     * @param commentCreateDto
+     * @param user
+     * @return
+     */
     public Long save(CommentDto.Create commentCreateDto, User user) {
         Post post = postRepository.findById(commentCreateDto.getPostNo()).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 포스트번호 입니다"));
         return commentRepository.save(commentCreateDto.toEntity(post, user)).getId();
