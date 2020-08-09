@@ -22,7 +22,7 @@ public class Comment extends BaseTimeEntity {
     private Long id;
 
     @Lob
-    private String comments;
+    private String contents;
 
     @ManyToOne
     private Post post;
@@ -31,9 +31,9 @@ public class Comment extends BaseTimeEntity {
     private User user;
 
     @Builder
-    public Comment(Long id, String comments, Post post, User user) {
+    public Comment(Long id, String contents, Post post, User user) {
         this.id = id;
-        this.comments = comments;
+        this.contents = contents;
         this.post = post;
         this.user = user;
     }

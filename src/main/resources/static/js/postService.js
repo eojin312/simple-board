@@ -135,7 +135,7 @@ PostService = {
         }
         if (this.postDto.contents == '') {
             alert('글을 입력해주세요')
-            $('#contents').focus();
+            $('#post-contents').focus();
             return false;
         }
 
@@ -182,7 +182,7 @@ PostService = {
         }).done(function (post) {
             $('#title').val(post.title);
             $('#category').val(post.category);
-            $('#contents').val(post.contents);
+            $('#post-contents').val(post.contents);
             $('#file-name').attr("src", '/api/download?file-name=' + post.img);
         });
     },
@@ -209,7 +209,7 @@ PostService = {
                 this.id = $.trim($('#id').text());
             }
             this.title = $.trim($('#title').val());
-            this.contents = $.trim($('#contents').val());
+            this.contents = $.trim($('#post-contents').val());
             this.author = $.trim($('#author').val());
             this.category = $.trim($('#category').val());
             this.createdDate = $.trim($('#createdDate').val());

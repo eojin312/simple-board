@@ -5,11 +5,11 @@
 var CommentService = {
 
     commentDto: {
-        comments: '',
+        contents: '',
         postNo: 0,
-        init: function (postNo, comments) {
+        init: function (postNo, contents) {
             this.postNo = postNo;
-            this.comments = comments;
+            this.contents = contents;
         },
     },
     bindEvent: function () {
@@ -19,8 +19,8 @@ var CommentService = {
     save: function () {
 
         let postNo = $('#post-no').val();
-        let comments = $.trim($('#comments').val());
-        this.commentDto.init(postNo, comments);
+        let contents = $.trim($('#contents').val());
+        this.commentDto.init(postNo, contents);
 
         $.ajax({
             type: 'POST',
