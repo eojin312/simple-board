@@ -66,7 +66,7 @@ class CommentRepositoryTest extends BaseTest {
     @Test
     public void 댓글리스트를posts객체로_조회해보기() {
         // when
-        List<Comment> commentList = commentRepository.findAllByPost(savedPost);
+        List<Comment> commentList = commentRepository.findByPost(savedPost);
 
         // then
         Assertions.assertTrue(commentList.size() == 2);

@@ -1,14 +1,12 @@
 package hachi.simpleboard.domain.post;
 
 import hachi.simpleboard.domain.BaseTimeEntity;
-import hachi.simpleboard.domain.comment.Comment;
+import hachi.simpleboard.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 게시물 Entity
@@ -35,17 +33,12 @@ public class Post extends BaseTimeEntity {
 
     @Column(nullable = false)
     private String author;
+
     private String img;
 
-    /**
-     * 한 게시물에 여러 댓글들을 보기위해 oneToMany 로 설정
-     */
-    @OneToMany
-    private List<Comment> comments = new ArrayList<>();
 
-/*
     @ManyToOne
-    private User user;*/
+    private User user;
 
     /**
      * 게시물 생성용 생성자

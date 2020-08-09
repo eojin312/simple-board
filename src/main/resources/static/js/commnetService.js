@@ -2,14 +2,14 @@
  * commentService
  * @type {{commentDto: {postNo: number, init: CommentService.commentDto.init, comment: string}, save: CommentService.save, bindEvent: CommentService.bindEvent}}
  */
-CommentService = {
+var CommentService = {
 
     commentDto: {
-        comment: '',
+        comments: '',
         postNo: 0,
-        init: function (postNo, comment) {
+        init: function (postNo, comments) {
             this.postNo = postNo;
-            this.comment = comment;
+            this.comments = comments;
         },
     },
     bindEvent: function () {
@@ -19,8 +19,8 @@ CommentService = {
     save: function () {
 
         let postNo = $('#post-no').val();
-        let comment = $.trim($('#comment').val());
-        this.commentDto.init(postNo, comment);
+        let comments = $.trim($('#comments').val());
+        this.commentDto.init(postNo, comments);
 
         $.ajax({
             type: 'POST',
@@ -28,11 +28,11 @@ CommentService = {
             contentType: 'application/json',
             datatype: 'json',
             data: JSON.stringify(this.commentDto)
-        }).done(function (post) {
+        }).done(function (savedPostId) {
             alert('정상적으로 댓글이 등록되었습니다');
-            window.location.href = '/post/detail/' + post.id;
+            window.location.reload(true);
         }).fail(function (errorResponse) {
             alert('댓글이 작성되지 않았습니다.')
         });
     }
-}
+};

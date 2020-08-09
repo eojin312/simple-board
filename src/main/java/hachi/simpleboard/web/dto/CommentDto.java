@@ -20,18 +20,18 @@ public class CommentDto {
     @Getter
     public static class Create {
 
-        private String comment;
+        private String comments;
         private long postNo;
 
         @Builder
-        public Create(String comment, long postNo) {
-            this.comment = comment;
+        public Create(String comments, long postNo) {
+            this.comments = comments;
             this.postNo = postNo;
         }
 
         public Comment toEntity(Post post, User user) {
             return Comment.builder()
-                    .comments(comment)
+                    .comments(comments)
                     .post(post)
                     .user(user)
                     .build();
