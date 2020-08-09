@@ -1,5 +1,7 @@
 package hachi.simpleboard;
 
+import hachi.simpleboard.domain.comment.Comment;
+import hachi.simpleboard.domain.comment.CommentRepository;
 import hachi.simpleboard.domain.post.Post;
 import hachi.simpleboard.domain.post.PostRepository;
 import hachi.simpleboard.domain.user.User;
@@ -56,17 +58,33 @@ public class SimpleBoardApplication {
     }
 
     @Bean
-    public CommandLineRunner initPostData(PostRepository postRepository) {
-        return args ->
-                IntStream.rangeClosed(10001, END_USER_COUNT).forEach(i -> {
-                    Post post = Post.builder()
-                            .title("test" + i)
-                            .contents("test Contents")
-                            .author("testID" + i)
-                            .category("humor")
-                            .build();
+    public CommandLineRunner initPostData(PostRepository postRepository, CommentRepository commentRepository, UserRepository userRepository) {
+        return args -> {
+            IntStream.rangeClosed(10001, END_USER_COUNT).forEach(i -> {
+                Post post = Post.builder()
+                        .title("test" + i)
+                        .contents("test Contents")
+                        .author("testID" + i)
+                        .category("humor")
+                        .build();
 
-                    postRepository.save(post);
-                });
+                Post savedPost = postRepository.save(post);
+
+                User user = userRepository.findById(1L).orElse(null);
+
+                commentRepository.save(Comment.builder()
+                        .user(user)
+                        .post(savedPost)
+                        .comments("댓글이다01")
+                        .build());
+
+                commentRepository.save(Comment.builder()
+                        .user(user)
+                        .post(savedPost)
+                        .comments("댓글이다02")
+                        .build());
+            });
+        };
     }
+
 }

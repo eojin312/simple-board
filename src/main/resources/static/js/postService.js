@@ -16,7 +16,7 @@ PostService = {
         for (let i = 0; i < postList.length; i++) {
             rowHtml += '<tr key="' + postList[i].id + '">';
             rowHtml += '\t<td>' + '<a href="#" onclick="PostService.linkToDetail(' + postList[i].id + ')">' + postList[i].id + '</a>' + '</td>';
-            rowHtml += '\t<td id="title-td-' + postList[i].id + '">' + postList[i].title + '</td>'
+            rowHtml += '\t<td id="title-td-' + postList[i].id + '">' + postList[i].title + ' <span class="comment-count">[9]</span></td>'
             rowHtml += '\t<td>' + postList[i].author + '</td>'
             rowHtml += '\t<td>' + postList[i].category + '</td>'
             rowHtml += '\t<td>' + CommonUtil.localdatetimeToDate(postList[i].createDate) + '</td>'
@@ -34,7 +34,7 @@ PostService = {
     },
 
     linkToDetail: function (id) {
-        window.location.href = '/post/' + id;
+        window.location.href = '/posts/' + id;
     },
 
     getList: function (_page) {
@@ -42,7 +42,7 @@ PostService = {
             _page = 0;
         }
         $.ajax({
-            url: '/api/post',
+            url: '/api/posts',
             type: 'GET',
             context: window.PostService,
             data: {
@@ -69,7 +69,8 @@ PostService = {
      * @param _crrentPage 현재 페이지 번호
      * @param size 한 페이지 당 게시글의 수
      * @param totalElements 총 게시글의 수
-     * @param _areaClassId 페이지네이션이 그려질 영역의 class id, default 는 .pagination-area
+     * @param _areaClassId 페
+     * 이지네이션이 그려질 영역의 class id, default 는 .pagination-area
      */
     renderPagination: function (totalPage, _crrentPage, size, totalElements, _areaClassId) {
 
@@ -113,13 +114,13 @@ PostService = {
 
         $.ajax({
             type: 'POST',
-            url: '/api/post',
+            url: '/api/posts',
             contentType: 'application/json',
             datatype: 'json',
             data: JSON.stringify(this.postDto)
         }).done(function (id) {
             alert('정상적으로 글이 등록되었습니다');
-            window.location.href = '/post/' + id;
+            window.location.href = '/posts/' + id;
         })
     },
     bindEvent: function () {
@@ -163,19 +164,19 @@ PostService = {
         }
         $.ajax({
             type: 'PUT',
-            url: '/api/post',
+            url: '/api/posts',
             dataType: 'json',
             contentType: 'application/json',
             data: JSON.stringify(this.postDto)
         }).done(function (post) {
             alert('정상적으로 변경이 완료되었습니다')
-            window.location.href = '/post/' + post.id;
+            window.location.href = '/posts/' + post.id;
         })
     },
     getUpdateInfo: function (id) {
         $.ajax({
             type: 'GET',
-            url: '/api/post/' + id,
+            url: '/api/posts/' + id,
             dataType: 'json',
             contentType: 'application/json'
         }).done(function (post) {
@@ -185,15 +186,15 @@ PostService = {
             $('#file-name').attr("src", '/api/download?file-name=' + post.img);
         });
     },
-    delete: function () {
+    delete: function (postId) {
         $.ajax({
             type: 'DELETE',
-            url: '/api/post/' + id,
+            url: '/api/posts/' + postId,
             dataType: 'json',
             contentType: 'application/json',
         }).done(function () {
             alert('게시물이 삭제되었습니다.');
-            window.location.href = '/';
+            window.location.href = '/posts';
         })
     },
     postDto: {

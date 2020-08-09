@@ -16,35 +16,37 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequiredArgsConstructor
+//@RequestMapping("/posts")
 public class PostsApiController extends BaseApiController {
 
     private final PostService postService;
     private final PostUserService postUserService;
 
-    @GetMapping("/post")
+    @GetMapping("/posts")
     public Page<Post> list(@PageableDefault Pageable pageable) {
         return postService.findAll(pageable);
     }
 
-    @PostMapping("/post")
+    @PostMapping("/posts")
     public Long create(@RequestBody PostDto.Create postDto) {
         return postService.save(postDto);
     }
 
 
-    @PutMapping("/post")
+    @PutMapping("/posts")
     public Post update(@RequestBody PostDto.Update postUpdateDto) {
         return postService.update(postUpdateDto);
     }
 
-    @GetMapping("/post/{id}")
+    @GetMapping("/posts/{id}")
     public PostUser findByPostUserByPostId(@PathVariable Long id) {
         return postUserService.findByPostUserByPostId(id);
     }
 
-    @DeleteMapping("/post/{id}")
+    @DeleteMapping("/posts/{id}")
     public Long delete(@PathVariable Long id) {
         postService.delete(id);
+
         return id;
     }
 }
