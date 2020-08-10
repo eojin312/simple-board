@@ -35,7 +35,6 @@ public class CommentService {
         Post post = postRepository.findById(commentCreateDto.getPostNo()).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 포스트번호 입니다"));
         return commentRepository.save(commentCreateDto.toEntity(post, user)).getId();
     }
-
     public List<Comment> findByPost(Post post) {
         return commentRepository.findByPost(post);
     }
