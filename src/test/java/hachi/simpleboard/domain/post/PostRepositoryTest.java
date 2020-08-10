@@ -66,7 +66,7 @@ class PostRepositoryTest {
     @Test
     public void 게시글_수정() {
         Comment comment = commentRepository.save(Comment.builder()
-                .comments("테스트용 댓글")
+                .contents("테스트용 댓글")
                 .build()
         );
 

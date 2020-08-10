@@ -53,13 +53,13 @@ class CommentRepositoryTest extends BaseTest {
         commentRepository.save(Comment.builder()
                 .user(savedUser)
                 .post(savedPost)
-                .comments("댓글이다01")
+                .contents("댓글이다01")
                 .build());
 
         commentRepository.save(Comment.builder()
                 .user(savedUser)
                 .post(savedPost)
-                .comments("댓글이다02")
+                .contents("댓글이다02")
                 .build());
     }
 
