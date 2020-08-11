@@ -6,9 +6,12 @@ import hachi.simpleboard.domain.post.PostLikeRepository;
 import hachi.simpleboard.domain.post.PostRepository;
 import hachi.simpleboard.domain.user.User;
 import hachi.simpleboard.domain.user.UserRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @SpringBootTest
 class PostLikeServiceTest {
@@ -35,6 +38,10 @@ class PostLikeServiceTest {
                 .post(post)
                 .build());
 
+        List<PostLike> postLikes = postLikeRepository.findByPost(post);
 
+        // then
+        // 좋아요를 한 개만 눌렀으니 1 개만 나올 수밖에 없다 무조건 true
+        Assertions.assertTrue(postLikes.size() == 1);
     }
 }
