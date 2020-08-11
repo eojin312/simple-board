@@ -22,4 +22,9 @@ public class PostLikeService {
         Post post = postRepository.findById(postLikeDto.getPostNo()).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
         return postLikeRepository.save(postLikeDto.toEntity(post, user)).getId();
     }
+
+    public Long count(PostLikeDto.Like postLikeDto, User user) {
+        Post post = postRepository.findById(postLikeDto.getPostNo()).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+        return postLikeRepository.countByPost(post);
+    }
 }
