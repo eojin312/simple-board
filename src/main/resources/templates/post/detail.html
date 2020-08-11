@@ -35,6 +35,12 @@
         </div>
     </div>
     <br/>
+    <div class="vote-area">
+        <button class="btn btn-success" id="vote-like" onclick="postLikeService.save($('#post-no').val());"
+                type="button">좋아요
+        </button>
+    </div>
+
     <div class="footer-button">
         <button class="btn btn-primary" onclick="window.location.href='/posts';" type="button">목록으로</button>
         <button class="btn btn-warning" onclick="goUpdate($('#post-no').val());" type="button">수정</button>
@@ -64,6 +70,7 @@
 <script src="/js/commonUtil.js"></script>
 <script src="/js/postService.js"></script>
 <script src="/js/commnetService.js"></script>
+<script src="/js/postLikeService.js"></script>
 <script>
     function goUpdate(postId) {
         location.href = '/posts/' + postId + '/update';

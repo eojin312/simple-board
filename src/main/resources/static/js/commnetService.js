@@ -28,7 +28,7 @@ var CommentService = {
             contentType: 'application/json',
             datatype: 'json',
             data: JSON.stringify(this.commentDto)
-        }).done(function (savedPostId) {
+        }).done(function () {
             alert('정상적으로 댓글이 등록되었습니다');
             window.location.reload(true);
         }).fail(function (errorResponse) {
