@@ -43,7 +43,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/posts") // 일단은 전체게시물페이지로 가게 한다. <TODO: 카테고리를 만들면 홈화면을 따로 만들어서 홈화면으로 연결시켜준다.>
                 .and()
                 .csrf()
                 .disable();

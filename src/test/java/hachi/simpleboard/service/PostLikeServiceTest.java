@@ -11,9 +11,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @SpringBootTest
+@Transactional
 class PostLikeServiceTest {
 
 
@@ -62,11 +64,18 @@ class PostLikeServiceTest {
 
     @Test
     void 게시글_조회수_테스트() {
+
+        // given
+        Post beforReadPost = postRepository.findById(1L).orElse(null);
+        int readCountBeforeView = beforReadPost.getView();
+
         // when
-        int view = postRepository.updateView(1L);
+        int view1 = postRepository.updateView(1L);
 
         // then
-        Assertions.assertTrue(view == 1);
+        Post post = postRepository.findById(1L).orElse(null);
+        int readCountAfterView = post.getView();
+        Assertions.assertTrue(readCountAfterView == readCountBeforeView + 1);
 
     }
 }

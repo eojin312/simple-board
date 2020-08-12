@@ -46,6 +46,8 @@ public class PostController {
         Post post = postService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
 //        Long likeCount = postLikeService.count(like, user.getUser());
 //        model.addAttribute("likeCount", likeCount);
+        int view = postService.view(id);
+        model.addAttribute("view", view);
         model.addAttribute("post", post);
         List<Comment> commentList = commentService.findByPost(post);
         model.addAttribute("commentList", commentList);
