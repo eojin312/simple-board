@@ -59,4 +59,14 @@ class PostLikeServiceTest {
 
         Long postLikeCount = postLikeRepository.countByPost(post);
     }
+
+    @Test
+    void 게시글_조회수_테스트() {
+        // when
+        int view = postRepository.updateView(1L);
+
+        // then
+        Assertions.assertTrue(view == 1);
+
+    }
 }

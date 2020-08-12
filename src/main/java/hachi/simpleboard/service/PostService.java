@@ -45,4 +45,8 @@ public class PostService {
     public Optional<Post> findById(Long id) {
         return postRepository.findById(id);
     }
+
+    public int view(Long id) {
+        return postRepository.updateView(id);
+    }
 }

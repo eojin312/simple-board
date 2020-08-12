@@ -3,6 +3,7 @@ package hachi.simpleboard.web;
 import hachi.simpleboard.domain.comment.Comment;
 import hachi.simpleboard.domain.post.Post;
 import hachi.simpleboard.service.CommentService;
+import hachi.simpleboard.service.PostLikeService;
 import hachi.simpleboard.service.PostService;
 import hachi.simpleboard.web.auth.AuthUser;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class PostController {
 
     private final PostService postService;
     private final CommentService commentService;
+    private final PostLikeService postLikeService;
 
     @GetMapping("/posts")
     public String list() {
@@ -42,6 +44,8 @@ public class PostController {
     @GetMapping("/posts/{id}")
     public String findByPostUserByPostId(@PathVariable Long id, Model model) throws Exception {
         Post post = postService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+//        Long likeCount = postLikeService.count(like, user.getUser());
+//        model.addAttribute("likeCount", likeCount);
         model.addAttribute("post", post);
         List<Comment> commentList = commentService.findByPost(post);
         model.addAttribute("commentList", commentList);

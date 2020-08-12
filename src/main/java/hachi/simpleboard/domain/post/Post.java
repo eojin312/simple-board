@@ -36,6 +36,8 @@ public class Post extends BaseTimeEntity {
 
     private String img;
 
+    private int view;
+
 
     @ManyToOne
     private User user;
