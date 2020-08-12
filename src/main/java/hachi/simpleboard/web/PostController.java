@@ -23,7 +23,6 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-//@RequestMapping("/posts")
 public class PostController {
 
     private final PostService postService;
