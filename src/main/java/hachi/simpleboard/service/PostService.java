@@ -2,7 +2,9 @@ package hachi.simpleboard.service;
 
 import hachi.simpleboard.domain.comment.CommentRepository;
 import hachi.simpleboard.domain.post.Post;
+import hachi.simpleboard.domain.post.PostLikeRepository;
 import hachi.simpleboard.domain.post.PostRepository;
+import hachi.simpleboard.exception.FailPlusReadCountException;
 import hachi.simpleboard.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
+    private final PostLikeRepository postLikeRepository;
 
     public Page<Post> findAll(Pageable pageable) {
         return postRepository.findAll(pageable);
@@ -46,7 +49,15 @@ public class PostService {
         return postRepository.findById(id);
     }
 
-    public int view(Long id) {
-        return postRepository.updateView(id);
+    public int plusReadCount(Long id) {
+        if (postRepository.plusReadCount(id) == 1) {
+            return postRepository.findById(id).get().getView();
+        } else {
+            throw new FailPlusReadCountException();
+        }
+    }
+
+    public long findLikeCountByPostId(Post post) {
+        return postLikeRepository.countByPost(post);
     }
 }

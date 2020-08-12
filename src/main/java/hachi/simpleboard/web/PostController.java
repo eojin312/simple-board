@@ -42,13 +42,16 @@ public class PostController {
     }
 
     @GetMapping("/posts/{id}")
-    public String findByPostUserByPostId(@PathVariable Long id, Model model) throws Exception {
+    public String postDetail(@PathVariable Long id, Model model) throws Exception {
         Post post = postService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
-//        Long likeCount = postLikeService.count(like, user.getUser());
-//        model.addAttribute("likeCount", likeCount);
-        int view = postService.view(id);
-        model.addAttribute("view", view);
         model.addAttribute("post", post);
+
+        long likeCount = postService.findLikeCountByPostId(post);
+        model.addAttribute("likeCount", likeCount);
+
+        int updatedReadCount = postService.plusReadCount(id);
+        model.addAttribute("updatedReadCount", updatedReadCount);
+
         List<Comment> commentList = commentService.findByPost(post);
         model.addAttribute("commentList", commentList);
         return "post/detail";

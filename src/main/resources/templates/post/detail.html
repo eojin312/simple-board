@@ -17,7 +17,7 @@
                 </tr>
                 <tr>
                     <th>조회수</th>
-                    <td id="view" th:text="${view}"></td>
+                    <td id="view" th:text="${updatedReadCount}"></td>
                 </tr>
                 <tr>
                     <th>카테고리</th>
@@ -43,7 +43,7 @@
         <button class="btn btn-success" id="vote-like" onclick="postLikeService.save($('#post-no').val());"
                 type="button">좋아요
         </button>
-        <!--<p th:text="${likeCount}"></p>-->
+        (<span id="likeCount" th:text="${likeCount}"></span>)
     </div>
 
     <div class="footer-button">

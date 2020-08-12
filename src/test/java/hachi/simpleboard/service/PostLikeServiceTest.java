@@ -70,7 +70,7 @@ class PostLikeServiceTest {
         int readCountBeforeView = beforReadPost.getView();
 
         // when
-        int view1 = postRepository.updateView(1L);
+        int view1 = postRepository.plusReadCount(1L);
 
         // then
         Post post = postRepository.findById(1L).orElse(null);

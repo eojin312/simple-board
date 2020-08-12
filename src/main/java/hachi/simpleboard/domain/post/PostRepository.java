@@ -20,5 +20,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     //@Modifying(flushAutomatically=true) // 안됨
     @Modifying(clearAutomatically = true) // 됨
     @Query("update Post p set p.view = p.view + 1 where p.id = :id")
-    int updateView(@Param("id") Long id);
+    int plusReadCount(@Param("id") Long id);
 }
