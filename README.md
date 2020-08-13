@@ -1,5 +1,6 @@
 # simple-board
 심플 게시판 프로젝트 향후에 다른 프로젝트 개발할 때 이 프로젝트의 기술스택 예제들을 보며 참고하면서 개발하기 위한 템플릿 프로젝트
+
 # 기술스택
   - jdk11
   - maven
@@ -32,6 +33,7 @@
 - domain
   - entity
   - repositoty
+  
 **기본 정책**
 - entity 는 domain 내에 격리되어야한다
 - setter 는 사용하지않는다
@@ -106,6 +108,7 @@ public class UserAuthService implements UserDetailsService {
 ![Jun-27-2020 14-41-57](https://user-images.githubusercontent.com/45488643/85915987-22abc680-b887-11ea-9eeb-e97cb3f5437d.gif)
 
 더 자세한 spring security 설명은 제 블로그를 참조해주세요 -> [Spring Security 도전기](https://eojin312.github.io/%EA%B3%B5%EB%B6%80/springsecurity/)
+
 
 ## Front 구현
   tymeleaf 최소로 사용 -> 
