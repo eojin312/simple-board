@@ -36,8 +36,5 @@ public class UserController {
         return "user/upload";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+
 }
