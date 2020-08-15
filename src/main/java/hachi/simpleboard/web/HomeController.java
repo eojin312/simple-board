@@ -1,4 +1,3 @@
-/*
 package hachi.simpleboard.web;
 
 import org.springframework.stereotype.Controller;
@@ -11,4 +10,3 @@ public class HomeController {
         return "index";
     }
 }
-*/
