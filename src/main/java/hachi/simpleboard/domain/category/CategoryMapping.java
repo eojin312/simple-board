@@ -1,10 +1,17 @@
 package hachi.simpleboard.domain.category;
 
-/*@Entity
-@Getter
-public class CategoryMapping {
+import hachi.simpleboard.domain.BaseTimeEntity;
+import hachi.simpleboard.domain.post.Post;
+import lombok.Getter;
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+import javax.persistence.*;
+
+@Getter
+@Entity
+public class CategoryMapping extends BaseTimeEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_mapping_id")
     private Long id;
 
@@ -15,4 +22,4 @@ public class CategoryMapping {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-}*/
+}

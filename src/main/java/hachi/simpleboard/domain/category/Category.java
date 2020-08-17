@@ -1,14 +1,11 @@
 package hachi.simpleboard.domain.category;
 
 
-import hachi.simpleboard.domain.post.Post;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 @Table(name = "category")
+@Entity
 public class Category {
 
     @Id
@@ -18,6 +15,9 @@ public class Category {
 
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
-    private List<Post> posts = new ArrayList<>();
+    @OneToMany
+    @JoinColumn(name = "category_id")
+    private List<CategoryMapping> categoryMappings;
+
 }
+

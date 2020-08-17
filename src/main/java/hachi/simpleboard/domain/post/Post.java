@@ -1,14 +1,13 @@
 package hachi.simpleboard.domain.post;
 
 import hachi.simpleboard.domain.BaseTimeEntity;
-import hachi.simpleboard.domain.category.Category;
+import hachi.simpleboard.domain.category.CategoryMapping;
 import hachi.simpleboard.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,10 +41,9 @@ public class Post extends BaseTimeEntity {
     @ManyToOne
     private User user;
 
-    @ManyToMany
-    @JoinTable(name = "category_mapping", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private List<Category> categories = new ArrayList<>();
-
+    @OneToMany
+    @JoinColumn(name = "post_id")
+    private List<CategoryMapping> categoryMappings;
 
     /**
      * 게시물 생성용 생성자
