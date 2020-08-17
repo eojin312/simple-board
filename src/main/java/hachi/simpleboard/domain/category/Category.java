@@ -1,6 +1,8 @@
 package hachi.simpleboard.domain.category;
 
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,7 +19,11 @@ public class Category {
 
     @OneToMany
     @JoinColumn(name = "category_id")
-    private List<CategoryMapping> categoryMappings;
+    private List<CategoryPost> categoryPosts;
 
+    @Builder
+    public Category(String name) {
+        this.name = name;
+    }
 }
 

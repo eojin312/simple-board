@@ -1,7 +1,7 @@
 package hachi.simpleboard.domain.post;
 
 import hachi.simpleboard.domain.BaseTimeEntity;
-import hachi.simpleboard.domain.category.CategoryMapping;
+import hachi.simpleboard.domain.category.CategoryPost;
 import hachi.simpleboard.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,7 +43,7 @@ public class Post extends BaseTimeEntity {
 
     @OneToMany
     @JoinColumn(name = "post_id")
-    private List<CategoryMapping> categoryMappings;
+    private List<CategoryPost> categoryPosts;
 
     /**
      * 게시물 생성용 생성자

@@ -56,7 +56,6 @@ public class PostUserRepository {
 
     /**
      * PostUser 객체를 이용해서 게시물 저장
-     *
      * @param postUser
      * @return
      */
