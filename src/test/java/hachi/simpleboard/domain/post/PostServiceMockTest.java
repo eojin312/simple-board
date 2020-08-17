@@ -33,7 +33,6 @@ public class PostServiceMockTest extends BaseTest {
                 .title("제목")
                 .contents("테스트용 게시물")
                 .author("testID10001")
-                .category("humor")
                 .img("/a.jpg")
                 .build();
         given(postRepository.findById(anyLong())).willReturn(Optional.ofNullable(mockPost));

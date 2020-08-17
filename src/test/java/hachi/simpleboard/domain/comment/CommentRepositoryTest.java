@@ -30,7 +30,6 @@ class CommentRepositoryTest extends BaseTest {
         Post post = Post.builder()
                 .title("테스트글001")
                 .contents("테스트내용001")
-                .category("humor")
                 .author("user01")
                 .img("")
                 .build();

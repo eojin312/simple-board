@@ -57,7 +57,6 @@ class PostRepositoryTest {
                 .title("테스트용 제목")
                 .author("회원1")
                 .contents("테스트용 내용")
-                .category("humor")
                 .img("/a.jpg")
                 .build()
         );
@@ -87,7 +86,6 @@ class PostRepositoryTest {
                 .title("테스트용제목")
                 .contents("테스트용 게시물")
                 .author("testID100001")
-                .category("humor")
                 .img("/a.jpg")
                 .build());
         // 댓글 쓰는 사람 = user 도 추가

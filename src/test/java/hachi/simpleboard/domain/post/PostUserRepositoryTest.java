@@ -26,7 +26,7 @@ class PostUserRepositoryTest extends BaseTest {
     void init() {
         User user = userRepository.findById(1L).orElseThrow();
 
-        PostUser postUser = new PostUser("11", "22", "33", "", "", user);
+        PostUser postUser = new PostUser("11", "22", "33", "", user);
 
         savedPostId = postUserRepository.save(postUser);
     }

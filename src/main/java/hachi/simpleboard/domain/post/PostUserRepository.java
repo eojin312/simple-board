@@ -37,6 +37,7 @@ public class PostUserRepository {
 
     /**
      * PostUser 객체로 게시물 번호 받아보는 메소드
+     *
      * @param id
      * @return
      */

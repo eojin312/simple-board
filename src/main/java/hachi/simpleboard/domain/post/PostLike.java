@@ -13,7 +13,7 @@ import javax.persistence.*;
  */
 @Getter
 @Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"post_no", "user_no"})
+        @UniqueConstraint(columnNames = {"post_id", "user_id"})
 })
 @Entity
 @NoArgsConstructor
@@ -29,11 +29,11 @@ public class PostLike extends BaseTimeEntity {
     private String ipAddress;
 
     @ManyToOne
-    @JoinColumn(name = "post_no")
+    @JoinColumn(name = "post_id")
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "user_no")
+    @JoinColumn(name = "user_id")
     private User user;
 
 

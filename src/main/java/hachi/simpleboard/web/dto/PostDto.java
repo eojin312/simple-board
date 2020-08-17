@@ -23,7 +23,6 @@ public class PostDto {
             this.title = entity.getTitle();
             this.contents = entity.getContents();
             this.author = entity.getAuthor();
-            this.category = entity.getCategory();
             this.modifiedDate = entity.getModifiedDate();
         }
     }
@@ -55,7 +54,6 @@ public class PostDto {
                     .title(title)
                     .contents(contents)
                     .author(author)
-                    .category(category)
                     .img(img)
                     .build();
         }
@@ -82,7 +80,6 @@ public class PostDto {
             return Post.builder()
                     .id(postsNo)
                     .title(title)
-                    .category(category)
                     .contents(contents)
                     .img(img)
                     .build();

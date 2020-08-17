@@ -65,7 +65,6 @@ public class SimpleBoardApplication {
                         .title("test" + i)
                         .contents("test Contents")
                         .author("testID" + i)
-                        .category("humor")
                         .build();
 
                 Post savedPost = postRepository.save(post);

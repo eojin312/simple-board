@@ -1,12 +1,15 @@
 package hachi.simpleboard.domain.post;
 
 import hachi.simpleboard.domain.BaseTimeEntity;
+import hachi.simpleboard.domain.category.Category;
 import hachi.simpleboard.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 게시물 Entity
@@ -19,7 +22,7 @@ public class Post extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_no")
+    @Column(name = "post_id")
     private Long id;
 
     @Column(nullable = false, length = 200)
@@ -27,9 +30,6 @@ public class Post extends BaseTimeEntity {
 
     @Column(nullable = false)
     private String contents;
-
-    @Column(nullable = false, columnDefinition = "varchar(10) default 'humor'")
-    private String category;
 
     @Column(nullable = false)
     private String author;
@@ -42,39 +42,41 @@ public class Post extends BaseTimeEntity {
     @ManyToOne
     private User user;
 
+    @ManyToMany
+    @JoinTable(name = "category_mapping", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private List<Category> categories = new ArrayList<>();
+
+
     /**
      * 게시물 생성용 생성자
      *
      * @param title
      * @param contents
-     * @param category
      * @param author
      * @param img
      */
     @Builder
-    public Post(String title, String contents, String category, String author, String img) {
+    public Post(String title, String contents, String author, String img) {
         this.title = title;
         this.contents = contents;
-        this.category = category;
         this.author = author;
         this.img = img;
     }
 
     /**
      * 게시물 수정용 생성자
+     *
      * @param id
      * @param title
      * @param contents
-     * @param category
      * @param author
      * @param img
      */
     @Builder
-    public Post(long id, String title, String contents, String category, String author, String img) {
+    public Post(long id, String title, String contents, String author, String img) {
         this.id = id;
         this.title = title;
         this.contents = contents;
-        this.category = category;
         this.author = author;
         this.img = img;
     }

@@ -17,21 +17,20 @@ public class PostUser extends Post {
 
     // 작성자
     @ManyToOne
-    @JoinColumn(name = "user_no")
+    @JoinColumn(name = "user_id")
     private User user;
 
-/**
+    /**
      * postUser 게시물 생성 생성자
      *
      * @param title
      * @param contents
-     * @param category
      * @param author
      * @param img
      * @param user
- */
-    public PostUser(String title, String contents, String category, String author, String img, User user) {
-        super(title, contents, category, author, img);
+     */
+    public PostUser(String title, String contents, String author, String img, User user) {
+        super(title, contents, author, img);
         this.user = user;
     }
 }
