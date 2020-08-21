@@ -62,4 +62,9 @@ public class PostController {
         model.addAttribute("id", id);
         return "post/update";
     }
+
+    @GetMapping("/multipleupload")
+    public String muliple() {
+        return "post/upload";
+    }
 }

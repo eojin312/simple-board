@@ -1,5 +1,7 @@
 package hachi.simpleboard.web;
 
+import hachi.simpleboard.service.UploadService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,9 +27,11 @@ import java.util.UUID;
  * 파일 업로드 테스트를 위해 만든 controller
  */
 @RestController
+@RequiredArgsConstructor
 public class UploadController {
 
     public static final String UPLOAD_BASE_DIR = "/Users/user/data/";
+    private final UploadService uploadService;
 
     public static Optional<String> getExtensionByStringHandling(String filename) {
         return Optional.ofNullable(filename)
@@ -45,6 +50,13 @@ public class UploadController {
         multipartFile.transferTo(destinationFile);
         return destinationFileName;
     }
+
+    @PostMapping("/api/multipleupload")
+    public List<String> muliple(List<MultipartFile> uploadingFiles) throws IOException {
+        List<String> filePathList = uploadService.multiplefile(uploadingFiles);
+        return filePathList;
+    }
+
 
     @GetMapping("/api/download")
     public ResponseEntity<Resource> download(@RequestParam("file-name") String fileName) throws IOException {

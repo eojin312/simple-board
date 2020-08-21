@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <body>
 <div th:replace="adminLteHeader :: adminLteHeader"/>
 <div th:fragment="sidebar">
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a class="brand-link" href="index3.html">
+        <a class="brand-link" href="/">
             <img alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                  src="AdminLTE-3.0.5/dist/img/AdminLTELogo.png" style="opacity: .8">
             <span class="brand-text font-weight-light">Simple Board</span>
@@ -30,10 +29,10 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-accordion="false" data-widget="treeview"
                     role="menu">
                     <li class="nav-item has-treeview menu-open">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link active" href="/posts">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
-                                Dashboard
+                                전체 게시물
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -127,5 +126,4 @@
 </div>
 <div th:replace="adminLteFooter :: adminLteFooter"></div>
 </body>
-
 </html>
