@@ -1,32 +1,13 @@
 package hachi.simpleboard.domain.category;
 
-import com.querydsl.jpa.impl.JPAQueryFactory;
-import hachi.simpleboard.domain.post.QPost;
-import lombok.RequiredArgsConstructor;
+import hachi.simpleboard.domain.post.Post;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-
 @Repository
-@RequiredArgsConstructor
-public class CategoryPostRepository {
+public interface CategoryPostRepository extends JpaRepository<CategoryPost, Long> {
 
-    private final EntityManager em;
+    CategoryPost save(Long postId, Long categoryId);
 
-    public long save(CategoryPost categoryPost) {
-        em.persist(categoryPost);
-        return categoryPost.getId();
-    }
-
-    public CategoryPost findCategoryPostByPost(Long id) {
-        QPost qPost = QPost.post;
-        QCategoryPost qCategoryPost = QCategoryPost.categoryPost;
-        JPAQueryFactory query = new JPAQueryFactory(em);
-        CategoryPost categoryPost = query.select(qCategoryPost)
-                .from(qCategoryPost)
-                .join(qPost).on(qPost.id.eq(qCategoryPost.id))
-                .where(qCategoryPost.id.eq(id))
-                .fetchOne();
-        return categoryPost;
-    }
+    CategoryPost findByPostAndCategory(Post post, Category category);
 }
