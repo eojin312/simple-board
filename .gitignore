@@ -28,3 +28,4 @@ target/
 build/
 ### VS Code ###
 .vscode/
+.yml
