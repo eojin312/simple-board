@@ -22,11 +22,14 @@ class CategoryPostRepositoryTest {
     @BeforeEach
     void init() {
         Category category = categoryRepository.save(Category.builder().name("유머").build());
+        Category categoryId = categoryRepository.findById(1L).orElse(null);
         Post post = postRepository.findById(1L).orElse(null);
     }
 
     @Test
     void save() {
+        Category categoryId = categoryRepository.findById(1L).orElse(null);
+        Post post = postRepository.findById(1L).orElse(null);
 
     }
 

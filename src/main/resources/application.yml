@@ -2,6 +2,7 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
+    server: 8022
 
   jpa:
     hibernate:
