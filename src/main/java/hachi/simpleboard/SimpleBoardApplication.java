@@ -64,6 +64,7 @@ public class SimpleBoardApplication {
                 Post post = Post.builder()
                         .title("test" + i)
                         .contents("test Contents")
+                        .category("유머")
                         .author("testID" + i)
                         .build();
 

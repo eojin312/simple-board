@@ -49,6 +49,7 @@ public class PostController {
         long likeCount = postService.findLikeCountByPostId(post);
         model.addAttribute("likeCount", likeCount);
 
+
         int updatedReadCount = postService.plusReadCount(id);
         model.addAttribute("updatedReadCount", updatedReadCount);
 

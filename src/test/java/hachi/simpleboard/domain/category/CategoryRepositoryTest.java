@@ -1,3 +1,4 @@
+/*
 package hachi.simpleboard.domain.category;
 
 import org.junit.jupiter.api.Test;
@@ -15,4 +16,4 @@ class CategoryRepositoryTest {
         Category category = categoryRepository.save(Category.builder().name("유머").build());
     }
 
-}
+}*/

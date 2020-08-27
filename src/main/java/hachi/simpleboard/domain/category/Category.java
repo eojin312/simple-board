@@ -1,3 +1,4 @@
+/*
 package hachi.simpleboard.domain.category;
 
 
@@ -26,4 +27,4 @@ public class Category {
         this.name = name;
     }
 }
-
+*/

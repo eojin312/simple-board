@@ -1,3 +1,4 @@
+/*
 package hachi.simpleboard.domain.category;
 
 import hachi.simpleboard.domain.BaseTimeEntity;
@@ -23,3 +24,4 @@ public class CategoryPost extends BaseTimeEntity {
     @JoinColumn(name = "category_id")
     private Category category;
 }
+*/

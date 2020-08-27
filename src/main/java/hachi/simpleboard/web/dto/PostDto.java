@@ -52,6 +52,7 @@ public class PostDto {
         public Post toEntity() {
             return Post.builder()
                     .title(title)
+                    .category(category)
                     .contents(contents)
                     .author(author)
                     .img(img)

@@ -29,8 +29,8 @@ public class PostUser extends Post {
      * @param img
      * @param user
      */
-    public PostUser(String title, String contents, String author, String img, User user) {
-        super(title, contents, author, img);
+    public PostUser(String title, String category, String contents, String author, String img, User user) {
+        super(title, category, contents, author, img);
         this.user = user;
     }
 }

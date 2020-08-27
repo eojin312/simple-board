@@ -13,11 +13,10 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Blank Page</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
                         </ol>
                     </div>
                 </div>
@@ -31,16 +30,16 @@
                     <h3 class="card-title">
                         <th:block th:text="${post.title}"></th:block>
                     </h3>
-                    <div class="card-tools">
+                    <div class="card-tools" style="float: right">
                         <span style="float: left;">조회수 </span><span id="view" style="float: left"
                                                                     th:text="${updatedReadCount}"></span>
                         <i class="fas fa-minus"></i>
                         <span style="float: left;">작성자 </span><span id="author" style="float: left"
                                                                     th:text="${post.author}"></span>
                         <i class="fas fa-times"></i>
+                        <span id="create-date" style="float: left" th:text="${post.createdDate}"></span>
+                        <i class="fas fa-times"></i>
                     </div>
-
-                    </ul>
                 </div>
                 <div class="card-body">
                     <th:block th:text="${post.contents}"></th:block>

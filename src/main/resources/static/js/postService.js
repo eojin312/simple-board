@@ -19,7 +19,7 @@ PostService = {
             rowHtml += '\t<td id="title-td-' + postList[i].id + '">' + postList[i].title + ' <span class="comment-count">[9]</span></td>'
             rowHtml += '\t<td>' + postList[i].author + '</td>'
             rowHtml += '\t<td>' + postList[i].category + '</td>'
-            rowHtml += '\t<td>' + CommonUtil.localdatetimeToDate(postList[i].createDate) + '</td>'
+            rowHtml += '\t<td>' + CommonUtil.localdatetimeToDate(postList[i].createdDate) + '</td>'
             rowHtml += '</tr>';
         }
         $('#list-tbody').html(rowHtml);

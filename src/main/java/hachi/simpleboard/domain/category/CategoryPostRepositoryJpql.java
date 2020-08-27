@@ -1,3 +1,4 @@
+/*
 package hachi.simpleboard.domain.category;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,3 +19,4 @@ public class CategoryPostRepositoryJpql {
         query.setParameter(2, postId);
     }
 }
+*/

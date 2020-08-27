@@ -7,17 +7,19 @@
 <div th:replace="fragments/header :: header"/>
 <div th:replace="fragments/adminLteBodyHeader :: adminLteBodyHeader"/>
 <div th:replace="fragments/sidebar :: sidebar"/>
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="card-header">
-                <h3 class="card-title">전체 글 리스트</h3>
-                <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 170px;">
-                        <input class="form-control float-right" name="table_search" placeholder="Search" type="text">
-                        <div class="input-group-append">
-                            <button class="btn btn-default" type="submit">
-                                <i class="fas fa-search"></i>
+<div class="content-wrapper" style="min-height: 1504px;">
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card-header">
+                    <h3 class="card-title">전체 글 리스트</h3>
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 170px;">
+                            <input class="form-control float-right" name="table_search" placeholder="Search"
+                                   type="text">
+                            <div class="input-group-append">
+                                <button class="btn btn-default" type="submit">
+                                    <i class="fas fa-search"></i>
                             </button>
                         </div>
                     </div>
@@ -25,7 +27,7 @@
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover">
                         <thead>
-                        <th scope="row">#</th>
+                        <th scope="row" style="width: 1px">#</th>
                         <th>제목</th>
                         <th>작성자</th>
                         <th>카테고리</th>
@@ -34,15 +36,17 @@
                         <tbody id="list-tbody"></tbody>
                     </table>
                 </div>
+                </div>
+                <div class="pagination-area2" style="text-align: center;"></div>
+                <div class="list-footer-area">
+                    <button class="btn btn-primary" onclick="location.href='/posts/create'" type="button">글쓰러가기</button>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <div class="pagination-area2" style="text-align: center;"></div>
-    <div class="list-footer-area">
-        <button class="btn btn-primary" onclick="location.href='/posts/create'" type="button">글쓰러가기</button>
-    </div>
+        </div>
+    </section>
 </div>
+
 <script>
     $(document).ready(function () {
         PostService.getList();

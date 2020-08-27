@@ -1,3 +1,4 @@
+/*
 package hachi.simpleboard.domain.category;
 
 import hachi.simpleboard.domain.post.Post;
@@ -30,10 +31,9 @@ class CategoryPostRepositoryTest {
     void save() {
         Category categoryId = categoryRepository.findById(1L).orElse(null);
         Post post = postRepository.findById(1L).orElse(null);
-
     }
 
     @Test
     void findCategoryPostByPost() {
     }
-}
+}*/
