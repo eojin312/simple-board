@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:replace="adminLteHeader :: adminLteHeader"/>
 <div th:fragment="sidebar">
@@ -15,113 +15,122 @@
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img alt="User Image" class="img-circle elevation-2"
-                         src="AdminLTE-3.0.5/dist/img/user2-160x160.jpg">
-                </div>
                 <div class="info">
-                    <a class="d-block" href="#">어진이</a>
+                    <a class="d-block" href="#" sec:authorize="isAuthenticated()">어진이</a>
+                    <a class="d-block" href="/logout" sec:authorize="isAuthenticated()" style="font-size: 4px;">로그아웃</a>
+                    <form action="login" autocomplete="off" method="POST" name="login-form"
+                          sec:authorize="isAnonymous()">
+                        <div class="form-group">
+                            <input class="form-control" name="username" placeholder="로그인아이디를 입력해주세요" type="text"
+                                   value="testID10001">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" name="password" placeholder="비밀번호를 입력해주세요" type="password"
+                                   value="1234">
+                        </div>
+                        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+                        <button class="btn btn-primary" id="sendlogin" type="submit">login</button>
+                    </form>
+                    <a class="d-block" href="/users/create" sec:authorize="isAnonymous()"
+                       style="font-size: 4px;">회원가입</a>
                 </div>
             </div>
-
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-accordion="false" data-widget="treeview"
-                    role="menu">
-                    <li class="nav-item has-treeview menu-open">
-                        <a class="nav-link active" href="/posts">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                전체 게시물
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-
-                        </ul>
-                    </li>
-                    <li class="nav-item has-treeview">
-                        <ul class="nav nav-treeview">
-
-                        </ul>
-                    </li>
-                    <li class="nav-item has-treeview">
-
-                        <ul class="nav nav-treeview">
-
-                        </ul>
-                    </li>
-                    <li class="nav-item has-treeview">
-
-                        <ul class="nav nav-treeview">
-                        </ul>
-                    </li>
-                    <li class="nav-item has-treeview">
-
-                        <ul class="nav nav-treeview">
-
-                        </ul>
-                    </li>
-                    <li class="nav-item has-treeview">
-                        <ul class="nav nav-treeview">
-
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-
-                    </li>
-                    <li class="nav-item has-treeview">
-
-                        <ul class="nav nav-treeview">
-
-                        </ul>
-                    </li>
-                    <li class="nav-item has-treeview">
-
-                        <ul class="nav nav-treeview">
-                        </ul>
-                    </li>
-                    <li class="nav-item has-treeview">
-                        <a class="nav-link" href="#">
-                            <i class="nav-icon far fa-plus-square"></i>
-                            <p>
-                                Extras
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a class="nav-link" href="pages/examples/login.html">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Login</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="pages/examples/register.html">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Register</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="pages/examples/forgot-password.html">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Forgot Password</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="pages/examples/recover-password.html">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Recover Password</p>
-                                </a>
-                            </li>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
         </div>
-        <!-- /.sidebar -->
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-accordion="false" data-widget="treeview" role="menu">
+                <li class="nav-item has-treeview menu-open">
+                    <a class="nav-link active" href="/posts">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            전체 게시물
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <ul class="nav nav-treeview">
+
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+
+                    <ul class="nav nav-treeview">
+
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+
+                    <ul class="nav nav-treeview">
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+
+                    <ul class="nav nav-treeview">
+
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <ul class="nav nav-treeview">
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+
+                </li>
+                <li class="nav-item has-treeview">
+
+                    <ul class="nav nav-treeview">
+
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+
+                    <ul class="nav nav-treeview">
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a class="nav-link" href="#">
+                        <i class="nav-icon far fa-plus-square"></i>
+                        <p>
+                            Extras
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Login</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/examples/register.html">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Register</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/examples/forgot-password.html">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Forgot Password</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/examples/recover-password.html">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Recover Password</p>
+                            </a>
+                        </li>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
     </aside>
 </div>
 <div th:replace="adminLteFooter :: adminLteFooter"></div>
