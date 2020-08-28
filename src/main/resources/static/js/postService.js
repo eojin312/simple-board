@@ -16,7 +16,7 @@ PostService = {
         for (let i = 0; i < postList.length; i++) {
             rowHtml += '<tr key="' + postList[i].id + '">';
             rowHtml += '\t<td>' + '<a href="#" onclick="PostService.linkToDetail(' + postList[i].id + ')">' + postList[i].id + '</a>' + '</td>';
-            rowHtml += '\t<td id="title-td-' + postList[i].id + '">' + postList[i].title + ' <span class="comment-count">[9]</span></td>'
+            rowHtml += '\t<td id="title-td-' + postList[i].id + '">' + postList[i].title + ' <span class="comment-count"></span></td>'
             rowHtml += '\t<td>' + postList[i].author + '</td>'
             rowHtml += '\t<td>' + postList[i].category + '</td>'
             rowHtml += '\t<td>' + CommonUtil.localdatetimeToDate(postList[i].createdDate) + '</td>'

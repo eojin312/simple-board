@@ -2,10 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/adminLteHeader :: adminLteHeader"></head>
 <body>
+<div th:replace="fragments/adminLteBodyHeader :: adminLteBodyHeader"/>
+<div th:replace="fragments/header :: header"/>
+<div th:replace="fragments/sidebar :: sidebar"/>
 <input id="post-no" th:value="${post.id}" type="hidden"/>
 
-<div th:replace="fragments/header :: header"/>
-<div th:replace="fragments/adminLteBodyHeader :: adminLteBodyHeader"/>
 <div class="container">
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -97,13 +98,12 @@
 <script src="/js/postService.js"></script>
 <script src="/js/commnetService.js"></script>
 <script src="/js/postLikeService.js"></script>
+<script src="/AdminLTE-3.0.5/plugins/jquery-ui/jquery-ui.js"></script>
 <script>
     function goUpdate(postId) {
         location.href = '/posts/' + postId + '/update';
     }
 </script>
-<script src="AdminLTE-3.0.5/plugins/jquery/jquery.min.js"></script>
-<script src="AdminLTE-3.0.5/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
