@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -59,5 +60,9 @@ public class PostService {
 
     public long findLikeCountByPostId(Post post) {
         return postLikeRepository.countByPost(post);
+    }
+
+    public List<Post> findAllByCategoryOrderByIdDesc(String category) {
+        return postRepository.findAllByCategoryOrderByIdDesc(category);
     }
 }
