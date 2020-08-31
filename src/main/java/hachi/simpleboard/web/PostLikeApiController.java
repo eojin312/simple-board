@@ -30,8 +30,7 @@ public class PostLikeApiController extends BaseApiController {
             likeCount = postLikeService.save(postId, authUser.getUser());
         } catch (DataIntegrityViolationException dive) { // unique index제약에 걸렸을 경우 Exception처리 (이미 좋아요하셨어요~~)
             return -1L;
-        }
-        if (authUser == null) {
+        } catch (NullPointerException e) {
             PrintWriter out = response.getWriter();
             out.println("<script>if(confirm('로그인이 필요한 서비스입니다. 로그인 하시겠습니까?');){window.loacation.href='/login'} else{return;}</script>");
         }

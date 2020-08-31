@@ -6,8 +6,6 @@
 <div th:replace="fragments/header :: header"/>
 <div th:replace="fragments/sidebar :: sidebar"/>
 <input id="post-no" th:value="${post.id}" type="hidden"/>
-
-<div class="container">
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -32,14 +30,16 @@
                         <th:block th:text="${post.title}"></th:block>
                     </h3>
                     <div class="card-tools" style="float: right">
-                        <span style="float: left;">조회수 </span><span id="view" style="float: left"
-                                                                    th:text="${updatedReadCount}"></span>
-                        <i class="fas fa-minus"></i>
-                        <span style="float: left;">작성자 </span><span id="author" style="float: left"
-                                                                    th:text="${post.author}"></span>
-                        <i class="fas fa-times"></i>
-                        <span id="create-date" style="float: left" th:text="${post.createdDate}"></span>
-                        <i class="fas fa-times"></i>
+                        <ul>
+                            <li><span style="float: left;">조회수 </span></li>
+                            <li><span id="view" style="float: left" th:text="${updatedReadCount}"></span><i
+                                    class="fas fa-minus"></i></li>
+                            <span style="float: left;">작성자 </span><span id="author" style="float: left"
+                                                                        th:text="${post.author}"></span>
+                            <i class="fas fa-times"></i>
+                            <span id="create-date" style="float: left" th:text="${post.createdDate}"></span>
+                            <i class="fas fa-times"></i>
+                        </ul>
                     </div>
                 </div>
                 <div class="card-body">
@@ -68,31 +68,31 @@
                 <!-- /.card-footer-->
             </div>
             <!-- /.card -->
+            <!--comments-area-->
+            <div class="comment-save-area">
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="contents" name="comments"></textarea>
+                    <span><button class="btn btn-primary" id="comment_button" onclick="CommentService.save()"
+                                  type="submit">댓글작성</button></span>
+                </div>
+            </div>
 
+            <div class="comments-result-list">
+                <ul>
+                    <li th:each="comment : ${commentList}">
+                        <div>
+                            <span id="commenter_name" th:text="${comment.user.name}"></span>
+                            <span>시간</span>
+                        </div>
+                        <div th:text="${comment.contents}"></div>
+                    </li>
+                </ul>
+            </div>
         </section>
         <!-- /.content -->
     </div>
-    <br/>
-    <div class="comment-save-area">
-        <div class="col-sm-10">
-            <textarea class="form-control" id="contents" name="comments"></textarea>
-            <span><button class="btn btn-primary" id="comment_button" onclick="CommentService.save()"
-                          type="submit">댓글작성</button></span>
-        </div>
-    </div>
+<br/>
 
-    <div class="comments-result-list">
-        <ul>
-            <li th:each="comment : ${commentList}">
-                <div>
-                    <span id="commenter_name" th:text="${comment.user.name}"></span>
-                    <span>시간</span>
-                </div>
-                <div th:text="${comment.contents}"></div>
-            </li>
-        </ul>
-    </div>
-</div>
 
 <script src="/js/commonUtil.js"></script>
 <script src="/js/postService.js"></script>
