@@ -23,7 +23,7 @@ public class PostsApiController extends BaseApiController {
 
     @GetMapping("/posts")
     public Page<Post> list(@PageableDefault Pageable pageable) {
-        return postService.findAll(pageable);
+        return postService.findAllByOrderByIdDesc(pageable);
     }
 
     @PostMapping("/posts")

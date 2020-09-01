@@ -27,8 +27,8 @@ public class PostService {
     private final CommentRepository commentRepository;
     private final PostLikeRepository postLikeRepository;
 
-    public Page<Post> findAll(Pageable pageable) {
-        return postRepository.findAll(pageable);
+    public Page<Post> findAllByOrderByIdDesc(Pageable pageable) {
+        return postRepository.findAllByOrderByIdDesc(pageable);
     }
 
     public Long save(PostDto.Create postDto) {

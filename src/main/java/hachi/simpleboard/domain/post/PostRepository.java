@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    Page<Post> findByOrderByIdDesc(Pageable pageable);
+    Page<Post> findAllByOrderByIdDesc(Pageable pageable);
 
     //@Modifying // 안됨
     // https://stackoverflow.com/questions/49690671/spring-data-repository-query-update-and-return-modified-entity/49692247
