@@ -30,16 +30,14 @@
                         <th:block th:text="${post.title}"></th:block>
                     </h3>
                     <div class="card-tools" style="float: right">
-                        <ul>
-                            <li><span style="float: left;">조회수 </span></li>
-                            <li><span id="view" style="float: left" th:text="${updatedReadCount}"></span><i
-                                    class="fas fa-minus"></i></li>
-                            <span style="float: left;">작성자 </span><span id="author" style="float: left"
-                                                                        th:text="${post.author}"></span>
-                            <i class="fas fa-times"></i>
-                            <span id="create-date" style="float: left;" th:text="${post.createdDate}"></span>
-                            <i class="fas fa-times"></i>
-                        </ul>
+                        <span style="float: left;">조회수 </span>
+                        <span id="view" style="float: left" th:text="${updatedReadCount}"></span><i
+                            class="fas fa-minus"></i>
+                        <span style="float: left;">작성자 </span><span id="author" style="float: left"
+                                                                    th:text="${post.author}"></span>
+                        <i class="fas fa-times"></i>
+                        <span id="create-date" style="float: left;" th:text="${post.createdDate}"></span>
+                        <i class="fas fa-times"></i>
                     </div>
                 </div>
                 <div class="card-body">
@@ -59,8 +57,7 @@
                             삭제
                         </button>
                         <button class="btn btn-success" id="vote-like"
-                                onclick="postLikeService.save($('#post-no').val());"
-                                type="button">좋아요
+                                onclick="postLikeService.save($('#post-no').val());" type="button">좋아요
                         </button>
                         (<span id="likeCount" th:text="${likeCount}"></span>)
                     </div>
