@@ -135,4 +135,10 @@ class PostRepositoryTest {
         String expected = "[1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] ";
         Assertions.assertEquals(expected, paginatinoString);
     }
+
+    @Test
+    void 게시글_카테고리_조회_테스트() {
+        List<Post> posts = postRepository.findAllByCategoryOrderByIdDesc("humor");
+        Assertions.assertTrue(posts.size() > 10);
+    }
 }

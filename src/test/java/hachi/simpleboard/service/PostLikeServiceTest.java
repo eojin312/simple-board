@@ -77,9 +77,4 @@ class PostLikeServiceTest {
         int readCountAfterView = post.getView();
         Assertions.assertTrue(readCountAfterView == readCountBeforeView + 1);
     }
-
-    @Test
-    void 게시글_카테고리_조회_테스트() {
-        postRepository.findAllByCategoryOrderByIdDesc("humor");
-    }
 }

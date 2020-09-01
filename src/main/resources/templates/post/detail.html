@@ -37,7 +37,7 @@
                             <span style="float: left;">작성자 </span><span id="author" style="float: left"
                                                                         th:text="${post.author}"></span>
                             <i class="fas fa-times"></i>
-                            <span id="create-date" style="float: left" th:text="${post.createdDate}"></span>
+                            <span id="create-date" style="float: left;" th:text="${post.createdDate}"></span>
                             <i class="fas fa-times"></i>
                         </ul>
                     </div>
@@ -82,7 +82,7 @@
                     <li th:each="comment : ${commentList}">
                         <div>
                             <span id="commenter_name" th:text="${comment.user.name}"></span>
-                            <span>시간</span>
+                            <span th:text="${comment.createdDate}"></span>
                         </div>
                         <div th:text="${comment.contents}"></div>
                     </li>
@@ -92,7 +92,6 @@
         <!-- /.content -->
     </div>
 <br/>
-
 
 <script src="/js/commonUtil.js"></script>
 <script src="/js/postService.js"></script>
