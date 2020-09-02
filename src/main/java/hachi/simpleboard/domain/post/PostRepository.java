@@ -6,12 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  * 게시물 repository
  */
+@Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     Page<Post> findAllByOrderByIdDesc(Pageable pageable);
@@ -28,5 +28,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     카테고리를 파라미터로 게시물을 갖고온다.
     최신글 순으로 정렬하는 메소드다.
     */
-    List<Post> findAllByCategoryOrderByIdDesc(String category);
+    Page<Post> findAllByCategoryOrderByIdDesc(Pageable pageable, String category);
 }

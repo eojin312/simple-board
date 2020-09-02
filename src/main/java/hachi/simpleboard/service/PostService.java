@@ -12,15 +12,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
-
 /**
  * postService
  */
-@Service
 @RequiredArgsConstructor
 @Transactional
+@Service
 public class PostService {
 
     private final PostRepository postRepository;
@@ -62,7 +60,7 @@ public class PostService {
         return postLikeRepository.countByPost(post);
     }
 
-    public List<Post> findAllByCategoryOrderByIdDesc(String category) {
-        return postRepository.findAllByCategoryOrderByIdDesc(category);
+    public Page<Post> findAllByCategoryOrderByIdDesc(Pageable pageable, String category) {
+        return postRepository.findAllByCategoryOrderByIdDesc(pageable, category);
     }
 }

@@ -138,7 +138,8 @@ class PostRepositoryTest {
 
     @Test
     void 게시글_카테고리_조회_테스트() {
-        List<Post> posts = postRepository.findAllByCategoryOrderByIdDesc("humor");
-        Assertions.assertTrue(posts.size() > 10);
+        Pageable pageable = PageRequest.of(1, 3);
+        Page<Post> posts = postRepository.findAllByCategoryOrderByIdDesc(pageable, "humor");
+        Assertions.assertNotNull(posts);
     }
 }

@@ -35,6 +35,11 @@ public class PostController {
         return "post/list";
     }
 
+    @GetMapping("/posts/{category}")
+    public String listCategory(@PathVariable String category) {
+        return "post/category-list";
+    }
+
     @GetMapping("/posts/create")
     public String create(Model model, @AuthenticationPrincipal AuthUser authUser) {
         model.addAttribute("authUser", authUser);

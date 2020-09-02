@@ -6,8 +6,8 @@ import hachi.simpleboard.domain.post.Post;
 import hachi.simpleboard.domain.post.PostRepository;
 import hachi.simpleboard.domain.user.User;
 import hachi.simpleboard.domain.user.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,10 +19,10 @@ import java.util.stream.IntStream;
 
 @EnableJpaAuditing
 @SpringBootApplication
+@RequiredArgsConstructor
 public class SimpleBoardApplication {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public static final int END_USER_COUNT = 10158;
 
