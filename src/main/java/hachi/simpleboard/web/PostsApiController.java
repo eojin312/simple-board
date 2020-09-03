@@ -26,11 +26,6 @@ public class PostsApiController extends BaseApiController {
         return postService.findAllByOrderByIdDesc(pageable);
     }
 
-    @GetMapping("/posts/{category}")
-    public Page<Post> listCategory(@PageableDefault Pageable pageable, @PathVariable String category) {
-        return postService.findAllByCategoryOrderByIdDesc(pageable, category);
-    }
-
     @PostMapping("/posts")
     public Long create(@RequestBody PostDto.Create postDto) {
         return postService.save(postDto);
