@@ -16,7 +16,6 @@ public class CategoryController {
 
     @GetMapping("/{category}")
     public String listCategory(@PageableDefault Pageable pageable, @PathVariable String category) {
-        category = "humor";
         postService.findAllByCategoryOrderByIdDesc(pageable, category);
         return "post/category-list";
     }
