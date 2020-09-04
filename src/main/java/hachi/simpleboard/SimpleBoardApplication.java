@@ -58,13 +58,43 @@ public class SimpleBoardApplication {
     }
 
     @Bean
-    public CommandLineRunner initPostData(PostRepository postRepository, CommentRepository commentRepository, UserRepository userRepository) {
+    public CommandLineRunner initPostHumorData(PostRepository postRepository, CommentRepository commentRepository, UserRepository userRepository) {
         return args -> {
-            IntStream.rangeClosed(10001, END_USER_COUNT).forEach(i -> {
+            IntStream.rangeClosed(10001, 10020).forEach(i -> {
                 Post post = Post.builder()
                         .title("test" + i)
                         .contents("test Contents")
                         .category("humor")
+                        .author("testID" + i)
+                        .build();
+
+                Post savedPost = postRepository.save(post);
+
+                User user = userRepository.findById(1L).orElse(null);
+
+                commentRepository.save(Comment.builder()
+                        .user(user)
+                        .post(savedPost)
+                        .contents("댓글이다01")
+                        .build());
+
+                commentRepository.save(Comment.builder()
+                        .user(user)
+                        .post(savedPost)
+                        .contents("댓글이다02")
+                        .build());
+            });
+        };
+    }
+
+    @Bean
+    public CommandLineRunner initPostNomalData(PostRepository postRepository, CommentRepository commentRepository, UserRepository userRepository) {
+        return args -> {
+            IntStream.rangeClosed(10021, 10040).forEach(i -> {
+                Post post = Post.builder()
+                        .title("test" + i)
+                        .contents("test Contents")
+                        .category("nomal")
                         .author("testID" + i)
                         .build();
 
