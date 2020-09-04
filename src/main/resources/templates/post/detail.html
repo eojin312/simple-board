@@ -6,6 +6,7 @@
 <div th:replace="fragments/header :: header"/>
 <div th:replace="fragments/sidebar :: sidebar"/>
 <input id="post-no" th:value="${post.id}" type="hidden"/>
+<div class="container">
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -24,20 +25,20 @@
         <!-- Main content -->
         <section class="content">
             <!-- Default box -->
-            <div class="card">
+            <div class="card" style="margin: 90px;">
                 <div class="card-header">
                     <h3 class="card-title">
                         <th:block th:text="${post.title}"></th:block>
                     </h3>
                     <div class="card-tools" style="float: right">
-                        <span style="float: left;">조회수 </span>
-                        <span id="view" style="float: left" th:text="${updatedReadCount}"></span><i
+                        <p style="float: left; font-size: 12px;">조회수 </p>
+                        <p id="view" style="float: left; font-size: 12px; " th:text="${updatedReadCount}"></p><i
                             class="fas fa-minus"></i>
-                        <span style="float: left;">작성자 </span><span id="author" style="float: left"
-                                                                    th:text="${post.author}"></span>
-                        <i class="fas fa-times"></i>
-                        <span id="create-date" style="float: left;" th:text="${post.createdDate}"></span>
-                        <i class="fas fa-times"></i>
+                        <p style="float: left; font-size: 12px;">작성자 </p>
+                        <p id="author" style="float: left; font-size: 12px;" th:text="${post.author}"></p><i
+                            class="fas fa-times"></i>
+                        <p id="create-date" style="float: left; font-size: 12px;" th:text="${post.createdDate}"></p><i
+                            class="fas fa-times"></i>
                     </div>
                 </div>
                 <div class="card-body">
@@ -49,8 +50,6 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                     <div class="footer-button">
-                        <button class="btn btn-primary" onclick="window.location.href='/posts';" type="button">목록으로
-                        </button>
                         <button class="btn btn-warning" onclick="goUpdate($('#post-no').val());" type="button">수정
                         </button>
                         <button class="btn btn-danger" onclick="PostService.delete($('#post-no').val());" type="button">
@@ -61,34 +60,40 @@
                         </button>
                         (<span id="likeCount" th:text="${likeCount}"></span>)
                     </div>
+                    <br/>
+                    <div class="comment-save-area">
+                        <div>
+                            <textarea class="form-control" id="contents" name="comments"></textarea>
+                            <span><button class="btn btn-primary" id="comment_button" onclick="CommentService.save()"
+                                          type="submit">댓글작성</button></span>
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+
+                    <div class="comments-result-list">
+                        <ul class="nav nav-pills flex-column" th:each="comment : ${commentList}">
+                            <li class="nav-item active">
+                                <hr/>
+                                <div>
+                                    <span id="commenter_name" th:text="${comment.user.name}"></span>
+                                    <span style="font-size: 12px;" th:text="${comment.createdDate}"></span><i
+                                        class="fas fa-indox"></i>
+                                </div>
+                                <div th:text="${comment.contents}"></div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <!-- /.card-footer-->
             </div>
             <!-- /.card -->
             <!--comments-area-->
-            <div class="comment-save-area">
-                <div class="col-sm-10">
-                    <textarea class="form-control" id="contents" name="comments"></textarea>
-                    <span><button class="btn btn-primary" id="comment_button" onclick="CommentService.save()"
-                                  type="submit">댓글작성</button></span>
-                </div>
-            </div>
-
-            <div class="comments-result-list">
-                <ul class="nav nav-pills flex-column" th:each="comment : ${commentList}">
-                    <li class="nav-item active">
-                        <div>
-                            <span id="commenter_name" th:text="${comment.user.name}"></span>
-                            <span th:text="${comment.createdDate}"></span> <i class="fas fa-indox"></i>
-                        </div>
-                        <div th:text="${comment.contents}"></div>
-                    </li>
-                </ul>
-            </div>
         </section>
         <!-- /.content -->
+        <button class="btn btn-primary" onclick="window.location.href='/posts';" type="button">목록으로</button>
     </div>
-<br/>
+    <br/>
+</div>
 
 <script src="/js/commonUtil.js"></script>
 <script src="/js/postService.js"></script>
