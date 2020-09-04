@@ -25,6 +25,16 @@
                                 <h3>유머 게시판</h3>
                             </div>
                         </div>
+                        <div class="card-body p-0">
+                            <ul class="nav nav-pills flex-column" th:each="humorList : ${humorList}">
+                                <li class="nav-item active">
+                                    <a class="nav-link" th:href="@{/posts/(id=${humorList.id})}"
+                                       th:text="${humorList.title}">
+                                        <i class="fas fa-indox"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->

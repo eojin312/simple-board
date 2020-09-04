@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 /**
  * postService
@@ -62,5 +63,9 @@ public class PostService {
 
     public Page<Post> findAllByCategoryOrderByIdDesc(Pageable pageable, String category) {
         return postRepository.findAllByCategoryOrderByIdDesc(pageable, category);
+    }
+
+    public List<Post> findTop5ByCategoryOrderByIdDesc(String category) {
+        return postRepository.findTop5ByCategoryOrderByIdDesc(category);
     }
 }

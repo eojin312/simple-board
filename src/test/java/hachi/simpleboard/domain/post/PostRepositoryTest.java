@@ -161,6 +161,5 @@ class PostRepositoryTest {
         Assertions.assertNotNull(posts);
         // limit 테스트이고 5개만 가져올테니 가져온 게시글이 5개 이하와 이상이면 안된다.
         Assertions.assertTrue(posts.size() == 5);
-
     }
 }
