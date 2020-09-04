@@ -138,8 +138,29 @@ class PostRepositoryTest {
 
     @Test
     void 게시글_카테고리_조회_테스트() {
+        // given
         Pageable pageable = PageRequest.of(1, 3);
+
+        // when
         Page<Post> posts = postRepository.findAllByCategoryOrderByIdDesc(pageable, "humor");
+
+        // then
         Assertions.assertNotNull(posts);
+    }
+
+    @Test
+    void 홈화면_카테고리_게시판_조회_limit_테스트() {
+        // given
+        String category = "humor";
+
+        // when
+        List<Post> posts = postRepository.findTop5ByCategoryOrderByIdDesc(category);
+
+        // then
+        // 일단 카테고리 게시판을 조회해야한다
+        Assertions.assertNotNull(posts);
+        // limit 테스트이고 5개만 가져올테니 가져온 게시글이 5개 이하와 이상이면 안된다.
+        Assertions.assertTrue(posts.size() == 5);
+
     }
 }
