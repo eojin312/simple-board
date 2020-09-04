@@ -75,11 +75,11 @@
             </div>
 
             <div class="comments-result-list">
-                <ul>
-                    <li th:each="comment : ${commentList}">
+                <ul class="nav nav-pills flex-column" th:each="comment : ${commentList}">
+                    <li class="nav-item active">
                         <div>
                             <span id="commenter_name" th:text="${comment.user.name}"></span>
-                            <span th:text="${comment.createdDate}"></span>
+                            <span th:text="${comment.createdDate}"></span> <i class="fas fa-indox"></i>
                         </div>
                         <div th:text="${comment.contents}"></div>
                     </li>
