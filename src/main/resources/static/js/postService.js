@@ -238,9 +238,16 @@ PostService = {
             this.img = $.trim($('#file-name').val());
         }
     },
-    search: function () {
+    search: function (event) {
+
         let searchType = $('#search-type').val();
         let searchKeyword = $('#search-keyword').val();
+        if ($.trim(searchKeyword) == '') {
+            alert('검색어를 입력해주세요');
+            event.preventDefault();
+            return;
+        }
         this.getList(null, searchType, searchKeyword);
+        event.preventDefault();
     }
 }
