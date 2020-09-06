@@ -195,6 +195,10 @@ PostService = {
             window.location.href = '/posts/' + post.id;
         })
     },
+    /**
+     * @Deprecated
+     * @param id
+     */
     getUpdateInfo: function (id) {
         $.ajax({
             type: 'GET',
@@ -220,6 +224,7 @@ PostService = {
         })
     },
     postDto: {
+        id: 0,
         title: '',
         contents: '',
         author: '',

@@ -61,6 +61,8 @@ public class PostController {
     @GetMapping("/posts/{id}/update")
     public String update(@PathVariable Long id, Model model) {
         model.addAttribute("id", id);
+        Post post = postService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+        model.addAttribute("post", post);
         return "post/update";
     }
 

@@ -56,7 +56,11 @@ public class PostService {
     }
 
     public Post update(PostDto.Update postUpdateDto) {
-        return postRepository.save(postUpdateDto.toEntity());
+        Post post = postUpdateDto.toEntity();
+        if (post.getId() == null) {
+            throw new IllegalArgumentException();
+        }
+        return postRepository.save(post);
     }
 
     public void delete(Long id) {

@@ -1,15 +1,15 @@
 package hachi.simpleboard.web;
 
 import hachi.simpleboard.domain.post.Post;
-import hachi.simpleboard.domain.post.PostUser;
 import hachi.simpleboard.service.PostService;
-import hachi.simpleboard.service.PostUserService;
+import hachi.simpleboard.web.auth.AuthUser;
 import hachi.simpleboard.web.dto.ListResponseDto;
 import hachi.simpleboard.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -17,10 +17,9 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequiredArgsConstructor
-public class PostsApiController extends BaseApiController {
+public class PostApiController extends BaseApiController {
 
     private final PostService postService;
-    private final PostUserService postUserService;
 
     @GetMapping("/posts")
     public ListResponseDto<Post> list(
@@ -37,19 +36,16 @@ public class PostsApiController extends BaseApiController {
     }
 
     @PostMapping("/posts")
-    public Long create(@RequestBody PostDto.Create postDto) {
+    public Long create(@RequestBody PostDto.Create postDto, @AuthenticationPrincipal AuthUser authUser) {
+        postDto.setAuthor(authUser.getUsername());
         return postService.save(postDto);
     }
 
 
     @PutMapping("/posts")
-    public Post update(@RequestBody PostDto.Update postUpdateDto) {
+    public Post update(@RequestBody PostDto.Update postUpdateDto, @AuthenticationPrincipal AuthUser authUser) {
+        postUpdateDto.setAuthor(authUser.getUsername());
         return postService.update(postUpdateDto);
-    }
-
-    @GetMapping("/posts/{id}")
-    public PostUser findByPostUserByPostId(@PathVariable Long id) {
-        return postUserService.findByPostUserByPostId(id);
     }
 
     @DeleteMapping("/posts/{id}")

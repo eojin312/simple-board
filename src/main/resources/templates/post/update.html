@@ -8,27 +8,27 @@
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
 <br/>
     <div class="create">
-        <tr>
-            <th>회원번호</th>
-            <td id="id" th:text="${id}"></td>
-        </tr>
+        <div>
+            <label>글 번호</label>
+            <span id="id" th:text="${id}"></span>
+        </div>
         <div class="form-group">
             <label>제목</label>
-            <input class="form-control" id="title" type="text">
+            <input class="form-control" id="title" th:value="${post.title}" type="text">
         </div>
         <div class="form-group">
             <label>작성자</label>
-            <input class="form-control" id="author" placeholder="작성자를 입력해주세요" type="text">
+            <span th:text="${post.author}"></span>
         </div>
         <div class="form-group">
             <label for="contents"></label>
-            <textarea class="form-control rounded-0" id="contents" rows="10"></textarea>
+            <textarea class="form-control rounded-0" id="contents" rows="10" th:text="${post.contents}"></textarea>
         </div>
         <div class="form-group">
             <label>카테고리</label>
-            <select class="selectpicker" id="gender">
-                <option value="humor">유머</option>
-                <option value="horror">공포</option>
+            <select class="selectpicker" id="category" th:field="*{post.category}">
+                <option th:text="유머" th:value="humor"></option>
+                <option th:text="일반" th:value="nomal"></option>
             </select>
         </div>
 

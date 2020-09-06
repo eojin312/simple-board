@@ -48,23 +48,6 @@ public class Post extends BaseTimeEntity {
 */
 
     /**
-     * 게시물 생성용 생성자
-     *
-     * @param title
-     * @param contents
-     * @param author
-     * @param img
-     */
-    @Builder
-    public Post(String title, String category, String contents, String author, String img) {
-        this.title = title;
-        this.category = category;
-        this.contents = contents;
-        this.author = author;
-        this.img = img;
-    }
-
-    /**
      * 게시물 수정용 생성자
      *
      * @param id
@@ -74,7 +57,7 @@ public class Post extends BaseTimeEntity {
      * @param img
      */
     @Builder
-    public Post(long id, String title, String category, String contents, String author, String img) {
+    public Post(Long id, String title, String category, String contents, String author, String img) {
         this.id = id;
         this.title = title;
         this.category = category;

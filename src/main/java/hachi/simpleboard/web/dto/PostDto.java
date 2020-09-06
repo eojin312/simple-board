@@ -3,6 +3,7 @@ package hachi.simpleboard.web.dto;
 import hachi.simpleboard.domain.post.Post;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Lob;
 import javax.validation.constraints.Size;
@@ -36,6 +37,8 @@ public class PostDto {
 
         @Lob
         private String contents;
+
+        @Setter
         private String author;
         private String category;
         private String img;
@@ -51,6 +54,7 @@ public class PostDto {
             this.createdDate = createdDate;
         }
 
+
         public Post toEntity() {
             return Post.builder()
                     .title(title)
@@ -64,16 +68,20 @@ public class PostDto {
 
     @Getter
     public static class Update {
-        private Long postsNo;
+        private Long id;
         private String title;
+
+        @Setter
+        private String author;
         private String category;
         private String contents;
         private String img;
 
         @Builder
-        public Update(Long postsNo, String title, String category, String contents, String img) {
-            this.postsNo = postsNo;
+        public Update(Long id, String title, String author, String category, String contents, String img) {
+            this.id = id;
             this.title = title;
+            this.author = author;
             this.category = category;
             this.contents = contents;
             this.img = img;
@@ -81,10 +89,12 @@ public class PostDto {
 
         public Post toEntity() {
             return Post.builder()
-                    .id(postsNo)
-                    .title(title)
-                    .contents(contents)
-                    .img(img)
+                    .id(this.id)
+                    .title(this.title)
+                    .author(this.author)
+                    .contents(this.contents)
+                    .img(this.img)
+                    .category(this.category)
                     .build();
         }
     }
