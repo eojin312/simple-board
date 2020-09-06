@@ -37,18 +37,38 @@ PostService = {
         window.location.href = '/posts/' + id;
     },
 
-    getList: function (_page) {
+    listState: {
+        page: 1,
+        searchType: '',
+        searchKeyword: ''
+    },
+
+    getList: function (_page, searchType, searchKeyword) {
         if (_page == undefined || _page == null) {
-            _page = 0;
+            _page = this.listState.page;
         }
+
+        if (searchType == undefined || searchType == null) {
+            searchType = this.listState.searchType;
+        }
+
+        if (searchKeyword == undefined || searchKeyword == null) {
+            searchKeyword = this.listState.searchKeyword;
+        }
+
         $.ajax({
             url: '/api/posts',
             type: 'GET',
             context: window.PostService,
             data: {
-                page: _page
+                page: _page,
+                searchType: searchType,
+                searchKeyword: searchKeyword
             }
-        }).done(function (page) {
+        }).done(function (listState) {
+            PostService.listState = listState;
+            let page = listState.page;
+
             let postList = page.content;
             if (postList == undefined || postList == null) {
                 $('#list-tbody').html('<tr><td colspan="10">글이 아무것도 등록되어있지 않습니다.</td></tr>');
@@ -215,5 +235,10 @@ PostService = {
             this.createdDate = $.trim($('#createdDate').val());
             this.img = $.trim($('#file-name').val());
         }
+    },
+    search: function () {
+        let searchType = $('#search-type').val();
+        let searchKeyword = $('#search-keyword').val();
+        this.getList()
     }
 }

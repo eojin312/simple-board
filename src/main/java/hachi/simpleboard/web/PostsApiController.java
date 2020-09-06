@@ -4,6 +4,7 @@ import hachi.simpleboard.domain.post.Post;
 import hachi.simpleboard.domain.post.PostUser;
 import hachi.simpleboard.service.PostService;
 import hachi.simpleboard.service.PostUserService;
+import hachi.simpleboard.web.dto.ListResponseDto;
 import hachi.simpleboard.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,8 +23,17 @@ public class PostsApiController extends BaseApiController {
     private final PostUserService postUserService;
 
     @GetMapping("/posts")
-    public Page<Post> list(@PageableDefault Pageable pageable) {
-        return postService.findAllByOrderByIdDesc(pageable);
+    public ListResponseDto<Post> list(
+            @PageableDefault Pageable pageable,
+            @RequestParam("searchType") String searchType,
+            @RequestParam("searchKeyword") String searchKeyword
+    ) {
+        Page<Post> page = postService.getList(pageable, searchType, searchKeyword);
+        return ListResponseDto.<Post>builder()
+                .page(page)
+                .searchType(searchType)
+                .searchKeyword(searchKeyword)
+                .build();
     }
 
     @PostMapping("/posts")

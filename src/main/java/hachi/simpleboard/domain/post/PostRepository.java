@@ -16,11 +16,47 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    Page<Post> findAllByOrderByIdDesc(Pageable pageable);
+    /**
+     * 검색필터 없이 pageable로 리스트 조회 (기본은 ID 역순)
+     *
+     * @param pageable
+     * @return
+     */
+    Page<Post> findAll(Pageable pageable);
+
+    /**
+     * 제목으로 LIKE검색 (기본은 pageable, 기본은 ID 역순), 검색필드는 service layer에서 결정함
+     *
+     * @param searchKeyword 검색키워드(=검색항목에 입력한 값)
+     * @param pageable
+     * @return Page<Post>
+     */
+    Page<Post> findAllByTitleContaining(String searchKeyword, Pageable pageable);
+
+
+    /**
+     * 작성자로 LIKE검색 (기본은 pageable, 기본은 ID 역순), 검색필드는 service layer에서 결정함
+     *
+     * @param searchKeyword 검색키워드
+     * @param pageable
+     * @return Page<Post>
+     */
+    Page<Post> findAllByAuthorContaining(String searchKeyword, Pageable pageable);
+
+    /**
+     * 내용으로 LIKE검색 (기본은 pageable, 기본은 ID 역순), 검색필드는 service layer에서 결정함
+     *
+     * @param searchKeyword 검색키워드
+     * @param pageable
+     * @return Page<Post>
+     */
+    Page<Post> findAllByContentsContaining(String searchKeyword, Pageable pageable);
+
 
     //@Modifying // 안됨
     // https://stackoverflow.com/questions/49690671/spring-data-repository-query-update-and-return-modified-entity/49692247
     //@Modifying(clearAutomatically=true, flushAutomatically = true) // 됨
+
     //@Modifying(flushAutomatically=true) // 안됨
     @Modifying(clearAutomatically = true) // 됨
     @Query("update Post p set p.view = p.view + 1 where p.id = :id")
@@ -40,5 +76,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
      기대하는 쿼리
      select post.~ from post where category = '?' limit 0, 5;
      */
+
     List<Post> findTop5ByCategoryOrderByIdDesc(String category);
 }

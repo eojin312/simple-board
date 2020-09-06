@@ -14,13 +14,21 @@
                 <div class="card-header">
                     <h3 class="card-title">전체 글 리스트</h3>
                     <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 170px;">
-                            <input class="form-control float-right" name="table_search" placeholder="Search"
-                                   type="text">
-                            <div class="input-group-append">
-                                <button class="btn btn-default" type="submit">
-                                    <i class="fas fa-search"></i>
-                            </button>
+                        <div class="input-group input-group-sm">
+                            <form id="search-form" name="search-form">
+                                <select id="search-type" name="search-type">
+                                    <option value="title">제목</option>
+                                    <option value="author">작성자</option>
+                                    <option value="contents">내용</option>
+                                </select>
+                                <input class="form-control float-right" id="search-keyword" name="search-keyword"
+                                       placeholder="Search" type="text"/>
+                                <div class="input-group-append">
+                                    <button class="btn btn-default" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

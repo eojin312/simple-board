@@ -8,8 +8,11 @@ import hachi.simpleboard.exception.FailPlusReadCountException;
 import hachi.simpleboard.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -26,8 +29,26 @@ public class PostService {
     private final CommentRepository commentRepository;
     private final PostLikeRepository postLikeRepository;
 
-    public Page<Post> findAllByOrderByIdDesc(Pageable pageable) {
-        return postRepository.findAllByOrderByIdDesc(pageable);
+    public Page<Post> getList(Pageable pageable, String searchType, String searchKeyword) {
+        final Sort sort = Sort.by(Sort.Direction.DESC, "id");
+
+        // findAll()에 sort파라미터는 허용하지만, pageable과 sort파라미터 동시 사용이 불가능함 (Method must not have Pageable *and* Sort parameter.)
+        // 그래서, pageable객체에 sort를 담아서 repository에 넘겨주도록 아래 코드를 작성해서 pageable을 재생성하도록 함 (어쩔 수 없음)
+        // 참고 : https://www.baeldung.com/spring-data-sorting
+        //     Page<Passenger> page = repository.findAll(PageRequest.of(0, 1, Sort.by(Sort.Direction.ASC, "seatNumber")));
+        Pageable _pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
+
+        if (StringUtils.isEmpty(searchType) == true) {
+            return postRepository.findAll(_pageable);
+        } else if ("title".equals(searchType)) {
+            return postRepository.findAllByTitleContaining(searchKeyword, _pageable);
+        } else if ("author".equals(searchType)) {
+            return postRepository.findAllByAuthorContaining(searchKeyword, _pageable);
+        } else if ("contents".equals(searchType)) {
+            return postRepository.findAllByContentsContaining(searchKeyword, _pageable);
+        } else {
+            return postRepository.findAll(pageable);
+        }
     }
 
     public Long save(PostDto.Create postDto) {
