@@ -38,7 +38,7 @@ PostService = {
     },
 
     listState: {
-        page: 1,
+        page: 0, /* 무조건 첫페이지의 default는 0 (1로 하면 에러난다!!) */
         searchType: '',
         searchKeyword: ''
     },
@@ -112,6 +112,8 @@ PostService = {
         // loopCount = PAGES_PER_BLOCK
 
         let loopCount = (isLastBlock) ? (totalPage % this.config.PAGES_PER_BLOCK) : this.config.PAGES_PER_BLOCK;
+        loopCount = (loopCount == 0) ? this.config.PAGES_PER_BLOCK : loopCount;
+
         let lessThanMinBlock = (totalElements <= (this.config.PAGES_PER_BLOCK - 1) * size);
         loopCount = (isFirstBlock && lessThanMinBlock) ? totalPage : loopCount;
 
@@ -143,7 +145,7 @@ PostService = {
             window.location.href = '/posts/' + id;
         })
     },
-    bindEvent: function () {
+    crateButtonbindEvent: function () {
         var _this = this;
         $('#create_button').on('click', this.save);
     },
@@ -229,7 +231,7 @@ PostService = {
                 this.id = $.trim($('#id').text());
             }
             this.title = $.trim($('#title').val());
-            this.contents = $.trim($('#post-contents').val());
+            this.contents = $.trim($('#contents').val());
             this.author = $.trim($('#author').val());
             this.category = $.trim($('#category').val());
             this.createdDate = $.trim($('#createdDate').val());
@@ -239,6 +241,6 @@ PostService = {
     search: function () {
         let searchType = $('#search-type').val();
         let searchKeyword = $('#search-keyword').val();
-        this.getList()
+        this.getList(null, searchType, searchKeyword);
     }
 }

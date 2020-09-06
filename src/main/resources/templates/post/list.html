@@ -24,7 +24,7 @@
                                 <input class="form-control float-right" id="search-keyword" name="search-keyword"
                                        placeholder="Search" type="text"/>
                                 <div class="input-group-append">
-                                    <button class="btn btn-default" type="submit">
+                                    <button class="btn btn-default" id="search-btn" type="button">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
@@ -45,26 +45,30 @@
                     </table>
                 </div>
                 </div>
-                <div class="pagination-area2" style="text-align: center;"></div>
-                <div class="list-footer-area">
-                    <button class="btn btn-primary" onclick="location.href='/posts/create'" type="button">글쓰러가기</button>
-                </div>
+            <div class="pagination-area2" style="text-align: center;"></div>
+            <div class="list-footer-area">
+                <button class="btn btn-primary" onclick="location.href='/posts/create'" type="button">글쓰러가기</button>
             </div>
-
         </div>
-    </section>
+
 </div>
+</section>
+</div>
+
+<script src="/AdminLTE-3.0.5/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<script src="/js/commonUtil.js"></script>
+<script src="/js/postService.js"></script>
+
 
 <script>
     $(document).ready(function () {
         PostService.getList();
+        $('#search-btn').on('click', function () {
+            PostService.search();
+        });
     })
 </script>
-<script src="/js/commonUtil.js"></script>
-<script src="/js/postService.js"></script>
-<script src="/AdminLTE-3.0.5/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script>
-    $.widget.bridge('uibutton', $.ui.button)
-</script>
+
 </body>
 </html>
