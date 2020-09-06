@@ -8,6 +8,7 @@ import javax.persistence.Lob;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
+@Getter
 public class PostDto {
 
     public static class ResponseListDto {
@@ -27,6 +28,7 @@ public class PostDto {
         }
     }
 
+    @Getter
     public static class Create {
 
         @Size(min = 3, max = 60)

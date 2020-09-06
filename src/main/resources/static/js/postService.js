@@ -224,7 +224,6 @@ PostService = {
         contents: '',
         author: '',
         category: '',
-        createdDate: '',
         img: '',
         toDto: function () {
             if ($('#id') != undefined) {
@@ -234,12 +233,10 @@ PostService = {
             this.contents = $.trim($('#contents').val());
             this.author = $.trim($('#author').val());
             this.category = $.trim($('#category').val());
-            this.createdDate = $.trim($('#createdDate').val());
             this.img = $.trim($('#file-name').val());
         }
     },
     search: function (event) {
-
         let searchType = $('#search-type').val();
         let searchKeyword = $('#search-keyword').val();
         if ($.trim(searchKeyword) == '') {

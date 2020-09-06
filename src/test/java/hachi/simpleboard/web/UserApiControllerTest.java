@@ -49,9 +49,7 @@ class UserApiControllerTest extends BaseApiControllerTest {
                 post("/api/users")
                         .content(content)
                         .contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk())
-
-                .andDo(print());
+        ).andExpect(status().isOk());
     }
 
     @Test
@@ -72,8 +70,7 @@ class UserApiControllerTest extends BaseApiControllerTest {
                 post("/api/users")
                         .content(content)
                         .contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isBadRequest())
-                .andDo(print());
+        ).andExpect(status().isBadRequest());
     }
 
     @Test

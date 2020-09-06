@@ -1,6 +1,7 @@
 package hachi.simpleboard.service;
 
 import hachi.simpleboard.domain.post.Post;
+import hachi.simpleboard.web.dto.PostDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -48,5 +49,18 @@ class PostServiceTest {
                 "id역순으로 정렬되어야 한다");
         assertTrue(page.getTotalPages() > 0 && page.getContent().get(0).getTitle().indexOf("st") > -1,
                 "검색 결과에서 title은 te 문자열을 포함해야한다");
+    }
+
+    @Test
+    void 게시글_생성할때_카테고리_잘저장되는지_테스트() throws Exception {
+        Long postId = postService.save(PostDto.Create.builder()
+                .title("테스트용 제목")
+                .contents("테스트용 내용")
+                .author("테스트용 회원")
+                .category("humor")
+                .build());
+        Post post = postService.findById(postId).orElseThrow(() -> new Exception());
+
+        assertTrue("humor".equals(post.getCategory()));
     }
 }

@@ -6,7 +6,6 @@
 <div th:replace="fragments/header :: header"/>
 <div th:replace="fragments/sidebar :: sidebar"/>
 <input id="post-no" th:value="${post.id}" type="hidden"/>
-<div class="container">
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -25,20 +24,17 @@
         <!-- Main content -->
         <section class="content">
             <!-- Default box -->
-            <div class="card" style="margin: 90px;">
+            <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
                         <th:block th:text="${post.title}"></th:block>
                     </h3>
                     <div class="card-tools" style="float: right">
                         <p style="float: left; font-size: 12px;">조회수 </p>
-                        <p id="view" style="float: left; font-size: 12px; " th:text="${updatedReadCount}"></p><i
-                            class="fas fa-minus"></i>
+                        <p id="view" style="float: left; font-size: 12px; " th:text="${updatedReadCount}"></p>
                         <p style="float: left; font-size: 12px;">작성자 </p>
-                        <p id="author" style="float: left; font-size: 12px;" th:text="${post.author}"></p><i
-                            class="fas fa-times"></i>
-                        <p id="create-date" style="float: left; font-size: 12px;" th:text="${post.createdDate}"></p><i
-                            class="fas fa-times"></i>
+                        <p id="author" style="float: left; font-size: 12px;" th:text="${post.author}"></p>
+                        <p id="create-date" style="float: left; font-size: 12px;" th:text="${post.createdDate}"></p>
                     </div>
                 </div>
                 <div class="card-body">
@@ -66,7 +62,6 @@
                             <textarea class="form-control" id="contents" name="comments"></textarea>
                             <span><button class="btn btn-primary" id="comment_button" onclick="CommentService.save()"
                                           type="submit">댓글작성</button></span>
-                            <i class="fas fa-times"></i>
                         </div>
                     </div>
 
@@ -88,12 +83,10 @@
             </div>
             <!-- /.card -->
             <!--comments-area-->
+            <button class="btn btn-primary" onclick="window.location.href='/posts';" type="button">목록으로</button>
         </section>
         <!-- /.content -->
-        <button class="btn btn-primary" onclick="window.location.href='/posts';" type="button">목록으로</button>
     </div>
-    <br/>
-</div>
 
 <script src="/js/commonUtil.js"></script>
 <script src="/js/postService.js"></script>
