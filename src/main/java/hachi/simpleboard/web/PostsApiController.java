@@ -25,8 +25,8 @@ public class PostsApiController extends BaseApiController {
     @GetMapping("/posts")
     public ListResponseDto<Post> list(
             @PageableDefault Pageable pageable,
-            @RequestParam("searchType") String searchType,
-            @RequestParam("searchKeyword") String searchKeyword
+            @RequestParam(value = "searchType", required = false) String searchType,
+            @RequestParam(value = "searchKeyword", required = false) String searchKeyword
     ) {
         Page<Post> page = postService.getList(pageable, searchType, searchKeyword);
         return ListResponseDto.<Post>builder()
