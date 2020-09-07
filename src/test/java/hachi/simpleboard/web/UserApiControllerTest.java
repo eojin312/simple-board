@@ -33,13 +33,12 @@ class UserApiControllerTest extends BaseApiControllerTest {
 
     @Test
     public void 회원등록() throws Exception {
-
         String content = objectMapper.writeValueAsString(
                 UserDto.Create.builder()
                         .name("이어진")
                         .email("eojin312@naver.com")
-                        .username("eojin312")
-                        .password("1234")
+                        .username("eojin312123")
+                        .password("1231231234")
                         .birthYear(2002)
                         .gender("M")
                         .build()

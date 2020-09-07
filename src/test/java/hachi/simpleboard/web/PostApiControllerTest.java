@@ -59,8 +59,8 @@ class PostApiControllerTest extends BaseApiControllerTest {
         MvcResult result = mockMvc.perform(
                 post("/api/posts")
                         .content(content)
-                        .contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
                 .andReturn();
 
         String body = result.getResponse().getContentAsString();
