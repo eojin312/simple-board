@@ -1,63 +1,92 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header">
-    <title>회원 생성</title>
+<head th:replace="fragments/adminLteHeader :: adminLteHeader"></head>
+<title>회원 생성</title>
 </head>
 <body>
-<div th:replace="fragments/bodyHeader :: bodyHeader"/>
+<div th:replace="fragments/adminLteBodyHeader :: adminLteBodyHeader"/>
+<div th:replace="fragments/header :: header"/>
+<div th:replace="fragments/sidebar :: sidebar"/>
 <input id="id" type="hidden"/>
-<div class="container">
-    <div class="create">
-        <div class="form-group">
-            <label>이름</label>
-            <input class="form-control" id="name" placeholder="이름을 입력해주세요" type="text">
-        </div>
-        <div class="form-group">
-            <label>이메일</label>
-            <input class="form-control" id="email" placeholder="이메일을 입력해주세요" type="text">
-        </div>
-        <div class="form-group">
-            <label>아이디</label>
-            <input class="form-control" id="username" placeholder="id 를 입력해주세요" type="text">
-        </div>
-        <div class="form-group">
-            <label>비밀번호</label>
-            <input class="form-control" id="password" placeholder="비밀번호를 입력해주세요" type="password">
-        </div>
-        <div class="form-group">
-            <label>성별</label>
-            <select class="selectpicker" id="gender">
-                <option value="M">남자</option>
-                <option value="F">여자</option>
-            </select>
-        </div>
-        1
-        <div class="form-group">
-            <label>생년</label>
-            <input class="form-control" id="birth-year" placeholder="생년을를 입력해주세요" type="text">
-        </div>
-        <input type="hidden">
+<div class="content-wrapper" style="min-height: 1504px;">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <div class="create">
+                        <div class="form-group">
+                            <label>이름</label>
+                            <input class="form-control" id="name" placeholder="이름을 입력해주세요" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>이메일</label>
+                            <input class="form-control" id="email" placeholder="이메일을 입력해주세요" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>아이디</label>
+                            <input class="form-control" id="username" placeholder="id 를 입력해주세요" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>비밀번호</label>
+                            <input class="form-control" id="password" placeholder="비밀번호를 입력해주세요" type="password">
+                            <input class="form-control" id="password-check" placeholder="비밀번호를 입력해주세요" type="password">
+                            <span id="check-notice"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>성별</label>
+                            <select class="selectpicker" id="gender">
+                                <option value="M">남자</option>
+                                <option value="F">여자</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>생년</label>
+                            <input class="form-control" id="birth-year" placeholder="생년을를 입력해주세요" type="text">
+                        </div>
+                        <input type="hidden">
 
-        <div class="img-area">
-            <label>프로필사진</label>
-            <form action="/api/upload" enctype="multipart/form-data" id="upload-form" method="post" name="upload-form">
-                <input name="attach-file" type="file">
-                <input onclick="UserService.upload();" type="button" value="upload">
-            </form>
-            <div class="select-img">
-                <img id="profile-image"/>
+                        <div class="img-area">
+                            <label>프로필사진</label>
+                            <form action="/api/upload" enctype="multipart/form-data" id="upload-form" method="post"
+                                  name="upload-form">
+                                <input name="attach-file" type="file">
+                                <input onclick="UserService.upload();" type="button" value="upload">
+                            </form>
+                            <div class="select-img">
+                                <img id="profile-image"/>
+                            </div>
+                        </div>
+
+                        <a class="btn btn-secondary" href="/user/list" role="button">취소</a>
+                        <button class="btn btn-primary" id="create_button" onclick="UserService.save();" type="button">
+                            등록
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <a class="btn btn-secondary" href="/user/list" role="button">취소</a>
-        <button class="btn btn-primary" id="create_button" onclick="UserService.save();" type="button">등록</button>
-    </div>
+    </section>
 </div>
 <script src="/js/commonUtil.js"></script>
 <script src="/js/userService.js"></script>
 <script>
     $(document).ready(function () {
         UserService.bindEvent();
+    });
+    $(function () {
+        $('#password').keyup(function () {
+            $('#check-notice').html('');
+        });
+        $('#password-check').keyup(function () {
+            if ($('#password').val() != $('#password-check').val()) {
+                $('#check-notice').html('비밀번호가 일치하지않습니다');
+                $('#check-notice').attr('color', 'FF0000');
+                return;
+            } else {
+                $('#check-notice').html('비밀번호가 일치!');
+                $('#check-notice').attr('color', '0073CF')
+            }
+        });
     });
 </script>
 </body>

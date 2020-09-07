@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header">
     <title>간단한 게시판</title>
 </head>
 <body>
-<div th:replace="fragments/bodyHeader :: bodyHeader"/>
-<div class="container">
-    <div class="board-area">
-        <div class="menu-area">
-            <div class="category-area"></div>
-            <div class="view-type-area"></div>
-        </div>
-        <div class="list-area">
-            <table class="table">
-                <thead class="thead-dark">
-                <th>회원번호</th>
-                <th>회원아이디</th>
+<div th:replace="fragments/adminLteBodyHeader :: adminLteBodyHeader"/>
+<div th:replace="fragments/header :: header"/>
+<div th:replace="fragments/sidebar :: sidebar"/>
+<div class="board-area">
+    <div class="menu-area">
+        <div class="category-area"></div>
+        <div class="view-type-area"></div>
+    </div>
+    <div class="list-area">
+        <table class="table">
+            <thead class="thead-dark">
+            <th>회원번호</th>
+            <th>회원아이디</th>
                 <th>회원이름</th>
                 <th>회원이메일</th>
                 <th>회원생년</th>

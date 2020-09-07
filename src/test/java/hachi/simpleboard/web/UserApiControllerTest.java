@@ -42,7 +42,6 @@ class UserApiControllerTest extends BaseApiControllerTest {
                         .password("1234")
                         .birthYear(2002)
                         .gender("M")
-                        .profileImage("1234")
                         .build()
         );
         mockMvc.perform(

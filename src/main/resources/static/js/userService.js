@@ -112,6 +112,11 @@ UserService = {
             $('#password').focus();
             return false;
         }
+        if ($('#password').val() != $('#password-check').val()) {
+            alert('비밀번호가 일치하지않아요!');
+            $('#password').focus();
+            return false;
+        }
     },
     isEmptyAndAlert(target, label) {
         if (this.userDto[target] == '') {
