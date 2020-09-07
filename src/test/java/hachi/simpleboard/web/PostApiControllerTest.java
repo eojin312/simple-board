@@ -67,4 +67,16 @@ class PostApiControllerTest extends BaseApiControllerTest {
         Long generatedId = Long.parseLong(body);
         Assertions.assertTrue(generatedId > 0);
     }
+
+    @Test
+    void 게시글_수정_테스트() throws Exception {
+        PostDto.Update update = PostDto.Update.builder()
+                .id(1L)
+                .title("테스트용제목")
+                .contents("테스트용내용")
+                .category("humor")
+                .author("testID10001")
+                .build();
+        String body = objectMapper.writeValueAsString(update);
+    }
 }
