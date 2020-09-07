@@ -5,19 +5,20 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"/>
-<div th:replace="fragments/adminLteBodyHeader :: adminLteBodyHeader"/>
-<div th:replace="fragments/sidebar :: sidebar"/>
-<div class="content-wrapper" style="min-height: 1504px;">
-    <section class="content">
-        <div class="row">
-            <div class="col-12">
-                <div class="card-header">
-                    <h3 class="card-title">전체 글 리스트</h3>
-                    <div class="card-tools">
-                        <div class="input-group input-group-sm">
-                            <select id="search-type" name="search-type">
-                                <option value="title">제목</option>
-                                <option value="author">작성자</option>
+<div class="wrapper">
+    <div th:replace="fragments/sidebar :: sidebar"/>
+    <div th:replace="fragments/adminLteBodyHeader :: adminLteBodyHeader"/>
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-header">
+                        <h3 class="card-title">전체 글 리스트</h3>
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm">
+                                <select id="search-type" name="search-type">
+                                    <option value="title">제목</option>
+                                    <option value="author">작성자</option>
                                 <option value="contents">내용</option>
                             </select>
                             <input class="form-control float-right" id="search-keyword" name="search-keyword"
@@ -33,24 +34,24 @@
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover">
                         <thead>
-                        <th scope="row" style="width: 1px">#</th>
-                        <th style="width: 10px;">제목</th>
-                        <th style="width: 10px;">작성자</th>
-                        <th style="width: 10px;">카테고리</th>
-                        <th style="width: 10px;">시간</th>
+                        <th scope="row">#</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>카테고리</th>
+                        <th>시간</th>
                         </thead>
                         <tbody id="list-tbody"></tbody>
                     </table>
                 </div>
                 </div>
-            <div class="pagination-area2" style="text-align: center;"></div>
-            <div class="list-footer-area">
-                <button class="btn btn-primary" onclick="location.href='/posts/create'" type="button">글쓰러가기</button>
+                <div class="pagination-area2" style="text-align: center;"></div>
+                <div class="list-footer-area">
+                    <button class="btn btn-primary" onclick="location.href='/posts/create'" type="button">글쓰러가기</button>
+                </div>
             </div>
-        </div>
-
+        </section>
 </div>
-</section>
+</div>
 </div>
 
 <script src="/AdminLTE-3.0.5/plugins/jquery-ui/jquery-ui.min.js"></script>

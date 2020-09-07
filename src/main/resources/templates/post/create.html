@@ -3,21 +3,22 @@
 <head th:replace="fragments/adminLteHeader :: adminLteHeader"></head>
 </head>
 <body>
-<div th:replace="fragments/adminLteBodyHeader :: adminLteBodyHeader"/>
 <div th:replace="fragments/header :: header"/>
-<div th:replace="fragments/sidebar :: sidebar"/>
-<div class="content-wrapper" style="min-height: 1504px;">
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>글 생성</h1>
+<div class="wrapper">
+    <div th:replace="fragments/sidebar :: sidebar"/>
+    <div th:replace="fragments/adminLteBodyHeader :: adminLteBodyHeader"/>
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>글 생성</h1>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="content">
-        <div class="row">
+        </section>
+        <section class="content">
+            <div class="row">
             <div class="col-md-12">
                 <div class="create">
                     <div class="form-group">
@@ -58,9 +59,10 @@
                     <br/>
                 </div>
             </div>
-            <div class="col-md-12"></div>
-        </div>
-    </section>
+                <div class="col-md-12"></div>
+            </div>
+        </section>
+    </div>
 </div>
 <script src="/js/commonUtil.js"></script>
 <script src="/js/postService.js"></script>

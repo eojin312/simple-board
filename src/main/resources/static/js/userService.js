@@ -241,8 +241,7 @@ UserService = {
             $('#birth-year').html(user.birthYear);
             $('#gender').html(user.gender);
             $('#profile-image').attr("src", '/api/download?file-name=' + user.profileImage)
-        })
-        ;
+        });
     },
     getUpdateInfo: function (id) {
         $.ajax({
