@@ -98,7 +98,7 @@ class UserRepositoryTest {
     @Test
     public void 검색기능테스트loginId() {
         Pageable pageable = PageRequest.of(0, 10);
-        Page<User> userListPage = userRepository.findByUsernameContaining("testID101", pageable);
+        Page<User> userListPage = userRepository.findAllByUsernameContaining("testID101", pageable);
         List<User> userList = userListPage.getContent();
         Assertions.assertTrue(userList.size() > 0);
     }

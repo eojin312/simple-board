@@ -125,7 +125,7 @@ UserService = {
             return false;
         }
     },
-    getUserList: function (_page) {
+    getUserList: function (_page, searchType, searchKeyword) {
         if (_page == undefined || _page == null) {
             _page = 0;
         }
@@ -133,7 +133,9 @@ UserService = {
             url: "/api/users",
             context: window.UserService,
             data: {
-                page: _page
+                page: _page,
+                searchType: searchType,
+                searchKeyword: searchKeyword
             }
         }).done(function (page) {
             let userList = page.content;
@@ -148,7 +150,6 @@ UserService = {
             console.log(res);
         });
     },
-
     /**
      * private renderPagination
      * @param totalPage 전체 페이지 수
@@ -160,7 +161,8 @@ UserService = {
     renderPagination: function (totalPage, _crrentPage, size, totalElements, _areaClassId) {
 
         let areaClassId = (_areaClassId === undefined || _areaClassId == null) ? '.pagination-area' : _areaClassId;
-        let crrentPage = (_crrentPage < 1) ? 1 : _crrentPage;
+        let crrentPage = (_crrentPage < 1) ? 1
+            : _crrentPage;
         let currentBlock = Math.ceil(crrentPage / this.config.PAGES_PER_BLOCK);
         let startPageOfBlock = Math.ceil((currentBlock - 1) * this.config.PAGES_PER_BLOCK) + 1;
         let totalBlock = Math.ceil(totalElements / size / this.config.PAGES_PER_BLOCK);
@@ -190,27 +192,15 @@ UserService = {
         if (isLastBlock == false) paginationString += '<span onclick="UserService.getUserList(' + firstPageOfNextBlock + ')" style="cursor:pointer;" >[다음]</span>';
         $(areaClassId).html(paginationString);
     },
-    search: function () {
+    search: function (event) {
         let searchType = $('#search-type').val();
         let searchKeyword = $('#search-keyword').val();
-
-        $.ajax({
-            url: "/api/users",
-            context: window.UserService,
-            data: {
-                searchType: searchType,
-                searchKeyword: searchKeyword
-            }
-        })
-            .done(function (res) {
-                let userList = res.content;
-                if (userList == undefined || userList == null) {
-                    $('#list-tbody').html('<tr><td colspan="6">검색 결과가 없습니다</td></tr>');
-                    return;
-                }
-                this.renderList(userList);
-            })
-        ;
+        if ($.trim(searchKeyword) == '') {
+            alert('검색어를 입력해주세요');
+            event.preventDefault();
+            return;
+        }
+        this.getUserList(null, searchType, searchKeyword);
     },
     renderList: function (userList) {
         let rowHtml = '';

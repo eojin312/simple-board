@@ -63,11 +63,11 @@ public class UserService {
      */
     public Page<User> findAllBySearchCondition(Pageable pageable, String searchType, String searchKeyword) {
         if (searchType.equals("username")) {
-            return userRepository.findByUsernameContaining(searchKeyword, pageable);
+            return userRepository.findAllByUsernameContaining(searchKeyword, pageable);
         } else if (searchType.equals("name")) {
-            return userRepository.findByNameContaining(searchKeyword, pageable);
+            return userRepository.findAllByNameContaining(searchKeyword, pageable);
         } else if (searchType.equals("email")) {
-            return userRepository.findByEmailContaining(searchKeyword, pageable);
+            return userRepository.findAllByEmailContaining(searchKeyword, pageable);
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "알 수 없는 검색 타입입니다.");
         }

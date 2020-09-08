@@ -17,15 +17,14 @@
                         <div class="card-tools">
                             <div class="input-group input-group-sm">
                                 <select id="search-type" name="search-type">
-                                    <option value="loginId">회원아이디</option>
+                                    <option value="username">회원아이디</option>
                                     <option value="name">회원이름</option>
                                     <option value="email">회원이메일</option>
                                 </select>
                                 <input class="form-control float-right" id="search-keyword" name="search-keyword"
                                        placeholder="Search" type="text"/>
                                 <div class="input-group-append">
-                                    <button class="btn btn-default" id="search-btn" onclick="UserService.search();"
-                                            type="button">
+                                    <button class="btn btn-default" id="search-btn" type="button">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
@@ -51,7 +50,6 @@
                                     <tbody id="list-tbody"></tbody>
                                 </table>
                             </div>
-
                             <div class="create-area"></div>
                         </div>
                         <div class="pagination-area" style="text-align: center;"></div>
@@ -67,6 +65,16 @@
 <script>
     $(document).ready(function () {
         UserService.getUserList();
+        $('#search-btn').on('click', function () {
+            UserService.search();
+        });
+
+        $('#search-keyword').on('keydown', function (e) {
+            console.log(e.keyCode);
+            if (e.keyCode == 13) {
+                UserService.search();
+            }
+        });
     });
 </script>
 </body>
