@@ -37,7 +37,6 @@ public class PostService {
         // 참고 : https://www.baeldung.com/spring-data-sorting
         //     Page<Passenger> page = repository.findAll(PageRequest.of(0, 1, Sort.by(Sort.Direction.ASC, "seatNumber")));
         Pageable _pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
-
         if (StringUtils.isEmpty(searchType) == true) {
             return postRepository.findAll(_pageable);
         } else if ("title".equals(searchType)) {
