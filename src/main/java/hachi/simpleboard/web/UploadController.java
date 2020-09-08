@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -50,13 +49,6 @@ public class UploadController {
         multipartFile.transferTo(destinationFile);
         return destinationFileName;
     }
-
-    @PostMapping("/api/multipleupload")
-    public List<String> muliple(List<MultipartFile> uploadingFiles) throws IOException {
-        List<String> filePathList = uploadService.multiplefile(uploadingFiles);
-        return filePathList;
-    }
-
 
     @GetMapping("/api/download")
     public ResponseEntity<Resource> download(@RequestParam("file-name") String fileName) throws IOException {

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/adminLteHeader :: adminLteHeader"></head>
+<link href="/js/dropzone/dropzone.css" rel="stylesheet">
 </head>
 <body>
 <div th:replace="fragments/header :: header"/>
@@ -34,24 +35,25 @@
                         <label for="contents"></label>
                         <textarea class="form-control rounded-0" id="contents" rows="10"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label>카테고리</label>
-                        <select class="selectpicker" id="category">
-                            <option value="humor">유머</option>
-                            <option value="nomal">일반</option>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label>카테고리</label>
+                            <select class="selectpicker" id="category">
+                                <option value="humor">유머</option>
+                                <option value="nomal">일반</option>
+                            </select>
+                        </div>
 
-                    <div class="img-area">
-                        <label>첨부파일</label>
-                        <form action="/api/upload" enctype="multipart/form-data" id="upload-form" method="post"
-                              name="upload-form">
-                            <input name="attach-file" type="file">
-                            <input onclick="PostService.upload();" type="button" value="upload">
-                        </form>
-                        <input id="file-name" type="hidden" value=""/>
-                        <img id="profile-image"/>
-                    </div>
+                        <div class="dropzone">
+                            <div class="fallback"></div>
+                            <label>첨부파일</label>
+                            <form action="/api/upload" class="dropzone" enctype="multipart/form-data"
+                                  id="my-awesome-dropzone" method="post" name="upload-form">
+                                <input multiple name="attach-file" type="file"/>
+                                <input onclick="PostService.upload();" type="button" value="upload">
+                            </form>
+                            <input id="file-name" type="hidden" value=""/>
+                            <img id="profile-image"/>
+                        </div>
                         <br/>
                         <a class="btn btn-secondary" href="/" role="button">취소</a>
                         <button class="btn btn-primary" id="create_button" onclick="PostService.save();" type="button">
@@ -67,10 +69,20 @@
 </div>
 <script src="/js/commonUtil.js"></script>
 <script src="/js/postService.js"></script>
+<script src="/js/dropzone/dropzone.js"/>
 <script>
     $(document).ready(function () {
         PostService.crateButtonbindEvent();
     });
+    Dropzone.autoDiscover = false;
+    $(document).ready(function () {
+        $('#my-awesome-dropzone').dropzone({
+            success: function (file, response) {
+                toastr.success('File' + file.name + 'upload 성공');
+            }
+        })
+    });
+
 </script>
 </body>
 </html>

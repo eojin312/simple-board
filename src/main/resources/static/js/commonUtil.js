@@ -4,9 +4,9 @@
  */
 var CommonUtil = {
     localdatetimeToDate: function (localdatetime) {
-        if (localdatetime == null || localdatetime == undefined || localdatetime.length < 10) {
+        if (localdatetime == null || localdatetime == undefined || localdatetime.length < 15) {
             return '';
         }
-        return localdatetime.substring(0, 10);
+        return localdatetime.substring(0, 15);
     }
 };
