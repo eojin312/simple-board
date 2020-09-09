@@ -1,12 +1,14 @@
 package hachi.simpleboard.domain.post;
 
 import hachi.simpleboard.domain.BaseTimeEntity;
+import hachi.simpleboard.domain.uploadfiles.UploadFiles;
 import hachi.simpleboard.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * 게시물 Entity
@@ -33,13 +35,12 @@ public class Post extends BaseTimeEntity {
 
     private String category;
 
-    private String img;
-
     private int view;
-
-
     @ManyToOne
     private User user;
+
+    @OneToMany
+    private List<UploadFiles> img;
 
 /*
     @OneToMany
@@ -54,15 +55,13 @@ public class Post extends BaseTimeEntity {
      * @param title
      * @param contents
      * @param author
-     * @param img
      */
     @Builder
-    public Post(Long id, String title, String category, String contents, String author, String img) {
+    public Post(Long id, String title, String category, String contents, String author) {
         this.id = id;
         this.title = title;
         this.category = category;
         this.contents = contents;
         this.author = author;
-        this.img = img;
     }
 }

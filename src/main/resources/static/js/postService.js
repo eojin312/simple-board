@@ -255,5 +255,5 @@ PostService = {
         }
         if (isLastBlock == false) paginationString += '<span onclick="PostService.getList(' + firstPageOfNextBlock + ')" style="cursor:pointer;" >[다음]</span>';
         $(areaClassId).html(paginationString);
-    },
+    }
 }
