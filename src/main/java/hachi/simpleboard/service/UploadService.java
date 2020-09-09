@@ -25,10 +25,10 @@ public class UploadService {
     }
 
     public String multiplefile(MultipartFile uploadingFiles) throws Exception {
-        String originalName = multipartFile.getOriginalFilename();
+        String originalName = uploadingFiles.getOriginalFilename();
         File dest = new File(UPLOAD_BASE_DIR + originalName);
-        multipartFile.transferTo(dest);
+        uploadingFiles.transferTo(dest);
 
-        return filePathList;
+        return originalName;
     }
 }
