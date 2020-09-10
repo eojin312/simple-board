@@ -1,6 +1,5 @@
 package hachi.simpleboard.service;
 
-import hachi.simpleboard.domain.uploadfiles.UploadFilesRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,8 +12,6 @@ import java.util.Optional;
 @Transactional
 @Slf4j
 public class UploadService {
-
-    private UploadFilesRepository uploadFilesRepository;
 
     public static final String UPLOAD_BASE_DIR = "/Users/user/data/";
 

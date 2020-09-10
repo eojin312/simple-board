@@ -78,13 +78,12 @@ public class PostDto {
         private String img;
 
         @Builder
-        public Update(Long id, String title, String author, String category, String contents, String img) {
+        public Update(Long id, String title, String author, String category, String contents) {
             this.id = id;
             this.title = title;
             this.author = author;
             this.category = category;
             this.contents = contents;
-            this.img = img;
         }
 
         public Post toEntity() {
@@ -93,8 +92,8 @@ public class PostDto {
                     .title(this.title)
                     .author(this.author)
                     .contents(this.contents)
-                    .img(this.img)
                     .category(this.category)
+                    .img(this.img)
                     .build();
         }
     }
