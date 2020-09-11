@@ -48,29 +48,6 @@ public class User extends BaseTimeEntity implements Serializable {
     private String role;
 
     /**
-     * user 생성용 생성자
-     *
-     * @param email
-     * @param username
-     * @param password
-     * @param profileImage
-     * @param birthYear
-     * @param gender
-     * @param role
-     */
-    @Builder
-    public User(String name, String email, String username, String password, String profileImage, int birthYear, String gender, String role) {
-        this.name = name;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.profileImage = profileImage;
-        this.birthYear = birthYear;
-        this.gender = gender;
-        this.role = role;
-    }
-
-    /**
      * user 수정용 생성자
      *
      * @param id
