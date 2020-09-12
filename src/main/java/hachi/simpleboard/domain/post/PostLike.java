@@ -28,6 +28,7 @@ public class PostLike extends BaseTimeEntity {
     @Column
     private String ipAddress;
 
+    // 단반향으로 post 와 연결 시켜줬다
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
