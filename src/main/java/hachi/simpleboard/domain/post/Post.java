@@ -39,12 +39,6 @@ public class Post extends BaseTimeEntity {
 
     private String img;
 
-/*
-    @OneToMany
-    @JoinColumn(name = "post_id")
-    private List<CategoryPost> categoryPosts;
-*/
-
     /**
      * 게시물 수정용 생성자
      *
