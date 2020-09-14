@@ -41,7 +41,6 @@ public class Post extends BaseTimeEntity {
 
     /**
      * 게시물 수정용 생성자
-     *
      * @param id
      * @param title
      * @param contents
