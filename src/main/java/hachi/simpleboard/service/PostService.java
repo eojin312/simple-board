@@ -56,9 +56,6 @@ public class PostService {
 
     public Post update(PostDto.Update postUpdateDto) {
         Post post = postUpdateDto.toEntity();
-        if (post.getId() == null) {
-            throw new IllegalArgumentException();
-        }
         return postRepository.save(post);
     }
 

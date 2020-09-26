@@ -10,13 +10,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
+
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class PostLikeService {
 
     private final PostLikeRepository postLikeRepository;
     private final PostRepository postRepository;
-
 
     public Long save(Long postId, User user) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));

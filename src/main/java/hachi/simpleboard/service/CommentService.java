@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -31,10 +32,12 @@ public class CommentService {
      * @param user
      * @return
      */
+    @Transactional
     public Long save(CommentDto.Create commentCreateDto, User user) {
         Post post = postRepository.findById(commentCreateDto.getPostNo()).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 포스트번호 입니다"));
         return commentRepository.save(commentCreateDto.toEntity(post, user)).getId();
     }
+
     public List<Comment> findByPost(Post post) {
         return commentRepository.findByPost(post);
     }

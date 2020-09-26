@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Lob;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
@@ -36,6 +39,7 @@ public class PostDto {
         private String title;
 
         @Lob
+        @NotBlank
         private String contents;
 
         @Setter
@@ -68,12 +72,21 @@ public class PostDto {
 
     @Getter
     public static class Update {
+
+        @NotEmpty
+        @NotNull
         private Long id;
+
+        @NotEmpty
         private String title;
 
         @Setter
         private String author;
+
+        @NotEmpty
         private String category;
+
+        @NotEmpty
         private String contents;
         private String img;
 
