@@ -15,12 +15,14 @@ public class UploadService {
 
     public static final String UPLOAD_BASE_DIR = "/Users/user/data/";
 
+
     public static Optional<String> getExtensionByStringHandling(String filename) {
         return Optional.ofNullable(filename)
                 .filter(f -> f.contains("."))
                 .map(f -> f.substring(filename.lastIndexOf(".") + 1));
     }
 
+    // upload 메소드 하지만 완성된 메소드는 아니다
     public String multiplefile(MultipartFile uploadingFiles) throws Exception {
         String originalName = uploadingFiles.getOriginalFilename();
         File dest = new File(UPLOAD_BASE_DIR + originalName);
