@@ -33,7 +33,9 @@ public class Post extends BaseTimeEntity {
 
     private String category;
 
+    // TODO: view 에 저장된 숫자를 리스트에 보여주기
     private int view;
+
     @ManyToOne
     private User user;
 
