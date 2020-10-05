@@ -140,12 +140,6 @@ class PostRepositoryTest {
     void 게시글_카테고리_조회_테스트() {
         // given
         Pageable pageable = PageRequest.of(1, 3);
-
-        // when
-        Page<Post> posts = postRepository.findAllByCategoryOrderByIdDesc(pageable, "humor");
-
-        // then
-        Assertions.assertNotNull(posts);
     }
 
     @Test

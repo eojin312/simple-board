@@ -67,13 +67,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("update Post p set p.view = p.view + 1 where p.id = :id")
     int plusReadCount(@Param("id") Long id);
 
-    /*
-    카테고리를 파라미터로 게시물을 갖고온다.
-    최신글 순으로 정렬하는 메소드다.
-    기대하는 쿼리
-    select * from post where post.category = '?' order by post.id
-    */
-    Page<Post> findAllByCategoryOrderByIdDesc(Pageable pageable, String category);
+
 
     /*
      index 에 카테고리 게시판 최신 글 5개씩 리스트 가져오기
