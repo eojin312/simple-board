@@ -1,7 +1,6 @@
 package hachi.simpleboard.service;
 
 import hachi.simpleboard.domain.comment.CommentRepository;
-import hachi.simpleboard.domain.post.CategoryRepository;
 import hachi.simpleboard.domain.post.Post;
 import hachi.simpleboard.domain.post.PostLikeRepository;
 import hachi.simpleboard.domain.post.PostRepository;
@@ -29,7 +28,6 @@ public class PostService {
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
     private final PostLikeRepository postLikeRepository;
-    private final CategoryRepository categoryRepository;
 
     public Page<Post> getList(Pageable pageable, String searchType, String searchKeyword) {
         final Sort sort = Sort.by(Sort.Direction.DESC, "id");
@@ -82,10 +80,6 @@ public class PostService {
 
     public long findLikeCountByPostId(Post post) {
         return postLikeRepository.countByPost(post);
-    }
-
-    public List<Post> findByCategoryOrderByIdDesc(String category) {
-        return categoryRepository.findByCategory(category);
     }
 
     public List<Post> findTop5ByCategoryOrderByIdDesc(String category) {
