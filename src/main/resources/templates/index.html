@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/adminLteHeader :: adminLteHeader"></head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -23,6 +23,8 @@
                         <div class="card-header ui-sortable-handle">
                             <div class="card-title">
                                 <h3>유머 게시판</h3>
+                                <p sec:authorize="isAuthenticated()" th:text="${username}"></p>
+                                <p sec:authorize="isAuthenticated()" th:text="${auth.getUsername()}"></p>
                             </div>
                         </div>
                         <div class="card-body p-0">
