@@ -13,9 +13,8 @@
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <a class="d-block" href="#" sec:authorize="isAuthenticated()">어진이</a>
                 <div class="info">
-                    <a class="d-block" href="#" sec:authorize="isAuthenticated()"><span
-                            sec:authentication="principal.username"></span></a>
                     <a class="d-block" href="/logout" sec:authorize="isAuthenticated()" style="font-size: 4px;">로그아웃</a>
                     <form action="login" autocomplete="off" method="POST" name="login-form"
                           sec:authorize="isAnonymous()">
