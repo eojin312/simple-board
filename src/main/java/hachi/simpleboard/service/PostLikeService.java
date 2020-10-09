@@ -12,6 +12,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 
+/**
+ * 좋아요 서비스
+ */
 @Service
 @RequiredArgsConstructor
 @Transactional
