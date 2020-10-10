@@ -204,10 +204,6 @@ PostService = {
             event.preventDefault();
             return;
         }
-        if (postList == undefined || postList == null) {
-            $('#list-tbody').html('<tr><td colspan="6">검색 결과가 없습니다</td></tr>');
-            return;
-        }
         this.getList(null, searchType, searchKeyword);
         event.preventDefault();
     },
