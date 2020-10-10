@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/adminLteHeader :: adminLteHeader"></head>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/adminLteHeader :: adminLteHeader">
+</head>
 <body>
 <div th:replace="fragments/adminLteBodyHeader :: adminLteBodyHeader"/>
 <div th:replace="fragments/header :: header"/>
 <div th:replace="fragments/sidebar :: sidebar"/>
 <input id="post-no" th:value="${post.id}" type="hidden"/>
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
                     <div class="col-sm-6">
                     </div>
                     <div class="col-sm-6">
@@ -46,25 +47,26 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                     <div class="footer-button">
-                        <button class="btn btn-warning" onclick="goUpdate($('#post-no').val());" type="button">수정
+                        <button class="btn btn-warning" onclick="goUpdate($('#post-no').val());"
+                                sec:authorize="isAuthenticated()" type="button">수정
                         </button>
-                        <button class="btn btn-danger" onclick="PostService.delete($('#post-no').val());" type="button">
+                        <button class="btn btn-danger" onclick="PostService.delete($('#post-no').val());"
+                                sec:authorize="isAuthenticated()" type="button">
                             삭제
                         </button>
-                        <button class="btn btn-success" id="vote-like"
+                        <button class="btn btn-success" id="vote-like" sec:authorize="isAuthenticated()"
                                 onclick="postLikeService.save($('#post-no').val());" type="button">좋아요
                         </button>
                         (<span id="likeCount" th:text="${likeCount}"></span>)
                     </div>
                     <br/>
                     <div class="comment-save-area">
-                        <div>
+                        <div style="display: inline-flex;">
                             <textarea class="form-control" id="contents" name="comments"></textarea>
                             <span><button class="btn btn-primary" id="comment_button" onclick="CommentService.save()"
                                           type="submit">댓글작성</button></span>
                         </div>
                     </div>
-
                     <div class="comments-result-list">
                         <ul class="nav nav-pills flex-column" th:each="comment : ${commentList}">
                             <li class="nav-item active">
