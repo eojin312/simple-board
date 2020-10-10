@@ -2,6 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/adminLteHeader :: adminLteHeader"></head>
 <title>게시물 리스트</title>
+<style>
+    #title {
+        text-align: center;
+    }
+</style>
 </head>
 <body>
 <div th:replace="fragments/header :: header"/>
@@ -34,8 +39,8 @@
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover">
                         <thead>
-                        <th scope="row">#</th>
-                        <th>제목</th>
+                        <th th:width="10px">#</th>
+                        <th id="title" th:width="1800px">제목</th>
                         <th>작성자</th>
                         <th>카테고리</th>
                         <th>시간</th>
