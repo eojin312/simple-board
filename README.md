@@ -1,4 +1,5 @@
 # simple-board
+
 심플 게시판 프로젝트 향후에 다른 프로젝트 개발할 때 이 프로젝트의 기술스택 예제들을 보며 참고하면서 개발하기 위한 템플릿 프로젝트
 
 # 기술스택
@@ -8,12 +9,10 @@
   - spring security
   - DBMS
     - h2
-    - MySQL
   - jpa
     - Spring Data JPA
     - JPA Interface 사용
     - JPQL
-    - queryDSL
   - FrontEnd
     - bootstrap 5.x
     - jquery 3.5.1
@@ -21,6 +20,7 @@
   - junit5
 
 # SpringBoot
+
 **package 구조**
 - web
   - dto : entity converting 용 toEntity 구현
@@ -28,6 +28,7 @@
     - BaseApiController - Api 추상클래스
     - *Controller - 화면
     - *ApiController - api
+    
 - service
   - business 로직처리
 - domain
@@ -43,34 +44,36 @@
 ## Spring Security
   - 로그인/로그아웃 + 권한제어 기능을 추가하려고 spring security 를 추가했습니다.
   
+  
 **SpringSecurityConfig**
+
 ```java
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+@Bean
+public BCryptPasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+}
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .mvcMatchers("/users/**").hasRole("ADMIN")
-                .mvcMatchers("/posts/**").hasRole("MEMBER")
-                .anyRequest().permitAll()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .logoutSuccessUrl("/")
-                .and()
-                .csrf()
-                .disable();
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+    http
+            .authorizeRequests()
+            .mvcMatchers("/users/**").hasRole("ADMIN")
+            .mvcMatchers("/posts/**").hasRole("MEMBER")
+            .anyRequest().permitAll()
+            .and()
+            .formLogin()
+            .loginPage("/login")
+            .permitAll()
+            .and()
+            .logout()
+            .logoutSuccessUrl("/")
+            .and()
+            .csrf()
+            .disable();
     }
 }
 ```
@@ -87,16 +90,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 **UserAuthService**
 ```java
 public class UserAuthService implements UserDetailsService {
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("존재하지않는 회원입니다"));
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
-        authorities.add(authority);
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+@Override
+public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("존재하지않는 회원입니다"));
+    List<GrantedAuthority> authorities = new ArrayList<>();
+    GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
+    authorities.add(authority);
+    return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 }
 ```
+
 |코드|설명|
 |------|---|
 |findByUserName|로그인 처리를 하기 전 username (=loginId) 를 가져옵니다.
@@ -129,10 +133,15 @@ public class UserAuthService implements UserDetailsService {
 - JPA를 정석으로 잘 활용해야
 - 테스트 자동화 + 안정적인 테스트
 
+# CRUD 외의 기능
+- 로그인 기능
+- 로그인 후 글 좋아요
+- 페이지네이션
+- 검색 기능
+
 # 회고
   - 전 프로젝트에선 http session 만 이용해서 로그인 기능을 만들었지만 지금 springboot 를 사용하는 시점에서 spring security 를 처음으로 사용하니 처음엔 많이 어렵고 흔하지않은 체이닝 식 코드라 적응하기 힘들었지만 많이 알아보고 연습하니 익숙해지고 더 많은 기술을 사용하게 되었다
   - servlet 과 mybatis 로 만든 간단한 CRUD 게시판보다 좀 더 기능을 추가해서 만든 게시판에서 entity의 복잡한 연관관계를 다시 생각하게 만들었다.
   - spring data jpa 에서 연관관계를 맺는데에 한계가 있어 JPQL 과 queryDSL 을 사용해서 풀어냈다. jpa 에만 의존하던 생각이 JPQL 과 queryDSL 에 의해 더 복잡하고 다양한 연관관계를 맺을 수 있다는 생각이 들었다.
   - 기존 프로젝트들과 달리 jquery와 javascript 의 비중을 높였다. vue.js framework 를 사용하기 전에 직접 수작업으로 웬만한 기능들을 구현했고, thymeleaf 는 어쩔 수 없을 때만 사용했다. js 를 사용해보니 규약이 많은 java 와 달리 많이 자유로운 느낌을 받았다. 코드에서 정말 중요한 세미콜론의 존재를 js 에선 까먹어도 문제없이 실행되기때문에 js 코드를 작성할 땐 신중히 작성하려고 노력했다. 
-
 
