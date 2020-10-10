@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:replace="adminLteHeader :: adminLteHeader"></div>
 <div th:fragment="adminLteBodyHeader">
@@ -17,65 +17,9 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <a class="nav-link" href="/posts">전체게시물</a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
+            <li class="nav-item d-none d-sm-inline-block" sec:authorize="isAnonymous()">
                 <a class="nav-link" href="/login">로그인</a>
             </li>
-        </ul>
-
-        <!-- SEARCH FORM -->
-        <form class="form-inline ml-3">
-            <div class="input-group input-group-sm">
-                <input aria-label="Search" class="form-control form-control-navbar" placeholder="Search" type="search">
-                <div class="input-group-append">
-                    <button class="btn btn-navbar" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-
-        <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-            <!-- Messages Dropdown Menu -->
-            <li class="nav-item dropdown">
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <a class="dropdown-item" href="#">
-                        <!-- Message Start -->
-                        <div class="media">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    Brad Diesel
-                                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">Call me whenever you can...</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                        <!-- Message Start -->
-                        <div class="media">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    Nora Silvester
-                                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">The subject goes here</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item dropdown-footer" href="#">See All Messages</a>
-                </div>
-            </li>
-            <!-- Notifications Dropdown Menu -->
         </ul>
     </nav>
 </div>

@@ -40,7 +40,7 @@
                     <table class="table table-hover">
                         <thead>
                         <th th:width="10px">#</th>
-                        <th id="title" th:width="1800px">제목</th>
+                        <th id="title" th:width="1150px">제목</th>
                         <th>작성자</th>
                         <th>카테고리</th>
                         <th>시간</th>
@@ -49,13 +49,14 @@
                     </table>
                 </div>
                 </div>
-                <div class="pagination-area" style="text-align: center;"></div>
+                <div class="pagination-area" style="text-align: center; width: 1500px;"></div>
                 <div class="list-footer-area">
                     <button class="btn btn-primary" onclick="location.href='/posts/create'" type="button">글쓰러가기</button>
                 </div>
             </div>
         </section>
 </div>
+    <div th:replace="fragments/adminLteFooter :: adminLteFooter"></div>
 </div>
 </div>
 
@@ -80,6 +81,5 @@
         });
     })
 </script>
-
 </body>
 </html>

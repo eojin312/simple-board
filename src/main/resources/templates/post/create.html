@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/adminLteHeader :: adminLteHeader"></head>
-<link href="/js/dropzone/dropzone.css" rel="stylesheet">
 </head>
 <body>
 <div th:replace="fragments/header :: header"/>
@@ -66,6 +65,7 @@
             </div>
         </section>
     </div>
+    <div th:replace="fragments/adminLteFooter :: adminLteFooter"></div>
 </div>
 <script src="/js/commonUtil.js"></script>
 <script src="/js/postService.js"></script>
@@ -73,14 +73,6 @@
 <script>
     $(document).ready(function () {
         PostService.crateButtonbindEvent();
-    });
-    Dropzone.autoDiscover = false;
-    $(document).ready(function () {
-        $('#my-awesome-dropzone').dropzone({
-            success: function (file, response) {
-                toastr.success('File' + file.name + 'upload 성공');
-            }
-        })
     });
 
 </script>
