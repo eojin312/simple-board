@@ -31,18 +31,18 @@
                                     <div class="card-body table-responsive p-0">
                                         <table class="table table-striped table-valign-middle">
                                             <thead>
-                                            <th>제목</th>
                                             <th>작성자</th>
+                                            <th>제목</th>
                                             <th>카테고리</th>
                                             <th>시간</th>
                                             </thead>
                                             <tbody>
                                             <tr th:each="humorList : ${humorList}">
+                                                <td th:text="${humorList.author}"></td>
                                                 <td><a th:href="@{/posts/{id}(id=${humorList.id})}"
                                                        th:text="${humorList.title}"></a></td>
-                                                <td th:text="${humorList.author}"></td>
                                                 <td th:text="${humorList.category}"></td>
-                                                <td th:text="${humorList.createdDate}"></td>
+                                                <td th:text="${#temporals.format(humorList.createdDate, 'HH:mm')}"></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -59,18 +59,18 @@
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped table-valign-middle">
                                     <thead>
-                                    <th>제목</th>
                                     <th>작성자</th>
+                                    <th>제목</th>
                                     <th>카테고리</th>
                                     <th>시간</th>
                                     </thead>
                                     <tbody>
                                     <tr th:each="nomalList : ${nomalList}">
+                                        <td th:text="${nomalList.author}"></td>
                                         <td><a th:href="@{/posts/{id}(id=${nomalList.id})}"
                                                th:text="${nomalList.title}"></a></td>
-                                        <td th:text="${nomalList.author}"></td>
                                         <td th:text="${nomalList.category}"></td>
-                                        <td th:text="${nomalList.createdDate}"></td>
+                                        <td th:text="${#temporals.format(nomalList.createdDate, 'HH:mm')}"></td>
                                     </tr>
                                     </tbody>
                                 </table>

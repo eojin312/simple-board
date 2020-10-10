@@ -7,6 +7,6 @@ var CommonUtil = {
         if (localdatetime == null || localdatetime == undefined || localdatetime.length < 15) {
             return '';
         }
-        return localdatetime.substring(0, 15);
+        return localdatetime.substring(11, 16);
     }
 };
