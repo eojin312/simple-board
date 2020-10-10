@@ -19,46 +19,72 @@
                         </ol>
                     </div>
                     <!-- /.col -->
-                    <div class="card">
-                        <div class="card-header ui-sortable-handle">
-                            <div class="card-title">
-                                <h3>유머 게시판</h3>
+                    <div class="content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="card">
+                                    <div class="card-header border-0">
+                                        <div class="card-title">
+                                            <h3>유머 게시판</h3>
+                                        </div>
+                                    </div>
+                                    <div class="card-body table-responsive p-0">
+                                        <table class="table table-striped table-valign-middle">
+                                            <thead>
+                                            <th>제목</th>
+                                            <th>작성자</th>
+                                            <th>카테고리</th>
+                                            <th>시간</th>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="humorList : ${humorList}">
+                                                <td><a th:href="@{/posts/{id}(id=${humorList.id})}"
+                                                       th:text="${humorList.title}"></a></td>
+                                                <td th:text="${humorList.author}"></td>
+                                                <td th:text="${humorList.category}"></td>
+                                                <td th:text="${humorList.createdDate}"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-body p-0">
-                            <ul class="nav nav-pills flex-column" th:each="humorList : ${humorList}">
-                                <li class="nav-item active">
-                                    <a class="nav-link" th:href="@{/posts/{id}(id=${humorList.id})}"
-                                       th:text="${humorList.title}">
-                                        <i class="fas fa-indox"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header ui-sortable-handle">
-                            <div class="card-title">
-                                <h3>일반 게시판</h3>
+                        <div class="card">
+                            <div class="card-header ui-sortable-handle">
+                                <div class="card-title">
+                                    <h3>일반 게시판</h3>
+                                </div>
+                            </div>
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-striped table-valign-middle">
+                                    <thead>
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>카테고리</th>
+                                    <th>시간</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="nomalList : ${nomalList}">
+                                        <td><a th:href="@{/posts/{id}(id=${nomalList.id})}"
+                                               th:text="${nomalList.title}"></a></td>
+                                        <td th:text="${nomalList.author}"></td>
+                                        <td th:text="${nomalList.category}"></td>
+                                        <td th:text="${nomalList.createdDate}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="card-body p-0">
-                            <ul class="nav nav-pills flex-column" th:each="nomalList : ${nomalList}">
-                                <li class="nav-item active">
-                                    <a class="nav-link" th:href="@{/posts/{id}(id=${nomalList.id})}"
-                                       th:text="${nomalList.title}">
-                                        <i class="fas fa-indox"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <aside class="control-sidebar control-sidebar-dark">
-        </aside>
+                </div>
+            </div>
+        </div><!-- /.row -->
     </div>
+</div>
+<aside class="control-sidebar control-sidebar-dark">
+</aside>
+</div>
 </div>
 <!-- jQuery -->
 <script src="/AdminLTE-3.0.5/plugins/jquery/jquery.min.js"></script>

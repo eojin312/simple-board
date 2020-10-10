@@ -30,7 +30,7 @@ public class PostLikeService {
                 .post(post)
                 .user(user)
                 .build());
-        return postLikeRepository.countByPost(post);
+         return postLikeRepository.countByPost(post);
     }
 
     public Long findCountByPost(long postId) {
