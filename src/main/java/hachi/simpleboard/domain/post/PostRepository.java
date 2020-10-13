@@ -31,7 +31,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
      * @param pageable
      * @return Page<Post>
      *
-     * TODO: 검색 기능이 제대로 되지 않아 곧 해결해야함
+     *
      */
     Page<Post> findAllByTitleContaining(String searchKeyword, Pageable pageable);
 
@@ -42,7 +42,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
      * @param searchKeyword 검색키워드
      * @param pageable
      * @return Page<Post>
-     * TODO: 검색 기능이 제대로 되지 않아 곧 해결해야함
+     *
      */
     Page<Post> findAllByAuthorContaining(String searchKeyword, Pageable pageable);
 
@@ -53,7 +53,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
      * @param pageable
      * @return Page<Post>
      *
-     * TODO: 검색 기능이 제대로 되지 않아 곧 해결해야함
+     *
      */
     Page<Post> findAllByContentsContaining(String searchKeyword, Pageable pageable);
 
