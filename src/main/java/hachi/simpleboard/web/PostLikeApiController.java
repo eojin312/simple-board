@@ -1,7 +1,6 @@
 package hachi.simpleboard.web;
 
 import hachi.simpleboard.service.PostLikeService;
-import hachi.simpleboard.service.PostService;
 import hachi.simpleboard.web.auth.AuthUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +16,9 @@ import java.io.PrintWriter;
 
 @RestController
 @RequiredArgsConstructor
-@Slf4j
+@Slf4j // 로그 찍기 위한 어노테이션
 public class PostLikeApiController extends BaseApiController {
 
-    private final PostService postService;
     private final PostLikeService postLikeService;
 
     @PostMapping("/like/{postId}")
