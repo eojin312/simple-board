@@ -30,7 +30,6 @@ public class PostLikeApiController extends BaseApiController {
             return -1L;
         } catch (NullPointerException e) {
             PrintWriter out = response.getWriter();
-            out.println("<script>if(confirm('로그인이 필요한 서비스입니다. 로그인 하시겠습니까?');){window.loacation.href='/login'} else{return;}</script>");
         }
         return likeCount;
     }
