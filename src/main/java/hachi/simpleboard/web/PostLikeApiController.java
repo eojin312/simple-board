@@ -34,3 +34,4 @@ public class PostLikeApiController extends BaseApiController {
         return likeCount;
     }
 }
+
