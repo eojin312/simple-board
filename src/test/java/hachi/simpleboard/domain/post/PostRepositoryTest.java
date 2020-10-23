@@ -31,6 +31,7 @@ class PostRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
+    //
     @BeforeAll
     static void beforeAll() {
         System.out.println("before");
@@ -57,7 +58,7 @@ class PostRepositoryTest {
                 .title("테스트용 제목")
                 .author("회원1")
                 .contents("테스트용 내용")
-                .img("/a.jpg")
+                .img("/b.jpg")
                 .build()
         );
     }
