@@ -1,6 +1,5 @@
 package hachi.simpleboard.web;
 
-import hachi.simpleboard.service.UploadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -31,7 +30,6 @@ import java.util.UUID;
 public class UploadController {
 
     public static final String UPLOAD_BASE_DIR = "/Users/user/data/";
-    private final UploadService uploadService;
 
     public static Optional<String> getExtensionByStringHandling(String filename) {
         return Optional.ofNullable(filename)
