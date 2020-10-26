@@ -74,7 +74,6 @@ public class User extends BaseTimeEntity implements Serializable {
 
     /**
      * 비밀번호 암호화
-     *
      * @param passwordEncoder
      */
     public void encodePassword(PasswordEncoder passwordEncoder) {
