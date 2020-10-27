@@ -30,6 +30,14 @@ public class UserApiController extends BaseApiController {
         return userService.save(userDto);
     }
 
+    /**
+     * user 검색 기능
+     *
+     * @param pageable
+     * @param searchType
+     * @param searchKeyword
+     * @return
+     */
     @GetMapping("/users")
     public Page<User> getList(
             @PageableDefault Pageable pageable,
