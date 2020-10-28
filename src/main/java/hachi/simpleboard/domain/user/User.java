@@ -43,7 +43,7 @@ public class User extends BaseTimeEntity implements Serializable {
     private String gender;
 
     // TODO: Enum 타입으로 변경해서 Enumerated 를 사용해보기
-    @Column(nullable = false, columnDefinition = "varchar(10) default 'MEMBER'")
+    @Column(nullable = false)
     private String role;
 
     /**
