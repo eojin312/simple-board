@@ -14,6 +14,7 @@ import java.util.List;
 @ToString
 public class AuthUser extends User {
 
+    // spring security 에 user 도 있어서 헷갈리지않게 구분했다
     private hachi.simpleboard.domain.user.User user;
 
     public AuthUser(hachi.simpleboard.domain.user.User _user) {
