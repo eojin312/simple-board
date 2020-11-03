@@ -137,6 +137,7 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
 - 기존 토이프로젝트에서 못했던 파일(혹은 이미지)첨부 기능은 필수로 해야한다
 - JPA를 정석으로 잘 활용해야한다
 - 테스트 자동화 + 안정적인 테스트
+- spring security 연습해본다
 
 # 회고
   - 전 프로젝트에선 http session 만 이용해서 로그인 기능을 만들었지만 지금 springboot 를 사용하는 시점에서 spring security 를 처음으로 사용하니 처음엔 많이 어렵고 흔하지않은 체이닝 식 코드라 적응하기 힘들었지만 많이 알아보고 연습하니 익숙해지고 더 많은 기술을 사용하게 되었다
