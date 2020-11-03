@@ -1,5 +1,6 @@
 package hachi.simpleboard.web;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -19,6 +20,7 @@ public class UserController {
         return "user/list";
     }
 
+    @ApiOperation(value = "회원 생성", notes = "id: long 타입")
     @GetMapping("/users/create")
     public String create() {
         return "user/create";
