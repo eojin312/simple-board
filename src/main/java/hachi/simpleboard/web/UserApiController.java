@@ -3,6 +3,7 @@ package hachi.simpleboard.web;
 import hachi.simpleboard.domain.user.User;
 import hachi.simpleboard.service.UserService;
 import hachi.simpleboard.web.dto.UserDto;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -25,6 +26,7 @@ public class UserApiController extends BaseApiController {
 
     private final UserService userService;
 
+    @ApiOperation(value = "회원 생성", notes = "id: long 타입")
     @PostMapping("/users")
     public Long create(@RequestBody @Valid UserDto.Create userDto) {
         return userService.save(userDto);
