@@ -67,6 +67,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("update Post p set p.view = p.view + 1 where p.id = :id")
     int plusReadCount(@Param("id") Long id);
 
+    @Query("select p from Post p where (id)")
+    List<Post> findByidOrName(Long id, String name);
 
 
     /*
