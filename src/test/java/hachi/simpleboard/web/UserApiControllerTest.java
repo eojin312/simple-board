@@ -23,10 +23,10 @@ class UserApiControllerTest extends BaseApiControllerTest {
     public void 회원조회() throws Exception {
         mockMvc.perform(get("/api/users/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("id").value(2L))
-                .andExpect(jsonPath("name").value("test10002"))
-                .andExpect(jsonPath("username").value("testID10002"))
-                .andExpect(jsonPath("birthYear").value(10202))
+                .andExpect(jsonPath("id").value(3L))
+                .andExpect(jsonPath("name").value("test10003"))
+                .andExpect(jsonPath("username").value("testID10003"))
+                .andExpect(jsonPath("birthYear").value(10203))
                 .andExpect(jsonPath("gender").value("M"))
                 .andDo(print());
     }
