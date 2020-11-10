@@ -37,7 +37,7 @@ class UserApiControllerTest extends BaseApiControllerTest {
                 UserDto.Create.builder()
                         .name("이어진")
                         .email("eojin312@naver.com")
-                        .username("eojin312123")
+                        .username("eojin312")
                         .password("1231231234")
                         .birthYear(2002)
                         .gender("M")
