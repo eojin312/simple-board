@@ -55,7 +55,7 @@ class UserApiControllerTest extends BaseApiControllerTest {
         String content = objectMapper.writeValueAsString(
                 UserDto.Create.builder()
                         .name("이희진")
-                        .email("h2jin312@naver.com")
+                        .email("hjin312@naver.com")
                         .username("h2")
                         .password("1234")
                         .birthYear(2013)
