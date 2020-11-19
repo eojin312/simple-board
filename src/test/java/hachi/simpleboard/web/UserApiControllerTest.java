@@ -57,7 +57,7 @@ class UserApiControllerTest extends BaseApiControllerTest {
                         .name("이희진")
                         .email("hjin312@naver.com")
                         .username("h2")
-                        .password("1234")
+                        .password("5678")
                         .birthYear(2013)
                         .gender("F")
                         .profileImage("1234")
