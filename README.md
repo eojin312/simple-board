@@ -133,7 +133,7 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
   - 댓글 기능
   - 첨부파일 기능
   - 페이지네이션 기능
-- 다른 프로젝트의 샘플로써의 역할 (템플릿)
+- 다른 프로젝트의 샘플로써의 역할
 - 기존 토이프로젝트에서 못했던 파일(혹은 이미지)첨부 기능은 필수로 해야한다
 - JPA를 정석으로 잘 활용해야한다
 - 테스트 자동화 + 안정적인 테스트
